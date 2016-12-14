@@ -234,7 +234,7 @@ http://60.216.101.229/server-ue2/rest/buses/busline/370100/164
             "lng": 117.101201,
             "lat": 36.677868,
             "velocity": 19.676019841452977,
-            "isArrvLft": "2",
+            "isArrvLft": "2", // 1没到，2到了
             "stationSeqNum": 13, // 站牌id，对应接口3中id字段
             "status": "1",
             "buslineId": "164",
