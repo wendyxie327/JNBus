@@ -1,8 +1,12 @@
 # JNBus
 
 
+## 工作过程
+获取最新版本号 —— 将版本号加入到头信息中 —— 获取服务IP地址：将IP地址和最新版本号保存在本地，当查询访问出现问题时，重复该过程
+查询路线界面 —— 根据接口1，查询出符合规则的线路名称，标记起止地和路线id —— 用户选中路线名称，访问接口2和3，分别查询路线和当前车辆
 
-## 获取升级地址
+## 接口地址
+### 获取升级地址
 http://jinan.iwaybook.com/download/update.json
 返回数据
 ```
@@ -35,7 +39,7 @@ http://jinan.iwaybook.com/download/update.json
 **value：android-insigma.waybook.jinan-231**
 
 
-## 获取服务器IP地址
+### 获取服务器IP地址
 http://www.iwaybook.com/server-ue2/rest/servers-v2/370100
 返回数据
 ```
@@ -56,7 +60,7 @@ http://www.iwaybook.com/server-ue2/rest/servers-v2/370100
 
 
 
-## 1. 查询接口
+### 1. 查询接口
 http://60.216.101.229/server-ue2/rest/buslines/simple/370100/1/0/20
 
 |query|offset|len|
@@ -219,7 +223,7 @@ http://60.216.101.229/server-ue2/rest/buslines/simple/370100/1/0/20
 }
 ```
 
-## 2. 线路接口
+### 2. 线路接口
 http://60.216.101.229/server-ue2/rest/buses/busline/370100/164
 返回数据
 ```
@@ -308,7 +312,7 @@ http://60.216.101.229/server-ue2/rest/buses/busline/370100/164
 }
 ```
 
-## 3. 返程接口
+### 3. 返程接口
 http://60.216.101.229/server-ue2/rest/buslines/theOtherDirection/370100/163
 返回数据
 
