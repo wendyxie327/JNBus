@@ -3,11 +3,9 @@ package com.wendy.jnbus.net;
 import android.content.Context;
 
 import com.eagle.androidlib.net.SubscriberOnNextListener;
-import com.wendy.jnbus.ui.JNBusApplication;
-import com.wendy.jnbus.utils.BusShare;
+import com.wendy.jnbus.persistence.BusShare;
 import com.wendy.jnbus.vo.BusDetail;
 import com.wendy.jnbus.vo.BusLine;
-import com.wendy.jnbus.vo.Version;
 
 import java.util.List;
 

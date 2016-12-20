@@ -26,6 +26,7 @@ public class BusStationView extends View {
     private int lineColor = Color.BLUE;
     private int ringColor = Color.RED;
     private float radius = 10;
+    private float lineWidth = 7;
     private String position ;
 
     enum Position{
@@ -48,6 +49,7 @@ public class BusStationView extends View {
         position = array.getString(R.styleable.BusStationView_linePosition);
         array.recycle();
 
+        // 设置类型初始化
         if (position == null || "".equals(position)){
             position = Position.LEFT.name();
         }
@@ -62,7 +64,7 @@ public class BusStationView extends View {
         linePaint.setColor(lineColor);
         linePaint.setStyle(Paint.Style.STROKE);
         linePaint.setAntiAlias(true);
-        linePaint.setStrokeWidth(4);
+        linePaint.setStrokeWidth(lineWidth);
 
         ringPaint = new Paint();
         ringPaint.setColor(ringColor);
@@ -73,23 +75,18 @@ public class BusStationView extends View {
         switch (Position.valueOf(position)){
 
             case LEFT: //线在左方，圈在右
-
-//                ringPaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.DST_OVER));
-                canvas.drawCircle(getX()+getWidth()- radius*4,getY(),radius,ringPaint);
-                Logger.d("BusStation", "x="+(getX()+getWidth()- radius*4)+",x+width="+(getWidth()+getX())+",");
-                canvas.drawLine(getX(),getY(),getX()+getWidth(),getY() ,linePaint);
-                canvas.drawLine(getX(),getY()+100,getX()+getWidth(),getY()+100 ,linePaint);
-                Logger.d("BusStationq", "x="+getX()+",x+width="+(getWidth()+getX())+",");
+                canvas.drawLine(0, radius, getWidth(), radius, linePaint);
+                canvas.drawCircle(getWidth()- radius, 0, radius, ringPaint);
                 break;
 
             case RIGHT:// 线在右，圈在左
-                canvas.drawCircle(getX(),getY(),radius,ringPaint);
-                canvas.drawLine(getX(),getY(),getX()+getWidth(),getY() ,linePaint);
+                canvas.drawLine(0,radius,getWidth(),radius ,linePaint);
+                canvas.drawCircle(radius,radius,radius,ringPaint);
                 break;
 
             case TOP:// 线在上，圈在下
-                canvas.drawLine(getX(),getY(),getX(),getWidth()+ getY() ,linePaint);
-                canvas.drawCircle(getX(),getWidth() + getY(),radius,ringPaint);
+                canvas.drawLine(radius,0,radius,getHeight() ,linePaint);
+                canvas.drawCircle(radius, getHeight()-radius ,radius,ringPaint);
                 break;
         }
 

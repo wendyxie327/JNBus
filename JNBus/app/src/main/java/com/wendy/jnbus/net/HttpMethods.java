@@ -1,7 +1,6 @@
 package com.wendy.jnbus.net;
 
-import com.eagle.androidlib.utils.Logger;
-import com.wendy.jnbus.utils.BusShare;
+import com.wendy.jnbus.persistence.BusShare;
 
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;

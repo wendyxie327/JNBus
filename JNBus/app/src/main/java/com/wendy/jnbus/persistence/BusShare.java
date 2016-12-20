@@ -1,4 +1,4 @@
-package com.wendy.jnbus.utils;
+package com.wendy.jnbus.persistence;
 
 import android.content.Context;
 import android.content.SharedPreferences;
