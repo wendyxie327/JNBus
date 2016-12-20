@@ -28,6 +28,7 @@ public class BusStationView extends View {
     private float radius = 10;
     private float lineWidth = 7;
     private String position ;
+    private boolean isFirst;
 
     enum Position{
         LEFT, RIGHT , TOP
@@ -43,16 +44,9 @@ public class BusStationView extends View {
 
     public BusStationView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        TypedArray array = context.obtainStyledAttributes(attrs,R.styleable.BusStationView);//注意一定要传入attrs，否则该方法不起作用
-        lineColor = array.getColor(R.styleable.BusStationView_lineColor, lineColor);
-        ringColor = array.getColor(R.styleable.BusStationView_ringColor, ringColor);
-        position = array.getString(R.styleable.BusStationView_linePosition);
-        array.recycle();
 
         // 设置类型初始化
-        if (position == null || "".equals(position)){
-            position = Position.LEFT.name();
-        }
+        position = Position.LEFT.name();
     }
 
 
@@ -75,7 +69,8 @@ public class BusStationView extends View {
         switch (Position.valueOf(position)){
 
             case LEFT: //线在左方，圈在右
-                canvas.drawLine(0, radius, getWidth(), radius, linePaint);
+                if (!isFirst)   // 当不是第一个时，是有横线的
+                    canvas.drawLine(0, radius, getWidth(), radius, linePaint);
                 canvas.drawCircle(getWidth()- radius, 0, radius, ringPaint);
                 break;
 
@@ -90,5 +85,53 @@ public class BusStationView extends View {
                 break;
         }
 
+    }
+
+    public int getLineColor() {
+        return lineColor;
+    }
+
+    public void setLineColor(int lineColor) {
+        this.lineColor = lineColor;
+    }
+
+    public int getRingColor() {
+        return ringColor;
+    }
+
+    public void setRingColor(int ringColor) {
+        this.ringColor = ringColor;
+    }
+
+    public float getRadius() {
+        return radius;
+    }
+
+    public void setRadius(float radius) {
+        this.radius = radius;
+    }
+
+    public float getLineWidth() {
+        return lineWidth;
+    }
+
+    public void setLineWidth(float lineWidth) {
+        this.lineWidth = lineWidth;
+    }
+
+    public String getPosition() {
+        return position;
+    }
+
+    public void setPosition(String position) {
+        this.position = position;
+    }
+
+    public boolean isFirst() {
+        return isFirst;
+    }
+
+    public void setFirst(boolean first) {
+        isFirst = first;
     }
 }
