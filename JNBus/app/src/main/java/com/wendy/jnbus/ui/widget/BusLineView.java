@@ -49,6 +49,8 @@ public class BusLineView extends LinearLayout {
         }
 
         int lineLength = (getMeasuredWidth()- ringRadius*2) / lineNum; // 某个站点的长度,总长度上，先减去边上圈圈
+        int width = ringRadius*2 + lineNum*lineLength; //正式的控件宽度为此。因为上面相除时，可能有些余数被忽略掉了
+        int padding = (getMeasuredWidth() - width)/2 ; //两边需要留出一定间隙
 
         int len = busStations.size();
         for (int i=0;i<len ; i++){
@@ -58,25 +60,41 @@ public class BusLineView extends LinearLayout {
             busStationView.setRingColor(R.color.yellow);
             busStationView.setRadius(ringRadius);
 
-            int iLineNum = i/ lineNum;
+            int iLineNum = i/ lineNum;  //判断在第几行
             // 一组横向，加一个竖为一组
             if (i ==0){ //第一个站点,只有一个点
                 busStationView.setPosition(BusStationView.Position.LEFT.name());
                 busStationView.setFirst(true);
-                busStationView.layout(0, 0,,
-                        DensityUtil.dp2px(getContext(),busStationView.getRadius())*2,
-                        lineLength);
+                busStationView.layout(
+                        padding,
+                        0,
+                        DensityUtil.dp2px(getContext(),busStationView.getRadius())*2 + padding,
+                        DensityUtil.dp2px(getContext(),busStationView.getRadius())*2);
+
             } else if ( iLineNum == (lineNum-1) ){    // ↓ 方向
                 busStationView.setPosition(BusStationView.Position.TOP.name());
                 if ( iLineNum%2 == 0){  // 下划线在右边
-                    busStationView.layout( lineNum*ringRadius,);
+                    busStationView.layout(
+                            width + padding,
+                            (iLineNum+1) * ringRadius*2 + (iLineNum-1)*lineLength,
+                            width + padding + ringRadius*2 ,
+                            (iLineNum+1) * ringRadius*2 + iLineNum*lineLength);
                 }else { //下划线在左边
-
+                    busStationView.layout(
+                            padding,
+                            (iLineNum+1) * ringRadius*2 + (iLineNum-1)*lineLength,
+                            padding + ringRadius*2 ,
+                            (iLineNum+1) * ringRadius*2 + iLineNum*lineLength);
                 }
 
-            } else if (iLineNum % 2 == 0){
+            } else if (iLineNum % 2 == 0){ //单数表示向右 →
                 busStationView.setPosition(BusStationView.Position.RIGHT.name());
-            }else if (iLineNum % 2 ==1 ){
+                busStationView.layout(
+                        padding + width*(i/),
+                        ,
+                        ,
+                        );
+            }else if (iLineNum % 2 ==1 ){   //双数表示向左 ←
                 busStationView.setPosition(BusStationView.Position.LEFT.name());
             }
 
