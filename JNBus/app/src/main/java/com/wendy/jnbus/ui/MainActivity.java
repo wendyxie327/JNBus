@@ -5,12 +5,18 @@ import com.eagle.androidlib.utils.Logger;
 import com.wendy.jnbus.R;
 import com.wendy.jnbus.net.BusHttpMethod;
 import com.wendy.jnbus.ui.base.BaseAppActivity;
+import com.wendy.jnbus.ui.widget.BusLineView;
 import com.wendy.jnbus.vo.BusDetail;
 import com.wendy.jnbus.vo.BusLine;
 
 import java.util.List;
 
+import butterknife.BindView;
+
 public class MainActivity extends BaseAppActivity {
+
+    @BindView(R.id.bus_line_view)
+    BusLineView busLineView;
 
     @Override
     public int getLayoutID() {
@@ -42,9 +48,10 @@ public class MainActivity extends BaseAppActivity {
         SubscriberOnNextListener<BusLine> busLineSub = new SubscriberOnNextListener<BusLine>() {
             @Override
             public void onNext(BusLine busLine) {
-                if (busLine !=null)
+                if (busLine !=null){
                     Logger.d(MainActivity.this, busLine.toString());
-                else
+                    busLineView.setBusStations( busLine.getStations());
+                } else
                     Logger.d(MainActivity.this, "busLine is null");
             }
         };
