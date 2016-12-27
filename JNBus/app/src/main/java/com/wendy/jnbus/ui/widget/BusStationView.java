@@ -79,8 +79,6 @@ public class BusStationView extends View {
                         getWidth()- radius,
                         radius,
                         radius, ringPaint);
-                Logger.d(TAG,"x1="+(getWidth()- radius)+",y1="+radius
-                        +",x2="+ radius+",y2="+ringPaint);
                 break;
 
             case LEFT://  ←
@@ -93,8 +91,6 @@ public class BusStationView extends View {
                         radius,
                         radius,
                         ringPaint);
-//                   Logger.d(TAG,"x1="+(0)+",y1="+radius
-//                        +",x2="+ radius+",y2="+radius+","+getHeight());
                 break;
 
             case TOP:// 线在上，圈在下

@@ -19,7 +19,6 @@ import butterknife.BindView;
 
 public class MainActivity extends BaseAppActivity {
 
-//    @BindView(R.id.bus_line_view)
     BusLineView busLineView;
     @BindView(R.id.content_ll)
     LinearLayout contentLL;
@@ -56,12 +55,7 @@ public class MainActivity extends BaseAppActivity {
             public void onNext(BusLine busLine) {
                 if (busLine !=null){
                     Logger.d(MainActivity.this, busLine.toString());
-
-                    busLineView = new BusLineView(MainActivity.this,null);
-                    busLineView.setBusStations( busLine.getStations() );
-                    LinearLayout.LayoutParams busParam = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
-                    busLineView.setLayoutParams(busParam);
-                    contentLL.addView(busLineView, busParam);
+                    showBusView(busLine,null);
                 } else
                     Logger.d(MainActivity.this, "busLine is null");
             }
@@ -72,5 +66,13 @@ public class MainActivity extends BaseAppActivity {
     @Override
     public void initDataResume() {
 
+    }
+
+    private void showBusView(BusLine busLine, List<BusDetail> busDetails){
+        busLineView = new BusLineView(MainActivity.this,null);
+        busLineView.setBusStations( busLine.getStations() );
+        LinearLayout.LayoutParams busParam = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+        busLineView.setLayoutParams(busParam);
+        contentLL.addView(busLineView, busParam);
     }
 }
