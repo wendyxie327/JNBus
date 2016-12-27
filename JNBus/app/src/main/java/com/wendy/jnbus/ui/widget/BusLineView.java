@@ -66,7 +66,7 @@ public class BusLineView extends LinearLayout {
             int iLineNum = i/ (oneLineNum +1) ;  //判断在第几行,一行=横行n个站点+竖行一个站点
             // 一组横向，加一个竖为一组
             if (i ==0){ //第一个站点,只有一个点
-                busStationView.setPosition(BusStationView.Position.LEFT.name());
+                busStationView.setPosition(BusViewConstant.Position.LEFT.name());
                 busStationView.setFirst(true);
                 busStationView.layout(
                         padding,
@@ -75,23 +75,24 @@ public class BusLineView extends LinearLayout {
                         ringRadius*2);
 
             } else if ( i%(oneLineNum +1) == 0 ){    // ↓ 方向
-                busStationView.setPosition(BusStationView.Position.TOP.name());
                 if ( iLineNum%2 == 0){  // 下划线在左边
+                    busStationView.setPosition(BusViewConstant.Position.TOP_LEFT.name());
                     busStationView.layout(
                             padding,
-                            ringRadius*3 + (iLineNum-1)*lineLength,
+                            ringRadius*3 + (iLineNum-1)*lineLength, // 正常情况下为（ringRadius*3 + (iLineNum-1)*lineLength），为防止线路突出，减少半个站点半径
                             padding + ringRadius*2 ,
                             ringRadius*2 + iLineNum*lineLength);
                 }else { //下划线在右边
+                    busStationView.setPosition(BusViewConstant.Position.TOP_RIGHT.name());
                     busStationView.layout(
                             widthNoPadding + padding - ringRadius*2 ,
                             ringRadius*2 + (iLineNum-1)*lineLength,
                             widthNoPadding + padding ,
-                            ringRadius*3 + iLineNum*lineLength);
+                            ringRadius*3 + iLineNum*lineLength);// 正常情况下为（ringRadius*3 + (iLineNum-1)*lineLength），为防止线路突出，增加半个站点半径
                 }
 
             } else if (iLineNum % 2 == 0){ //单数表示向右 →
-                busStationView.setPosition(BusStationView.Position.RIGHT.name());
+                busStationView.setPosition(BusViewConstant.Position.RIGHT.name());
                 busStationView.layout(
                         padding + lineLength*(i % (oneLineNum +1) -1) + ringRadius*2,
                         lineLength * iLineNum ,
@@ -99,7 +100,7 @@ public class BusLineView extends LinearLayout {
                         lineLength * iLineNum + ringRadius*2);
 
             }else if (iLineNum % 2 ==1 ){   //双数表示向左 ←
-                busStationView.setPosition(BusStationView.Position.LEFT.name());
+                busStationView.setPosition(BusViewConstant.Position.LEFT.name());
                 busStationView.setFirst(false);
                 busStationView.layout(
                         padding + widthNoPadding - (padding + lineLength*(i % (oneLineNum +1) ) + ringRadius*2),

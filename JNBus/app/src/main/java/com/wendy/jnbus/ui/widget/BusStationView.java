@@ -31,9 +31,6 @@ public class BusStationView extends View {
     private String position ;
     private boolean isFirst;
 
-    enum Position{
-        LEFT, RIGHT , TOP
-    }
 
     public BusStationView(Context context) {
         this(context, null ,0);
@@ -47,7 +44,7 @@ public class BusStationView extends View {
         super(context, attrs, defStyleAttr);
 
         // 设置类型初始化
-        position = Position.LEFT.name();
+        position = BusViewConstant.Position.LEFT.name();
     }
 
 
@@ -68,7 +65,7 @@ public class BusStationView extends View {
         ringPaint.setAntiAlias(true);
         ringPaint.setColor(ringColor);
 
-        switch (Position.valueOf(position)){
+        switch (BusViewConstant.Position.valueOf(position)){
 
             case RIGHT: //线在左方，圈在右 →
                 Logger.d(TAG,"RIGHT");
@@ -93,7 +90,16 @@ public class BusStationView extends View {
                         ringPaint);
                 break;
 
-            case TOP:// 线在上，圈在下
+            case TOP_LEFT:// 线在上，圈在下
+                canvas.drawLine(radius,0,
+                        radius,getHeight() ,
+                        linePaint);
+                canvas.drawCircle(radius,
+                        getHeight()-radius,
+                        radius,
+                        ringPaint);
+                break;
+            case TOP_RIGHT:// 线在上，圈在下
                 canvas.drawLine(radius,0,
                         radius,getHeight() ,
                         linePaint);

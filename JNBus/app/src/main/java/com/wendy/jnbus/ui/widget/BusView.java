@@ -2,11 +2,8 @@ package com.wendy.jnbus.ui.widget;
 
 import android.content.Context;
 import android.graphics.Color;
-import android.support.v4.content.ContextCompat;
 import android.view.ViewGroup;
 
-import com.eagle.androidlib.utils.Logger;
-import com.wendy.jnbus.R;
 import com.wendy.jnbus.vo.BusDetail;
 
 /**
@@ -41,6 +38,18 @@ public class BusView extends ViewGroup {
         busStationView.layout(0, 0, getWidth(), getHeight());
         busStationView.setFirst(isFirst);
         busStationView.setPosition(position);
+
+        switch (BusViewConstant.Position.valueOf(position)){
+            case RIGHT:
+//                if ()
+                break;
+            case LEFT:
+                break;
+            case TOP_LEFT:
+                break;
+            case TOP_RIGHT:
+                break;
+        }
 
         addView(busStationView);
     }
