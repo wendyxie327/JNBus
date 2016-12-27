@@ -1,5 +1,9 @@
 package com.wendy.jnbus.ui;
 
+import android.support.v4.content.ContextCompat;
+import android.view.ViewGroup;
+import android.widget.LinearLayout;
+
 import com.eagle.androidlib.net.SubscriberOnNextListener;
 import com.eagle.androidlib.utils.Logger;
 import com.wendy.jnbus.R;
@@ -15,8 +19,10 @@ import butterknife.BindView;
 
 public class MainActivity extends BaseAppActivity {
 
-    @BindView(R.id.bus_line_view)
+//    @BindView(R.id.bus_line_view)
     BusLineView busLineView;
+    @BindView(R.id.content_ll)
+    LinearLayout contentLL;
 
     @Override
     public int getLayoutID() {
@@ -50,7 +56,12 @@ public class MainActivity extends BaseAppActivity {
             public void onNext(BusLine busLine) {
                 if (busLine !=null){
                     Logger.d(MainActivity.this, busLine.toString());
-                    busLineView.setBusStations( busLine.getStations());
+
+                    busLineView = new BusLineView(MainActivity.this,null);
+                    busLineView.setBusStations( busLine.getStations() );
+                    LinearLayout.LayoutParams busParam = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+                    busLineView.setLayoutParams(busParam);
+                    contentLL.addView(busLineView, busParam);
                 } else
                     Logger.d(MainActivity.this, "busLine is null");
             }

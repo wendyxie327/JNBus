@@ -1,12 +1,10 @@
 package com.wendy.jnbus.ui.widget;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.util.AttributeSet;
-import android.view.View;
 import android.widget.LinearLayout;
 
-import com.eagle.androidlib.utils.DensityUtil;
+import com.eagle.androidlib.utils.Logger;
 import com.wendy.jnbus.R;
 import com.wendy.jnbus.vo.BusStation;
 
@@ -20,8 +18,9 @@ public class BusLineView extends LinearLayout {
 
     private static final String TAG= "BusLineView";
     private List<BusStation> busStations;
-    private int lineNum = 10; // 线上总共有几个点
+    private int oneLineNum = 5 ; // 线上总共有几个点
     private int ringRadius = 10;
+    private int lineWidth = 5;
 
 
     public BusLineView(Context context, AttributeSet attrs) {
@@ -46,23 +45,29 @@ public class BusLineView extends LinearLayout {
     protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
         super.onLayout(changed, left, top, right, bottom);
 
+        Logger.d(TAG,"-----onLayout--start");
+
         if ( busStations==null){
             return;
         }
 
-        int lineLength = (getMeasuredWidth()- ringRadius*2) / lineNum; // 某个站点的长度,总长度上，先减去边上圈圈
-        int width = ringRadius*2 + lineNum*lineLength; //正式的控件宽度为此。因为上面相除时，可能有些余数被忽略掉了
-        int padding = (getMeasuredWidth() - width)/2 ; //两边需要留出一定间隙
+        int lineLength = (getMeasuredWidth()- ringRadius*2) / oneLineNum; // 某个站点的长度,总长度上，先减去边上圈圈
+        int widthNoPadding = ringRadius*2 + oneLineNum *lineLength; //正式的控件宽度为此。因为上面相除时，可能有些余数被忽略掉了
+        int padding = (getMeasuredWidth() - widthNoPadding)/2 ; //两边需要留出一定间隙
+
+        Logger.d(TAG,"lineLength="+lineLength+",width="+widthNoPadding+",padding="+padding+",height="+getMeasuredHeight());
 
         int len = busStations.size();
-        for (int i=0;i < len + 1; i++){
+        Logger.d(TAG,"-----onLayout-len="+busStations.size());
+        for (int i=0 ;i < len -1 ; i++){
             BusStationView busStationView = new BusStationView(getContext());
-            busStationView.setLineWidth( 4);
+            busStationView.setLineWidth(lineWidth);
             busStationView.setLineColor(R.color.cyan);
             busStationView.setRingColor(R.color.yellow);
             busStationView.setRadius(ringRadius);
 
-            int iLineNum = i/ (lineNum+1) ;  //判断在第几行
+            int iLineNum = i/ (oneLineNum +1) ;  //判断在第几行,一行=横行n个站点+竖行一个站点
+            Logger.d(TAG,"-----onLayout-iLineNum="+iLineNum);
             // 一组横向，加一个竖为一组
             if (i ==0){ //第一个站点,只有一个点
                 busStationView.setPosition(BusStationView.Position.LEFT.name());
@@ -70,41 +75,63 @@ public class BusLineView extends LinearLayout {
                 busStationView.layout(
                         padding,
                         0,
-                        DensityUtil.dp2px(getContext(),busStationView.getRadius())*2 + padding,
-                        DensityUtil.dp2px(getContext(),busStationView.getRadius())*2);
+                        ringRadius*2 + padding,
+                        ringRadius*2);
 
-            } else if ( iLineNum == (lineNum-1) ){    // ↓ 方向
+                Logger.d( TAG,"radius="+busStationView.getRadius());
+
+            } else if ( i%(oneLineNum +1) == 0 ){    // ↓ 方向
+                Logger.d(TAG,"bottom");
                 busStationView.setPosition(BusStationView.Position.TOP.name());
-                if ( iLineNum%2 == 0){  // 下划线在右边
-                    busStationView.layout(
-                            width + padding,
-                            (iLineNum+1) * ringRadius*2 + (iLineNum-1)*lineLength,
-                            width + padding + ringRadius*2 ,
-                            (iLineNum+1) * ringRadius*2 + iLineNum*lineLength);
-                }else { //下划线在左边
+                if ( iLineNum%2 == 0){  // 下划线在左边
                     busStationView.layout(
                             padding,
-                            (iLineNum+1) * ringRadius*2 + (iLineNum-1)*lineLength,
+                            ringRadius*2 + (iLineNum-1)*lineLength,
                             padding + ringRadius*2 ,
-                            (iLineNum+1) * ringRadius*2 + iLineNum*lineLength);
+                            ringRadius*2 + iLineNum*lineLength);
+                }else { //下划线在右边
+                    busStationView.layout(
+                            widthNoPadding + padding - ringRadius*2 ,
+                            ringRadius*2 + (iLineNum-1)*lineLength,
+                            widthNoPadding + padding ,
+                            ringRadius*2 + iLineNum*lineLength);
                 }
 
             } else if (iLineNum % 2 == 0){ //单数表示向右 →
+                Logger.d(TAG,"i="+i +",right");
                 busStationView.setPosition(BusStationView.Position.RIGHT.name());
                 busStationView.layout(
-                        padding + width*(i/ 2 % lineNum) + ringRadius,
-                        width * iLineNum ,
-                        padding + width*(i/ 2 % lineNum + 1) + ringRadius,
-                        width * iLineNum + ringRadius*2);
+                        padding + lineLength*(i % (oneLineNum +1) -1) + ringRadius*2,
+                        lineLength * iLineNum ,
+                        padding + lineLength*(i % (oneLineNum +1) ) + ringRadius*2,
+                        lineLength * iLineNum + ringRadius*2);
+
+                Logger.d(TAG,"i="+i+",i % oneLineNum="+i % oneLineNum);
+                Logger.d(TAG,
+                        "x1="+(padding + lineLength*(i % (oneLineNum +1) -1) + ringRadius*2)
+                        +",y1="+(lineLength * iLineNum )
+                        +",x2="+(padding + lineLength*(i % (oneLineNum +1) ) + ringRadius*2)
+                        +",y2="+(lineLength * iLineNum + ringRadius*2));
+
             }else if (iLineNum % 2 ==1 ){   //双数表示向左 ←
+                Logger.d(TAG,"i="+i+",left");
                 busStationView.setPosition(BusStationView.Position.LEFT.name());
+                busStationView.setFirst(false);
                 busStationView.layout(
-                        padding + width*(i/ 2 % lineNum) + ringRadius,
-                        getMeasuredWidth() - padding - 2*ringRadius - (i/2%lineNum-1)*lineLength ,
-                        padding + width*(i/ 2 % lineNum + 1) + ringRadius,
-                        getMeasuredWidth() - padding - 2*ringRadius - (i/2%lineNum)*lineLength);
+                        padding + widthNoPadding - (padding + lineLength*(i % (oneLineNum +1) ) + ringRadius*2),
+                        ringRadius*2 + iLineNum*lineLength - ringRadius,
+                        padding + widthNoPadding-(padding + lineLength*(i % (oneLineNum +1) -1) + ringRadius*2),
+                        ringRadius*2 + iLineNum*lineLength + ringRadius);
+
+                Logger.d(TAG,"i="+i+",i % oneLineNum="+i % (oneLineNum +1));
+                Logger.d(TAG,
+                        "x1="+(padding + widthNoPadding - (padding + lineLength*(i % (oneLineNum +1) ) + ringRadius*2))
+                                +",y1="+((iLineNum/2) * ringRadius*2 + iLineNum*lineLength +ringRadius)
+                                +",x2="+( padding + widthNoPadding-(padding + lineLength*(i % (oneLineNum +1) -1) + ringRadius*2))
+                                +",y2="+((iLineNum/2) * ringRadius*2 + iLineNum*lineLength -ringRadius));
             }
 
+            addView(busStationView);
 
         }
     }

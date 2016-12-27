@@ -11,7 +11,6 @@ import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
 import android.view.View;
 
-import com.eagle.androidlib.utils.DensityUtil;
 import com.eagle.androidlib.utils.Logger;
 import com.wendy.jnbus.R;
 
@@ -19,6 +18,8 @@ import com.wendy.jnbus.R;
  * Created by Wendy on 2016/12/18.
  */
 public class BusStationView extends View {
+
+    private static final String TAG = "BusStationView";
 
     private Paint linePaint;
     private Paint ringPaint;
@@ -54,6 +55,7 @@ public class BusStationView extends View {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
+        Logger.d(TAG,"----onDraw--start");
         linePaint = new Paint();
         linePaint.setColor(lineColor);
         linePaint.setStyle(Paint.Style.STROKE);
@@ -68,20 +70,41 @@ public class BusStationView extends View {
 
         switch (Position.valueOf(position)){
 
-            case LEFT: //线在左方，圈在右
-                if (!isFirst)   // 当不是第一个时，是有横线的
-                    canvas.drawLine(0, radius, getWidth(), radius, linePaint);
-                canvas.drawCircle(getWidth()- radius, 0, radius, ringPaint);
+            case RIGHT: //线在左方，圈在右 →
+                Logger.d(TAG,"RIGHT");
+                canvas.drawLine(0, radius,
+                        getWidth(), radius,
+                        linePaint);
+                canvas.drawCircle(
+                        getWidth()- radius,
+                        radius,
+                        radius, ringPaint);
+                Logger.d(TAG,"x1="+(getWidth()- radius)+",y1="+radius
+                        +",x2="+ radius+",y2="+ringPaint);
                 break;
 
-            case RIGHT:// 线在右，圈在左
-                canvas.drawLine(0,radius,getWidth(),radius ,linePaint);
-                canvas.drawCircle(radius,radius,radius,ringPaint);
+            case LEFT://  ←
+                Logger.d(TAG,"LEFT");
+                if (!isFirst)   // 当不是第一个时，是有横线的
+                    canvas.drawLine(0,radius,
+                            getWidth(), radius,
+                            linePaint);
+                canvas.drawCircle(radius,
+                        radius,
+                        radius,
+                        ringPaint);
+//                   Logger.d(TAG,"x1="+(0)+",y1="+radius
+//                        +",x2="+ radius+",y2="+radius+","+getHeight());
                 break;
 
             case TOP:// 线在上，圈在下
-                canvas.drawLine(radius,0,radius,getHeight() ,linePaint);
-                canvas.drawCircle(radius, getHeight()-radius ,radius,ringPaint);
+                canvas.drawLine(radius,0,
+                        radius,getHeight() ,
+                        linePaint);
+                canvas.drawCircle(radius,
+                        getHeight()-radius,
+                        radius,
+                        ringPaint);
                 break;
         }
 
@@ -92,7 +115,7 @@ public class BusStationView extends View {
     }
 
     public void setLineColor(int lineColor) {
-        this.lineColor = lineColor;
+        this.lineColor = ContextCompat.getColor(getContext(),lineColor);
     }
 
     public int getRingColor() {
@@ -100,7 +123,7 @@ public class BusStationView extends View {
     }
 
     public void setRingColor(int ringColor) {
-        this.ringColor = ringColor;
+        this.ringColor = ContextCompat.getColor(getContext(),ringColor);
     }
 
     public float getRadius() {
