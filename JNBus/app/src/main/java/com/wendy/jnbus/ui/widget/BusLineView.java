@@ -18,7 +18,7 @@ public class BusLineView extends LinearLayout {
 
     private static final String TAG= "BusLineView";
     private List<BusStation> busStations;
-    private int oneLineNum = 5 ; // 线上总共有几个点
+    private int oneLineNum = 4 ; // 线上总共有几个点
     private int ringRadius = 10;
     private int lineWidth = 5;
     private int stationNameWidth = 50 ; // 站点名称控件宽度
@@ -75,7 +75,7 @@ public class BusLineView extends LinearLayout {
                         padding ,
                         0,
                         ringRadius*2 + padding + stationNameWidth,
-                        ringRadius*2 + stationNameWidth);
+                        ringRadius*2 + 2*stationNameWidth);
 
             } else if ( i%(oneLineNum +1) == 0 ){    // ↓ 方向
                 if ( iLineNum%2 == 0){  // 下划线在左边
@@ -84,14 +84,14 @@ public class BusLineView extends LinearLayout {
                             padding ,
                             ringRadius*3 + (iLineNum-1)*lineLength, // 正常情况下为（ringRadius*3 + (iLineNum-1)*lineLength），为防止线路突出，减少半个站点半径
                             padding + ringRadius*2 + stationNameWidth,
-                            ringRadius*2 + iLineNum*lineLength + stationNameWidth);
+                            ringRadius*2 + iLineNum*lineLength + 2*stationNameWidth);
                 }else { //下划线在右边
                     busStationView.setPosition(BusViewConstant.Position.TOP_RIGHT.name());
                     busStationView.layout(
                             widthNoPadding + padding - ringRadius*2  ,
                             ringRadius*2 + (iLineNum-1)*lineLength,
                             widthNoPadding + padding + stationNameWidth,
-                            ringRadius*3 + iLineNum*lineLength+ stationNameWidth);// 正常情况下为（ringRadius*3 + (iLineNum-1)*lineLength），为防止线路突出，增加半个站点半径
+                            ringRadius*3 + iLineNum*lineLength+ 2*stationNameWidth);// 正常情况下为（ringRadius*3 + (iLineNum-1)*lineLength），为防止线路突出，增加半个站点半径
                 }
 
             } else if (iLineNum % 2 == 0){ //单数表示向右 →
@@ -100,7 +100,7 @@ public class BusLineView extends LinearLayout {
                         padding + lineLength*(i % (oneLineNum +1) -1) + ringRadius*2 ,
                         lineLength * iLineNum ,
                         padding + lineLength*(i % (oneLineNum +1) ) + ringRadius*2 + stationNameWidth,
-                        lineLength * iLineNum + ringRadius*2 + stationNameWidth);
+                        lineLength * iLineNum + ringRadius*2 + 2*stationNameWidth);
 
             }else if (iLineNum % 2 ==1 ){   //双数表示向左 ←
                 busStationView.setPosition(BusViewConstant.Position.LEFT.name());
@@ -109,7 +109,7 @@ public class BusLineView extends LinearLayout {
                         padding + widthNoPadding - (padding + lineLength*(i % (oneLineNum +1) ) + ringRadius*2) ,
                         ringRadius*2 + iLineNum*lineLength - ringRadius,
                         padding + widthNoPadding-(padding + lineLength*(i % (oneLineNum +1) -1) + ringRadius*2) + stationNameWidth,
-                        ringRadius*2 + iLineNum*lineLength + ringRadius + stationNameWidth);
+                        ringRadius*2 + iLineNum*lineLength + ringRadius + 2*stationNameWidth);
             }
 
             addView(busStationView);// 将站点添加到view中

@@ -3,9 +3,11 @@ package com.wendy.jnbus.ui.widget;
 import android.content.Context;
 import android.graphics.Color;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.eagle.androidlib.utils.Logger;
+import com.wendy.jnbus.R;
 import com.wendy.jnbus.vo.BusDetail;
 
 /**
@@ -37,7 +39,7 @@ public class BusView extends ViewGroup {
         busStationView.setRingColor(ringColor);
         busStationView.setRadius(radius);
         busStationView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.MATCH_PARENT));
-        busStationView.layout(0, 0, getWidth() - stationNameWidth, getHeight()- stationNameWidth);
+        busStationView.layout(0, stationNameWidth, getWidth() - stationNameWidth, getHeight()- stationNameWidth);
         busStationView.setFirst(isFirst);
         busStationView.setPosition(position);
         addView(busStationView);
@@ -45,9 +47,13 @@ public class BusView extends ViewGroup {
         TextView textView = new TextView(getContext());
         textView.setText("test");
 
+        ImageView imageView = new ImageView(getContext());
+        imageView.setImageDrawable(getResources().getDrawable(R.drawable.car));
+
         switch (BusViewConstant.Position.valueOf(position)){
             case RIGHT:
                 textView.layout( getWidth()-stationNameWidth, getHeight()-stationNameWidth , getWidth(),getHeight());
+                imageView.layout( 0, 0 , stationNameWidth,stationNameWidth);
                 break;
             case LEFT:
                 textView.layout( 0, getHeight()-stationNameWidth , stationNameWidth,getHeight());
@@ -61,6 +67,7 @@ public class BusView extends ViewGroup {
         }
 
         addView(textView);
+        addView(imageView);
 
     }
 
