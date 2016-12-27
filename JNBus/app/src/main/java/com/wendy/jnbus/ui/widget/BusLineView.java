@@ -79,7 +79,7 @@ public class BusLineView extends LinearLayout {
                 if ( iLineNum%2 == 0){  // 下划线在左边
                     busStationView.layout(
                             padding,
-                            ringRadius*2 + (iLineNum-1)*lineLength,
+                            ringRadius*3 + (iLineNum-1)*lineLength,
                             padding + ringRadius*2 ,
                             ringRadius*2 + iLineNum*lineLength);
                 }else { //下划线在右边
@@ -87,7 +87,7 @@ public class BusLineView extends LinearLayout {
                             widthNoPadding + padding - ringRadius*2 ,
                             ringRadius*2 + (iLineNum-1)*lineLength,
                             widthNoPadding + padding ,
-                            ringRadius*2 + iLineNum*lineLength);
+                            ringRadius*3 + iLineNum*lineLength);
                 }
 
             } else if (iLineNum % 2 == 0){ //单数表示向右 →
