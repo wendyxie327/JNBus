@@ -50,7 +50,7 @@ public class BusLineView extends LinearLayout {
             return;
         }
 
-        int lineUseWidth = getMeasuredWidth() - stationNameWidth;
+        int lineUseWidth = getMeasuredWidth() - 2*stationNameWidth;// 横向实际可用长度，在前后去掉一个站点的显示
         int lineLength = (lineUseWidth- ringRadius*2) / (oneLineNum); // 某个站点的长度,总长度上，先减去边上圈圈.为站点名称空出一个站点的长度
         int widthNoPadding = ringRadius*2 + oneLineNum *lineLength; //正式的控件宽度为此。因为上面相除时，可能有些余数被忽略掉了
         int padding = (lineUseWidth - widthNoPadding)/2 ; //两边需要留出一定间隙
@@ -59,7 +59,7 @@ public class BusLineView extends LinearLayout {
 
         int len = busStations.size();
         for (int i=0 ;i < len -1 ; i++){
-            BusView busStationView = new BusView(getContext());
+            BusContentView busStationView = new BusContentView(getContext());
             busStationView.setLineWidth(lineWidth);
             busStationView.setLineColor(R.color.cyan);
             busStationView.setRingColor(R.color.yellow);
@@ -69,12 +69,12 @@ public class BusLineView extends LinearLayout {
             int iLineNum = i/ (oneLineNum +1) ;  //判断在第几行,一行=横行n个站点+竖行一个站点
             // 一组横向，加一个竖为一组
             if (i ==0){ //第一个站点,只有一个点
-                busStationView.setPosition(BusViewConstant.Position.LEFT.name());
+                busStationView.setPosition(BusViewConstant.Position.TOP_LEFT.name());
                 busStationView.setFirst(true);
                 busStationView.layout(
                         padding ,
                         0,
-                        ringRadius*2 + padding + stationNameWidth,
+                        ringRadius*2 + padding + 2*stationNameWidth,
                         ringRadius*2 + 2*stationNameWidth);
 
             } else if ( i%(oneLineNum +1) == 0 ){    // ↓ 方向
@@ -83,14 +83,14 @@ public class BusLineView extends LinearLayout {
                     busStationView.layout(
                             padding ,
                             ringRadius*3 + (iLineNum-1)*lineLength, // 正常情况下为（ringRadius*3 + (iLineNum-1)*lineLength），为防止线路突出，减少半个站点半径
-                            padding + ringRadius*2 + stationNameWidth,
+                            padding + ringRadius*2 +2* stationNameWidth,
                             ringRadius*2 + iLineNum*lineLength + 2*stationNameWidth);
                 }else { //下划线在右边
                     busStationView.setPosition(BusViewConstant.Position.TOP_RIGHT.name());
                     busStationView.layout(
                             widthNoPadding + padding - ringRadius*2  ,
                             ringRadius*2 + (iLineNum-1)*lineLength,
-                            widthNoPadding + padding + stationNameWidth,
+                            widthNoPadding + padding + 2*stationNameWidth,
                             ringRadius*3 + iLineNum*lineLength+ 2*stationNameWidth);// 正常情况下为（ringRadius*3 + (iLineNum-1)*lineLength），为防止线路突出，增加半个站点半径
                 }
 
@@ -99,7 +99,7 @@ public class BusLineView extends LinearLayout {
                 busStationView.layout(
                         padding + lineLength*(i % (oneLineNum +1) -1) + ringRadius*2 ,
                         lineLength * iLineNum ,
-                        padding + lineLength*(i % (oneLineNum +1) ) + ringRadius*2 + stationNameWidth,
+                        padding + lineLength*(i % (oneLineNum +1) ) + ringRadius*2 + 2*stationNameWidth,
                         lineLength * iLineNum + ringRadius*2 + 2*stationNameWidth);
 
             }else if (iLineNum % 2 ==1 ){   //双数表示向左 ←
@@ -108,7 +108,7 @@ public class BusLineView extends LinearLayout {
                 busStationView.layout(
                         padding + widthNoPadding - (padding + lineLength*(i % (oneLineNum +1) ) + ringRadius*2) ,
                         ringRadius*2 + iLineNum*lineLength - ringRadius,
-                        padding + widthNoPadding-(padding + lineLength*(i % (oneLineNum +1) -1) + ringRadius*2) + stationNameWidth,
+                        padding + widthNoPadding-(padding + lineLength*(i % (oneLineNum +1) -1) + ringRadius*2) + 2*stationNameWidth,
                         ringRadius*2 + iLineNum*lineLength + ringRadius + 2*stationNameWidth);
             }
 

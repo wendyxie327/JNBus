@@ -5,8 +5,6 @@ import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.graphics.PorterDuff;
-import android.graphics.PorterDuffXfermode;
 import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
 import android.view.View;
@@ -80,10 +78,10 @@ public class BusStationView extends View {
 
             case LEFT://  ←
                 Logger.d(TAG,"LEFT");
-                if (!isFirst)   // 当不是第一个时，是有横线的
-                    canvas.drawLine(0,radius,
-                            getWidth(), radius,
-                            linePaint);
+
+                canvas.drawLine(0,radius,
+                        getWidth(), radius,
+                        linePaint);
                 canvas.drawCircle(radius,
                         radius,
                         radius,
@@ -91,9 +89,10 @@ public class BusStationView extends View {
                 break;
 
             case TOP_LEFT:// 线在上，圈在下
-                canvas.drawLine(radius,0,
-                        radius,getHeight() ,
-                        linePaint);
+                if (!isFirst)   // 当不是第一个时，是有横线的
+                    canvas.drawLine(radius,0,
+                            radius,getHeight() ,
+                            linePaint);
                 canvas.drawCircle(radius,
                         getHeight()-radius,
                         radius,
