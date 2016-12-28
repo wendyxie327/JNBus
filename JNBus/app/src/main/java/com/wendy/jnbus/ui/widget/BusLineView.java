@@ -21,7 +21,7 @@ public class BusLineView extends LinearLayout {
     private int oneLineNum = 4 ; // 线上总共有几个点
     private int ringRadius = 10;
     private int lineWidth = 5;
-    private int stationNameWidth = 50 ; // 站点名称控件宽度
+    private int stationNameWidth = 70 ; // 站点名称控件宽度
 
 
     public BusLineView(Context context, AttributeSet attrs) {

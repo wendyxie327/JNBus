@@ -1,21 +1,78 @@
 package com.wendy.jnbus.ui.widget;
 
 import android.content.Context;
-import android.view.ViewGroup;
+import android.support.v4.content.ContextCompat;
+import android.util.AttributeSet;
+import android.view.Gravity;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+
+import com.eagle.androidlib.utils.Logger;
+import com.wendy.jnbus.R;
 
 /**
  * 站点车辆显示
  * Created by Administrator on 2016/12/28 0028.
  */
 
-public class BusView extends ViewGroup {
+public class BusView extends RelativeLayout {
 
-    public BusView(Context context){
-        super(context);
+    private static final String TAG = "BusView";
+
+    public BusView(Context context) {
+        this(context, null, 0);
+    }
+
+    public BusView(Context context, AttributeSet attrs) {
+        this(context, attrs, 0);
+    }
+
+    public BusView(Context context, AttributeSet attrs, int defStyleAttr) {
+        super(context, attrs, defStyleAttr);
+        init(context);
+    }
+
+    private void init(Context context) {
+        this.setBackground(ContextCompat.getDrawable(context,R.drawable.car));
+
+        TextView carIdTV = new TextView(context);
+        carIdTV.setText("K0000");
+        carIdTV.setTextColor(ContextCompat.getColor(context, R.color.red_a200));
+        carIdTV.setTextSize(10);
+        carIdTV.setGravity(Gravity.CENTER);
+        LayoutParams carIdTVParams = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+        carIdTVParams.addRule(CENTER_IN_PARENT);
+        addView(carIdTV, carIdTVParams);
     }
 
     @Override
-    protected void onLayout(boolean changed, int l, int t, int r, int b) {
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+
+        int count = this.getChildCount();
+
+        for (int i = 0; i < count; i++) {
+            View child = this.getChildAt(i);
+            child.measure(widthMeasureSpec, heightMeasureSpec);
+        }
+    }
+
+    @Override
+    protected void onLayout(boolean arg0, int l, int t, int r, int b) {
+
+        int count = this.getChildCount();
+
+        for (int i = 0; i < count; i++) {
+            View child = this.getChildAt(i);
+            child.setVisibility(View.VISIBLE);
+            //child.measure(r-l, b-t);
+            int x = 0;
+            int y = 0;
+            child.layout(x, y, x + getWidth(), y + getHeight()/2);
+        }
 
     }
 }

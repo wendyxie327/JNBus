@@ -17,4 +17,8 @@
         android:layout_height="match_parent"
         android:orientation="vertical"></LinearLayout>
 
+    <!--<com.wendy.jnbus.ui.widget.BusView-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"></com.wendy.jnbus.ui.widget.BusView>-->
+
 </RelativeLayout>

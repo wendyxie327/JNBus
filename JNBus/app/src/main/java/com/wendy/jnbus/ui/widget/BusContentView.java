@@ -48,8 +48,9 @@ public class BusContentView extends ViewGroup {
         TextView textView = new TextView(getContext());
         textView.setText("test");
 
-        ImageView imageView = new ImageView(getContext());
-        imageView.setImageDrawable(getResources().getDrawable(R.drawable.car));
+        BusView busView = new BusView(getContext());
+        busView.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT,LayoutParams.WRAP_CONTENT));
+        float busViewHeightP = 1.0f/3; // 显示小车高度设置少 1/3，全显示太高了
 
         ImageView imageView1 = new ImageView(getContext());
         imageView1.setImageDrawable(getResources().getDrawable(R.drawable.car));
@@ -57,29 +58,32 @@ public class BusContentView extends ViewGroup {
         switch (BusViewConstant.Position.valueOf(position)){
             case RIGHT:
                 textView.layout( getWidth()-3*stationNameWidth/2, getHeight()-stationNameWidth , getWidth()-stationNameWidth/2,getHeight());
-                imageView.layout( getWidth()-3*stationNameWidth/2 , 0 , getWidth()-stationNameWidth/2 ,stationNameWidth);
+                busView.layout( getWidth()-3*stationNameWidth/2 , (int) (stationNameWidth*busViewHeightP), getWidth()-stationNameWidth/2 ,stationNameWidth);
                 imageView1.layout(getWidth()/2 - stationNameWidth/2 , 0 , getWidth()/2 + stationNameWidth/2,stationNameWidth);
                 break;
             case LEFT:
                 textView.layout( stationNameWidth/2, getHeight()-stationNameWidth , 3*stationNameWidth/2,getHeight());
-                imageView.layout( stationNameWidth , 0 , 2*stationNameWidth,stationNameWidth);
+                busView.layout( stationNameWidth , (int) (stationNameWidth*busViewHeightP) , 2*stationNameWidth,stationNameWidth);
                 imageView1.layout(getWidth()/2 , 0 , getWidth()/2+stationNameWidth,stationNameWidth);
                 break;
             case TOP_LEFT:
                 textView.layout( getWidth()- 3*stationNameWidth/2, getHeight()-stationNameWidth , getWidth()-stationNameWidth/2,getHeight());
-                imageView.layout( stationNameWidth/2, getHeight()-2*stationNameWidth- 2* ((int)radius) , 3*stationNameWidth/2, getHeight()- stationNameWidth- 2* ((int)radius));
+                busView.layout( stationNameWidth/2, getHeight()-2*stationNameWidth- 2* ((int)radius) + (int) (stationNameWidth*busViewHeightP) ,
+                        3*stationNameWidth/2, getHeight()- stationNameWidth- 2* ((int)radius));
                 imageView1.layout( stationNameWidth/2, getHeight()/2-stationNameWidth , 3*stationNameWidth/2, getHeight()/2);
                 break;
             case TOP_RIGHT:
                 textView.layout( getWidth()- 3*stationNameWidth/2, getHeight()-stationNameWidth , getWidth()-stationNameWidth/2,getHeight());
-                imageView.layout( getWidth()-3*stationNameWidth/2, getHeight()-2*stationNameWidth- 2* ((int)radius) , getWidth()-stationNameWidth/2, getHeight()- stationNameWidth- 2* ((int)radius));
+                busView.layout( getWidth()-3*stationNameWidth/2, getHeight()-2*stationNameWidth- 2* ((int)radius)+(int) (stationNameWidth*busViewHeightP) ,
+                        getWidth()-stationNameWidth/2, getHeight()- stationNameWidth- 2* ((int)radius));
                 imageView1.layout( getWidth()-3*stationNameWidth/2, getHeight()/2-stationNameWidth , getWidth()-stationNameWidth/2, getHeight()/2);
                 break;
         }
 
         addView(textView);
-        addView(imageView);
-        addView(imageView1);
+
+//        addView(imageView1);
+        addView(busView);
 
     }
 
