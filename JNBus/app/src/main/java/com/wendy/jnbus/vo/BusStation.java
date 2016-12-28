@@ -1,6 +1,7 @@
 package com.wendy.jnbus.vo;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * 公交车站点相关信息
@@ -18,6 +19,15 @@ public class BusStation {
     private Date updateTime;
     private int distance;
     private String[] busLineList;
+    private List<BusDetail> busDetails; //该站点存在的总车辆
+
+    public List<BusDetail> getBusDetails() {
+        return busDetails;
+    }
+
+    public void setBusDetails(List<BusDetail> busDetails) {
+        this.busDetails = busDetails;
+    }
 
     public String getId() {
         return id;

@@ -12,7 +12,9 @@ import com.wendy.jnbus.ui.base.BaseAppActivity;
 import com.wendy.jnbus.ui.widget.BusLineView;
 import com.wendy.jnbus.vo.BusDetail;
 import com.wendy.jnbus.vo.BusLine;
+import com.wendy.jnbus.vo.BusStation;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -22,6 +24,9 @@ public class MainActivity extends BaseAppActivity {
     BusLineView busLineView;
     @BindView(R.id.content_ll)
     LinearLayout contentLL;
+
+    List<BusDetail> mBusDetails ;
+    BusLine mBusLine;
 
     @Override
     public int getLayoutID() {
@@ -41,7 +46,7 @@ public class MainActivity extends BaseAppActivity {
             @Override
             public void onNext(List<BusDetail> busDetails) {
                 if (busDetails !=null)
-                    Logger.d(MainActivity.this, busDetails.toString());
+                    mBusDetails = busDetails;
                 else
                     Logger.d(MainActivity.this, "busDetails is null");
             }
@@ -55,6 +60,7 @@ public class MainActivity extends BaseAppActivity {
             public void onNext(BusLine busLine) {
                 if (busLine !=null){
                     Logger.d(MainActivity.this, busLine.toString());
+                    mBusLine = busLine;
                     showBusView(busLine,null);
                 } else
                     Logger.d(MainActivity.this, "busLine is null");
@@ -67,6 +73,25 @@ public class MainActivity extends BaseAppActivity {
     public void initDataResume() {
 
     }
+
+    private void parseBusLine(){
+        if ( mBusLine!=null && mBusDetails!=null
+                && mBusLine.getStations()!=null && mBusLine.getStations().size() >0 ){
+            List<BusStation> busStations = mBusLine.getStations(); //获取到的站点列表
+            int len = busStations.size();
+            for (int i=0 ; i<len ; i++){
+                List<BusDetail> busDetailsShow = new ArrayList<>(); //初始化站点包含的车辆列表
+                if ( mBusDetails.size() <=0) continue;
+                for (BusDetail busDetail: mBusDetails) { //循环遍历车辆列表，找出与某站点全部的车辆
+                    if ( busDetail.getStationSeqNum()!=null && busDetail.getStationSeqNum().equals( busStations.get(i).getId())){
+                        busDetailsShow.add( busDetail); //将符合条件的车辆加到列表中
+                    }
+                }
+                busStations.get(i).setBusDetails(busDetailsShow);
+            }
+        }
+    }
+
 
     private void showBusView(BusLine busLine, List<BusDetail> busDetails){
         busLineView = new BusLineView(MainActivity.this,null);

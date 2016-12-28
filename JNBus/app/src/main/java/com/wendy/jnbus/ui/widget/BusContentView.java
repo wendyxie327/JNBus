@@ -17,7 +17,7 @@ import com.wendy.jnbus.vo.BusDetail;
 
 public class BusContentView extends ViewGroup {
 
-    private static final String TAG = "BusView";
+    private static final String TAG = "BusContentView";
 
     private int lineColor = Color.BLUE;
     private int ringColor = Color.RED;
