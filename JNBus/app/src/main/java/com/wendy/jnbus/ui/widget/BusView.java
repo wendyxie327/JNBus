@@ -21,6 +21,7 @@ import com.wendy.jnbus.R;
 public class BusView extends RelativeLayout {
 
     private static final String TAG = "BusView";
+    private String carId;
 
     public BusView(Context context) {
         this(context, null, 0);
@@ -39,7 +40,7 @@ public class BusView extends RelativeLayout {
         this.setBackground(ContextCompat.getDrawable(context,R.drawable.car));
 
         TextView carIdTV = new TextView(context);
-        carIdTV.setText("K0000");
+        carIdTV.setText(carId);
         carIdTV.setTextColor(ContextCompat.getColor(context, R.color.red_a200));
         carIdTV.setTextSize(10);
         carIdTV.setGravity(Gravity.CENTER);
@@ -74,5 +75,9 @@ public class BusView extends RelativeLayout {
             child.layout(x, y, x + getWidth(), y + getHeight()/2);
         }
 
+    }
+
+    public void setCarId(String carId) {
+        this.carId = carId;
     }
 }
