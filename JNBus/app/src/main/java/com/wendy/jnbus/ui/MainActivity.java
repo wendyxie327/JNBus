@@ -10,6 +10,7 @@ import com.wendy.jnbus.R;
 import com.wendy.jnbus.net.BusHttpMethod;
 import com.wendy.jnbus.ui.base.BaseAppActivity;
 import com.wendy.jnbus.ui.widget.BusLineView;
+import com.wendy.jnbus.ui.widget.BusLineViewNew;
 import com.wendy.jnbus.vo.BusDetail;
 import com.wendy.jnbus.vo.BusLine;
 import com.wendy.jnbus.vo.BusStation;
@@ -22,6 +23,7 @@ import butterknife.BindView;
 public class MainActivity extends BaseAppActivity {
 
     BusLineView busLineView;
+    BusLineViewNew busLineViewNew;
     @BindView(R.id.content_ll)
     LinearLayout contentLL;
 
@@ -97,10 +99,16 @@ public class MainActivity extends BaseAppActivity {
 
 
     private void showBusView(List<BusStation> busStations){
-        busLineView = new BusLineView(MainActivity.this,null);
-        busLineView.setBusStations( busStations );
+//        busLineView = new BusLineView(MainActivity.this,null);
+//        busLineView.setBusStations( busStations );
+//        LinearLayout.LayoutParams busParam = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+//        busLineView.setLayoutParams(busParam);
+//        contentLL.addView(busLineView, busParam);
+
+        busLineViewNew = new BusLineViewNew(MainActivity.this,null);
+        busLineViewNew.setBusStations( busStations );
         LinearLayout.LayoutParams busParam = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
-        busLineView.setLayoutParams(busParam);
-        contentLL.addView(busLineView, busParam);
+        busLineViewNew.setLayoutParams(busParam);
+        contentLL.addView(busLineViewNew, busParam);
     }
 }
