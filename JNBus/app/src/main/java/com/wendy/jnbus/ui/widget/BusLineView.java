@@ -65,6 +65,7 @@ public class BusLineView extends LinearLayout {
             busStationView.setRingColor(R.color.yellow);
             busStationView.setRadius(ringRadius);
             busStationView.setStationNameWidth(stationNameWidth);
+            busStationView.setBusStation( busStations.get(i) );
 
             int iLineNum = i/ (oneLineNum +1) ;  //判断在第几行,一行=横行n个站点+竖行一个站点
             // 一组横向，加一个竖为一组

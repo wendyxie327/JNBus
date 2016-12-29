@@ -1,5 +1,6 @@
 package com.wendy.jnbus.vo;
 
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -20,6 +21,23 @@ public class BusStation {
     private int distance;
     private String[] busLineList;
     private List<BusDetail> busDetails; //该站点存在的总车辆
+
+    @Override
+    public String toString() {
+        return "BusStation{" +
+                "id='" + id + '\'' +
+                ", area=" + area +
+                ", stationName='" + stationName + '\'' +
+                ", lng=" + lng +
+                ", lat=" + lat +
+                ", buslines='" + buslines + '\'' +
+                ", state='" + state + '\'' +
+                ", updateTime=" + updateTime +
+                ", distance=" + distance +
+                ", busLineList=" + Arrays.toString(busLineList) +
+                ", busDetails=" + busDetails +
+                '}';
+    }
 
     public List<BusDetail> getBusDetails() {
         return busDetails;

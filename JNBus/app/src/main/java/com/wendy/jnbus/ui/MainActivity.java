@@ -45,9 +45,10 @@ public class MainActivity extends BaseAppActivity {
         SubscriberOnNextListener<List<BusDetail>> buses = new SubscriberOnNextListener<List<BusDetail>>() {
             @Override
             public void onNext(List<BusDetail> busDetails) {
-                if (busDetails !=null)
+                if (busDetails !=null){
                     mBusDetails = busDetails;
-                else
+                    parseBusLine();
+                } else
                     Logger.d(MainActivity.this, "busDetails is null");
             }
         };
@@ -61,7 +62,8 @@ public class MainActivity extends BaseAppActivity {
                 if (busLine !=null){
                     Logger.d(MainActivity.this, busLine.toString());
                     mBusLine = busLine;
-                    showBusView(busLine,null);
+//                    showBusView(busLine,null);
+                    parseBusLine();
                 } else
                     Logger.d(MainActivity.this, "busLine is null");
             }
@@ -89,13 +91,14 @@ public class MainActivity extends BaseAppActivity {
                 }
                 busStations.get(i).setBusDetails(busDetailsShow);
             }
+            showBusView(busStations);
         }
     }
 
 
-    private void showBusView(BusLine busLine, List<BusDetail> busDetails){
+    private void showBusView(List<BusStation> busStations){
         busLineView = new BusLineView(MainActivity.this,null);
-        busLineView.setBusStations( busLine.getStations() );
+        busLineView.setBusStations( busStations );
         LinearLayout.LayoutParams busParam = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
         busLineView.setLayoutParams(busParam);
         contentLL.addView(busLineView, busParam);

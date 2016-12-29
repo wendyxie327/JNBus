@@ -2,13 +2,17 @@ package com.wendy.jnbus.ui.widget;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.support.v4.content.ContextCompat;
+import android.util.TypedValue;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.eagle.androidlib.utils.DensityUtil;
 import com.eagle.androidlib.utils.Logger;
 import com.wendy.jnbus.R;
 import com.wendy.jnbus.vo.BusDetail;
+import com.wendy.jnbus.vo.BusStation;
 
 /**
  * 绘制每个站点的样子，包含站点显示，站点名称显示，车辆显示
@@ -25,7 +29,7 @@ public class BusContentView extends ViewGroup {
     private float lineWidth = 7;
     private String position ;
     private boolean isFirst;
-    private BusDetail busDetail;
+    private BusStation busStation;
     private int stationNameWidth ; // 站点名称控件宽度
 
     public BusContentView(Context context){
@@ -45,8 +49,13 @@ public class BusContentView extends ViewGroup {
         busStationView.setPosition(position);
         addView(busStationView);
 
+        if ( busStation!=null) Logger.d(TAG,busStation.toString());
+        else Logger.d(TAG,"busStation is null");
+
         TextView textView = new TextView(getContext());
-        textView.setText("test");
+        textView.setText(busStation.getStationName());
+        textView.setTextColor(ContextCompat.getColor(getContext(),R.color.textColor));
+        textView.setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimensionPixelSize(R.dimen.text_note_small_size));
 
         BusView busView = new BusView(getContext());
         busView.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT,LayoutParams.WRAP_CONTENT));
@@ -135,12 +144,12 @@ public class BusContentView extends ViewGroup {
         isFirst = first;
     }
 
-    public BusDetail getBusDetail() {
-        return busDetail;
+    public BusStation getBusStation() {
+        return busStation;
     }
 
-    public void setBusDetail(BusDetail busDetail) {
-        this.busDetail = busDetail;
+    public void setBusStation(BusStation busStation) {
+        this.busStation = busStation;
     }
 
     public int getStationNameWidth() {
