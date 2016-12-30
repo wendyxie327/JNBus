@@ -11,14 +11,15 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.wendy.jnbus.ui.MainActivity">
 
-    <LinearLayout
+    <ScrollView
         android:id="@+id/content_ll"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"></LinearLayout>
+        android:orientation="vertical"
+        android:scrollbars="vertical"></ScrollView>
 
     <!--<com.wendy.jnbus.ui.widget.BusView-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent"></com.wendy.jnbus.ui.widget.BusView>-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"></com.wendy.jnbus.ui.widget.BusView>-->
 
 </RelativeLayout>

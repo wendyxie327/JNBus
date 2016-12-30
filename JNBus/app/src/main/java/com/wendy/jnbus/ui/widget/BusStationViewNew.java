@@ -9,6 +9,7 @@ import android.util.AttributeSet;
 import android.view.View;
 
 import com.eagle.androidlib.utils.Logger;
+import com.wendy.jnbus.R;
 
 /**
  * Created by Wendy on 2016/12/18.
@@ -49,7 +50,6 @@ public class BusStationViewNew extends View {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
-        Logger.d(TAG,"----onDraw--start");
         linePaint = new Paint();
         linePaint.setColor(lineColor);
         linePaint.setStyle(Paint.Style.STROKE);
@@ -63,25 +63,24 @@ public class BusStationViewNew extends View {
         ringPaint.setColor(ringColor);
 
         lineLength = getWidth()/2;
+        int lineHeight = getHeight() /2 ;// 竖向的长度
         canvas.drawCircle(  // 圆心在正中央
-                lineLength,
-                radius,
+                lineLength, // 圆心x坐标点
+                lineHeight, // 圆心y坐标点
                 radius, ringPaint);
 
         switch (BusViewConstant.Position.valueOf(position)){
 
             case RIGHT: //线在左方，圈在右 →
-                Logger.d(TAG,"RIGHT");
-                canvas.drawLine( 0, lineLength ,
-                        lineLength, lineLength ,
+                canvas.drawLine( 0, lineHeight ,
+                        lineLength, lineHeight ,
                         linePaint);
 
                 break;
 
             case LEFT://  ←
-                Logger.d(TAG,"LEFT");
-                canvas.drawLine( lineLength , lineLength,
-                        getWidth() , lineLength,
+                canvas.drawLine( lineLength , lineHeight,
+                        getWidth() , lineHeight,
                         linePaint);
                 break;
 
@@ -89,7 +88,7 @@ public class BusStationViewNew extends View {
             case TOP_RIGHT:// 线在上，圈在下 - 右 ，都执行同一个方法
                 if (!isFirst)   // 当不是第一个时，是有横线的
                     canvas.drawLine( lineLength , 0,
-                            lineLength , lineLength ,
+                            lineLength , lineHeight ,
                             linePaint);
                 break;
         }

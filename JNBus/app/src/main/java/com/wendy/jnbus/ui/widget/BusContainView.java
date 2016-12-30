@@ -25,8 +25,8 @@ public class BusContainView extends ViewGroup {
 
     private int lineColor = Color.BLUE;
     private int ringColor = Color.RED;
-    private float radius = 10;
-    private float lineWidth = 7;
+    private int radius = 10;
+    private int lineWidth = 7;
     private String position ;
     private boolean isFirst;
     private BusStation busStation;
@@ -38,13 +38,13 @@ public class BusContainView extends ViewGroup {
 
     @Override
     protected void onLayout(boolean changed, int l, int t, int r, int b) {
-        BusStationView busStationView = new BusStationView(getContext());
+        BusStationViewNew busStationView = new BusStationViewNew(getContext());
         busStationView.setLineWidth(lineWidth);
         busStationView.setLineColor(lineColor);
         busStationView.setRingColor(ringColor);
         busStationView.setRadius(radius);
         busStationView.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
-        busStationView.layout(stationNameWidth, stationNameWidth, getWidth() - stationNameWidth, getHeight()- stationNameWidth);
+        busStationView.layout(0, 0, getWidth(), getHeight());
         busStationView.setFirst(isFirst);
         busStationView.setPosition(position);
         addView(busStationView);
@@ -52,10 +52,14 @@ public class BusContainView extends ViewGroup {
         if ( busStation!=null) Logger.d(TAG,busStation.toString());
         else Logger.d(TAG,"busStation is null");
 
+        int lineLength = getWidth()/2;
+        int lineHeight = getHeight() /2 ;// 竖向的长度
+
         TextView stationNameTV = new TextView(getContext());
         stationNameTV.setText(busStation.getStationName());
         stationNameTV.setTextColor(ContextCompat.getColor(getContext(),R.color.textColor));
         stationNameTV.setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimensionPixelSize(R.dimen.text_note_small_size));
+        stationNameTV.layout( lineLength , lineHeight , 3* lineLength/2, 3*lineHeight/2 );
 
 
         BusView busView2 = null;
@@ -72,6 +76,7 @@ public class BusContainView extends ViewGroup {
                     busView1 = new BusView(getContext());
                     busView1.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT,LayoutParams.WRAP_CONTENT));
                     busView1.setCarId(busDetail.getCardId());
+                    busView1.layout( lineHeight/2 , );
                 }else {
                     // 已到达
                     busView2 = new BusView(getContext());
@@ -82,38 +87,38 @@ public class BusContainView extends ViewGroup {
         }
 
 
-        switch (BusViewConstant.Position.valueOf(position)){
-            case RIGHT:
-                stationNameTV.layout( getWidth()-3*stationNameWidth/2, getHeight()-stationNameWidth , getWidth()-stationNameWidth/2,getHeight());
-                if ( busView2 !=null)
-                busView2.layout( getWidth()-3*stationNameWidth/2 , (int) (stationNameWidth*busViewHeightP), getWidth()-stationNameWidth/2 ,stationNameWidth);
-                if ( busView1 !=null)
-                busView1.layout(getWidth()/2 - stationNameWidth/2 , 0 , getWidth()/2 + stationNameWidth/2,stationNameWidth);
-                break;
-            case LEFT:
-                stationNameTV.layout( stationNameWidth/2, getHeight()-stationNameWidth , 3*stationNameWidth/2,getHeight());
-                if ( busView2 !=null)
-                busView2.layout( stationNameWidth , (int) (stationNameWidth*busViewHeightP) , 2*stationNameWidth,stationNameWidth);
-                if ( busView1 !=null)
-                busView1.layout(getWidth()/2 , 0 , getWidth()/2+stationNameWidth,stationNameWidth);
-                break;
-            case TOP_LEFT:
-                stationNameTV.layout( getWidth()- 3*stationNameWidth/2, getHeight()-stationNameWidth , getWidth()-stationNameWidth/2,getHeight());
-                if ( busView2 !=null)
-                busView2.layout( stationNameWidth/2, getHeight()-2*stationNameWidth- 2* ((int)radius) + (int) (stationNameWidth*busViewHeightP) ,
-                        3*stationNameWidth/2, getHeight()- stationNameWidth- 2* ((int)radius));
-                if ( busView1 !=null)
-                busView1.layout( stationNameWidth/2, getHeight()/2-stationNameWidth , 3*stationNameWidth/2, getHeight()/2);
-                break;
-            case TOP_RIGHT:
-                stationNameTV.layout( getWidth()- 3*stationNameWidth/2, getHeight()-stationNameWidth , getWidth()-stationNameWidth/2,getHeight());
-                if ( busView2 !=null)
-                busView2.layout( getWidth()-3*stationNameWidth/2, getHeight()-2*stationNameWidth- 2* ((int)radius)+(int) (stationNameWidth*busViewHeightP) ,
-                        getWidth()-stationNameWidth/2, getHeight()- stationNameWidth- 2* ((int)radius));
-                if ( busView1 !=null)
-                busView1.layout( getWidth()-3*stationNameWidth/2, getHeight()/2-stationNameWidth , getWidth()-stationNameWidth/2, getHeight()/2);
-                break;
-        }
+//        switch (BusViewConstant.Position.valueOf(position)){
+//            case RIGHT:
+////                stationNameTV.layout( getWidth()-3*stationNameWidth/2, getHeight()-stationNameWidth , getWidth()-stationNameWidth/2,getHeight());
+//                if ( busView2 !=null)
+//                busView2.layout( getWidth()-3*stationNameWidth/2 , (int) (stationNameWidth*busViewHeightP), getWidth()-stationNameWidth/2 ,stationNameWidth);
+//                if ( busView1 !=null)
+//                busView1.layout(getWidth()/2 - stationNameWidth/2 , 0 , getWidth()/2 + stationNameWidth/2,stationNameWidth);
+//                break;
+//            case LEFT:
+////                stationNameTV.layout( stationNameWidth/2, getHeight()-stationNameWidth , 3*stationNameWidth/2,getHeight());
+//                if ( busView2 !=null)
+//                busView2.layout( stationNameWidth , (int) (stationNameWidth*busViewHeightP) , 2*stationNameWidth,stationNameWidth);
+//                if ( busView1 !=null)
+//                busView1.layout(getWidth()/2 , 0 , getWidth()/2+stationNameWidth,stationNameWidth);
+//                break;
+//            case TOP_LEFT:
+////                stationNameTV.layout( getWidth()- 3*stationNameWidth/2, getHeight()-stationNameWidth , getWidth()-stationNameWidth/2,getHeight());
+//                if ( busView2 !=null)
+//                busView2.layout( stationNameWidth/2, getHeight()-2*stationNameWidth- 2* ((int)radius) + (int) (stationNameWidth*busViewHeightP) ,
+//                        3*stationNameWidth/2, getHeight()- stationNameWidth- 2* ((int)radius));
+//                if ( busView1 !=null)
+//                busView1.layout( stationNameWidth/2, getHeight()/2-stationNameWidth , 3*stationNameWidth/2, getHeight()/2);
+//                break;
+//            case TOP_RIGHT:
+////                stationNameTV.layout( getWidth()- 3*stationNameWidth/2, getHeight()-stationNameWidth , getWidth()-stationNameWidth/2,getHeight());
+//                if ( busView2 !=null)
+//                busView2.layout( getWidth()-3*stationNameWidth/2, getHeight()-2*stationNameWidth- 2* ((int)radius)+(int) (stationNameWidth*busViewHeightP) ,
+//                        getWidth()-stationNameWidth/2, getHeight()- stationNameWidth- 2* ((int)radius));
+//                if ( busView1 !=null)
+//                busView1.layout( getWidth()-3*stationNameWidth/2, getHeight()/2-stationNameWidth , getWidth()-stationNameWidth/2, getHeight()/2);
+//                break;
+//        }
 
         addView(stationNameTV);
         if ( busView1 !=null)
@@ -138,19 +143,19 @@ public class BusContainView extends ViewGroup {
         this.ringColor = ringColor;
     }
 
-    public float getRadius() {
+    public int getRadius() {
         return radius;
     }
 
-    public void setRadius(float radius) {
+    public void setRadius(int radius) {
         this.radius = radius;
     }
 
-    public float getLineWidth() {
+    public int getLineWidth() {
         return lineWidth;
     }
 
-    public void setLineWidth(float lineWidth) {
+    public void setLineWidth(int lineWidth) {
         this.lineWidth = lineWidth;
     }
 

@@ -3,6 +3,7 @@ package com.wendy.jnbus.ui;
 import android.support.v4.content.ContextCompat;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 
 import com.eagle.androidlib.net.SubscriberOnNextListener;
 import com.eagle.androidlib.utils.Logger;
@@ -25,7 +26,7 @@ public class MainActivity extends BaseAppActivity {
     BusLineView busLineView;
     BusLineViewNew busLineViewNew;
     @BindView(R.id.content_ll)
-    LinearLayout contentLL;
+    ScrollView contentLL;
 
     List<BusDetail> mBusDetails ;
     BusLine mBusLine;
