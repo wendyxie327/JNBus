@@ -71,12 +71,12 @@ public class BusContentView extends ViewGroup {
             for (BusDetail busDetail: busDetails) {
                 if ( "1".equals(busDetail.getIsArrvLft())){
                     // 未到达
-                    busView1 = new BusView(getContext());
+                    busView1 = new BusView(getContext(),"d");
                     busView1.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT,LayoutParams.WRAP_CONTENT));
                     busView1.setCarId(busDetail.getCardId());
                 }else {
                     // 已到达
-                    busView2 = new BusView(getContext());
+                    busView2 = new BusView(getContext(),"d");
                     busView2.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT,LayoutParams.WRAP_CONTENT));
                     busView2.setCarId(busDetail.getCardId());
                 }

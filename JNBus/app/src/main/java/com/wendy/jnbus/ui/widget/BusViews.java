@@ -3,17 +3,25 @@ package com.wendy.jnbus.ui.widget;
 import android.content.Context;
 import android.view.ViewGroup;
 
+import com.eagle.androidlib.utils.Logger;
 import com.wendy.jnbus.vo.BusDetail;
 
 import java.util.List;
 
 /**
+ *
+ * 一个格上小车的显示
  * Created by Administrator on 2016/12/30 0030.
  */
 
 public class BusViews extends ViewGroup {
 
-    public List<BusDetail> busDetails;
+    private static final String TAG = "BusViews";
+
+    private List<BusDetail> busDetails;
+    private String position ;
+    private int stationWidth;
+    private int busWidth = 30;
 
     public BusViews(Context context){
         super(context);
@@ -21,13 +29,97 @@ public class BusViews extends ViewGroup {
 
     @Override
     protected void onLayout(boolean changed, int l, int t, int r, int b) {
+
+        int widthHalf = getWidth()/2;
+        int heightHalf = getHeight()/2;
+        int x = 0 ;
+        int y = 0 ;
+        switch (BusViewConstant.Position.valueOf(position)){
+            case LEFT:
+                y = heightHalf-stationWidth;
+                break;
+            case RIGHT:
+                y = heightHalf - stationWidth;
+                break;
+            case TOP_LEFT:
+                x = widthHalf - stationWidth ;
+                break;
+            case TOP_RIGHT:
+                x = widthHalf + stationWidth;
+                break;
+        }
+
+
         if ( busDetails !=null && busDetails.size()>0 ){
             for(int i=0; i< busDetails.size() ; i++){
-                BusView busView = new BusView(getContext());
+                Logger.d(TAG,"cardId0="+busDetails.get(i).getCardId());
+                BusView busView = new BusView(getContext(), busDetails.get(i).getCardId());
                 busView.setCarId( busDetails.get(i).getCardId() );
-                busView.layout();
+                Logger.d(TAG,"cardId="+busDetails.get(i).getCardId());
+
+                switch (BusViewConstant.Position.valueOf(position)){
+                    case LEFT:
+                        if ("1".equals( busDetails.get(i).getIsArrvLft())){ //未到达
+                            busView.layout( 3*widthHalf/2- busWidth/2, y-busWidth, 3*widthHalf/2+ busWidth/2 , y);
+                        }else {
+                            busView.layout( widthHalf, y-busWidth , 3*widthHalf/2 , y );
+                        }
+                        y = y-10;
+                        break;
+                    case RIGHT:
+                        if ("1".equals( busDetails.get(i).getIsArrvLft())){
+                            busView.layout(widthHalf/2 -busWidth/2 , y-busWidth , widthHalf/2 + busWidth/2, y);
+                        }else {
+                            busView.layout(widthHalf, y-busWidth ,3*widthHalf/2,y);
+                        }
+                        y = y-10;
+                        break;
+                    case TOP_LEFT:
+                        if ("1".equals( busDetails.get(i).getIsArrvLft())){
+                            busView.layout( x , heightHalf/2-busWidth/2 , x+busWidth, heightHalf/2+busWidth/2);
+                        }else {
+                            busView.layout(x, heightHalf - stationWidth - busWidth, x+busWidth , heightHalf-stationWidth);
+                        }
+                        x = x-10;
+                        break;
+                    case TOP_RIGHT:
+                        if ("1".equals( busDetails.get(i).getIsArrvLft())){
+                            busView.layout( x, heightHalf/2- busWidth/2 , x+busWidth, heightHalf/2+busWidth/2);
+                        }else {
+                            busView.layout(x, heightHalf-stationWidth-busWidth , x+busWidth, heightHalf-stationWidth);
+                        }
+                        x = x+10;
+                        break;
+                }
+
+                Logger.d(TAG , "busView: width="+busView.getWidth()+",height="+busView.getHeight());
+                addView(busView);
             }
         }
+    }
+
+    public int getBusWidth() {
+        return busWidth;
+    }
+
+    public void setBusWidth(int busWidth) {
+        this.busWidth = busWidth;
+    }
+
+    public int getStationWidth() {
+        return stationWidth;
+    }
+
+    public void setStationWidth(int stationWidth) {
+        this.stationWidth = stationWidth;
+    }
+
+    public String getPosition() {
+        return position;
+    }
+
+    public void setPosition(String position) {
+        this.position = position;
     }
 
     public List<BusDetail> getBusDetails() {

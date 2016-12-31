@@ -62,69 +62,16 @@ public class BusContainView extends ViewGroup {
         stationNameTV.layout( lineLength , lineHeight , 3* lineLength/2, 3*lineHeight/2 );
 
 
-        BusView busView2 = null;
-        float busViewHeightP = 1.0f/3; // 显示小车高度设置少 1/3，全显示太高了
-
-        BusView busView1 = null ;
-
         //显示站点车辆
-        if ( busStation.getBusDetails()!=null && busStation.getBusDetails().size()>0){
-            List<BusDetail> busDetails = busStation.getBusDetails();
-            for (BusDetail busDetail: busDetails) {
-                if ( "1".equals(busDetail.getIsArrvLft())){
-                    // 未到达
-                    busView1 = new BusView(getContext());
-                    busView1.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT,LayoutParams.WRAP_CONTENT));
-                    busView1.setCarId(busDetail.getCardId());
-                    busView1.layout( lineHeight/2 , );
-                }else {
-                    // 已到达
-                    busView2 = new BusView(getContext());
-                    busView2.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT,LayoutParams.WRAP_CONTENT));
-                    busView2.setCarId(busDetail.getCardId());
-                }
-            }
-        }
-
-
-//        switch (BusViewConstant.Position.valueOf(position)){
-//            case RIGHT:
-////                stationNameTV.layout( getWidth()-3*stationNameWidth/2, getHeight()-stationNameWidth , getWidth()-stationNameWidth/2,getHeight());
-//                if ( busView2 !=null)
-//                busView2.layout( getWidth()-3*stationNameWidth/2 , (int) (stationNameWidth*busViewHeightP), getWidth()-stationNameWidth/2 ,stationNameWidth);
-//                if ( busView1 !=null)
-//                busView1.layout(getWidth()/2 - stationNameWidth/2 , 0 , getWidth()/2 + stationNameWidth/2,stationNameWidth);
-//                break;
-//            case LEFT:
-////                stationNameTV.layout( stationNameWidth/2, getHeight()-stationNameWidth , 3*stationNameWidth/2,getHeight());
-//                if ( busView2 !=null)
-//                busView2.layout( stationNameWidth , (int) (stationNameWidth*busViewHeightP) , 2*stationNameWidth,stationNameWidth);
-//                if ( busView1 !=null)
-//                busView1.layout(getWidth()/2 , 0 , getWidth()/2+stationNameWidth,stationNameWidth);
-//                break;
-//            case TOP_LEFT:
-////                stationNameTV.layout( getWidth()- 3*stationNameWidth/2, getHeight()-stationNameWidth , getWidth()-stationNameWidth/2,getHeight());
-//                if ( busView2 !=null)
-//                busView2.layout( stationNameWidth/2, getHeight()-2*stationNameWidth- 2* ((int)radius) + (int) (stationNameWidth*busViewHeightP) ,
-//                        3*stationNameWidth/2, getHeight()- stationNameWidth- 2* ((int)radius));
-//                if ( busView1 !=null)
-//                busView1.layout( stationNameWidth/2, getHeight()/2-stationNameWidth , 3*stationNameWidth/2, getHeight()/2);
-//                break;
-//            case TOP_RIGHT:
-////                stationNameTV.layout( getWidth()- 3*stationNameWidth/2, getHeight()-stationNameWidth , getWidth()-stationNameWidth/2,getHeight());
-//                if ( busView2 !=null)
-//                busView2.layout( getWidth()-3*stationNameWidth/2, getHeight()-2*stationNameWidth- 2* ((int)radius)+(int) (stationNameWidth*busViewHeightP) ,
-//                        getWidth()-stationNameWidth/2, getHeight()- stationNameWidth- 2* ((int)radius));
-//                if ( busView1 !=null)
-//                busView1.layout( getWidth()-3*stationNameWidth/2, getHeight()/2-stationNameWidth , getWidth()-stationNameWidth/2, getHeight()/2);
-//                break;
-//        }
+        BusViews busViews = new BusViews(getContext());
+        busViews.setBusDetails(busStation.getBusDetails());
+        busViews.setPosition(position);
+        busViews.setStationWidth( radius);
+        busViews.setBusWidth(50);//TODO
+        busViews.layout(0,0,getWidth(),getHeight());
 
         addView(stationNameTV);
-        if ( busView1 !=null)
-        addView(busView1);
-        if ( busView2 !=null) addView(busView2);
-
+        addView( busViews);
     }
 
     public int getLineColor() {

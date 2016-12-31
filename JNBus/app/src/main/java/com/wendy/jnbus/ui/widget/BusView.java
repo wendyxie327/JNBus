@@ -22,9 +22,11 @@ public class BusView extends RelativeLayout {
 
     private static final String TAG = "BusView";
     private String carId;
+    private TextView carIdTV;
 
-    public BusView(Context context) {
+    public BusView(Context context,String carId) {
         this(context, null, 0);
+
     }
 
     public BusView(Context context, AttributeSet attrs) {
@@ -39,13 +41,15 @@ public class BusView extends RelativeLayout {
     private void init(Context context) {
         this.setBackground(ContextCompat.getDrawable(context,R.drawable.car));
 
-        TextView carIdTV = new TextView(context);
+        carIdTV = new TextView(context);
         carIdTV.setText(carId);
+        Logger.d(TAG,"---cardId="+carId);
         carIdTV.setTextColor(ContextCompat.getColor(context, R.color.red_a200));
         carIdTV.setTextSize(10);
         carIdTV.setGravity(Gravity.CENTER);
-        LayoutParams carIdTVParams = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+        LayoutParams carIdTVParams = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
         carIdTVParams.addRule(CENTER_IN_PARENT);
+        carIdTV.layout(0,0,getWidth(),getHeight());
         addView(carIdTV, carIdTVParams);
     }
 
@@ -79,5 +83,6 @@ public class BusView extends RelativeLayout {
 
     public void setCarId(String carId) {
         this.carId = carId;
+        carIdTV.setText(carId);
     }
 }

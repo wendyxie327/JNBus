@@ -55,7 +55,7 @@ public class MainActivity extends BaseAppActivity {
                     Logger.d(MainActivity.this, "busDetails is null");
             }
         };
-        BusHttpMethod.queryBusDetail(MainActivity.this , buses, "164");
+        BusHttpMethod.queryBusDetail(MainActivity.this , buses, "191");
 
 
         // 根据线路，获取具体线路
@@ -71,7 +71,7 @@ public class MainActivity extends BaseAppActivity {
                     Logger.d(MainActivity.this, "busLine is null");
             }
         };
-        BusHttpMethod.queryBusLine(MainActivity.this , busLineSub, "163");
+        BusHttpMethod.queryBusLine(MainActivity.this , busLineSub, "191");
     }
 
     @Override
