@@ -1,7 +1,6 @@
 package com.wendy.jnbus.ui.widget;
 
 import android.content.Context;
-import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -9,24 +8,22 @@ import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
 import android.view.View;
 
-import com.eagle.androidlib.utils.Logger;
-import com.wendy.jnbus.R;
-
 /**
  * Created by Wendy on 2016/12/18.
  */
 public class BusStationView extends View {
 
-    private static final String TAG = "BusStationView";
+    private static final String TAG = "BusStationViewNew";
 
     private Paint linePaint;
     private Paint ringPaint;
 
     private int lineColor = Color.BLUE;
     private int ringColor = Color.RED;
-    private float radius = 10;
-    private float lineWidth = 7;
-    private String position ;
+    private int radius = 10;    // 站点圆圈的半径
+    private int lineWidth = 7;  // 单个线路的宽度
+    private int lineLength = 64; // 单个线路的长度
+    private String position ;   // 线路样式
     private boolean isFirst;
 
 
@@ -50,7 +47,6 @@ public class BusStationView extends View {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
-        Logger.d(TAG,"----onDraw--start");
         linePaint = new Paint();
         linePaint.setColor(lineColor);
         linePaint.setStyle(Paint.Style.STROKE);
@@ -63,49 +59,34 @@ public class BusStationView extends View {
         ringPaint.setAntiAlias(true);
         ringPaint.setColor(ringColor);
 
+        lineLength = getWidth()/2;
+        int lineHeight = getHeight() /2 ;// 竖向的长度
+        canvas.drawCircle(  // 圆心在正中央
+                lineLength, // 圆心x坐标点
+                lineHeight, // 圆心y坐标点
+                radius, ringPaint);
+
         switch (BusViewConstant.Position.valueOf(position)){
 
             case RIGHT: //线在左方，圈在右 →
-                Logger.d(TAG,"RIGHT");
-                canvas.drawLine(0, radius,
-                        getWidth(), radius,
+                canvas.drawLine( 0, lineHeight ,
+                        lineLength, lineHeight ,
                         linePaint);
-                canvas.drawCircle(
-                        getWidth()- radius,
-                        radius,
-                        radius, ringPaint);
+
                 break;
 
             case LEFT://  ←
-                Logger.d(TAG,"LEFT");
-
-                canvas.drawLine(0,radius,
-                        getWidth(), radius,
+                canvas.drawLine( lineLength , lineHeight,
+                        getWidth() , lineHeight,
                         linePaint);
-                canvas.drawCircle(radius,
-                        radius,
-                        radius,
-                        ringPaint);
                 break;
 
-            case TOP_LEFT:// 线在上，圈在下
+            case TOP_LEFT:// 线在上，圈在下 - 左
+            case TOP_RIGHT:// 线在上，圈在下 - 右 ，都执行同一个方法
                 if (!isFirst)   // 当不是第一个时，是有横线的
-                    canvas.drawLine(radius,0,
-                            radius,getHeight() ,
+                    canvas.drawLine( lineLength , 0,
+                            lineLength , lineHeight ,
                             linePaint);
-                canvas.drawCircle(radius,
-                        getHeight()-radius,
-                        radius,
-                        ringPaint);
-                break;
-            case TOP_RIGHT:// 线在上，圈在下
-                canvas.drawLine(radius,0,
-                        radius,getHeight() ,
-                        linePaint);
-                canvas.drawCircle(radius,
-                        getHeight()-radius,
-                        radius,
-                        ringPaint);
                 break;
         }
 
@@ -131,7 +112,7 @@ public class BusStationView extends View {
         return radius;
     }
 
-    public void setRadius(float radius) {
+    public void setRadius(int radius) {
         this.radius = radius;
     }
 
@@ -139,7 +120,7 @@ public class BusStationView extends View {
         return lineWidth;
     }
 
-    public void setLineWidth(float lineWidth) {
+    public void setLineWidth(int lineWidth) {
         this.lineWidth = lineWidth;
     }
 

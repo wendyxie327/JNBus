@@ -9,10 +9,7 @@ import android.widget.TextView;
 
 import com.eagle.androidlib.utils.Logger;
 import com.wendy.jnbus.R;
-import com.wendy.jnbus.vo.BusDetail;
 import com.wendy.jnbus.vo.BusStation;
-
-import java.util.List;
 
 /**
  * 绘制每个站点的样子，包含站点显示，站点名称显示，车辆显示
@@ -38,7 +35,7 @@ public class BusContainView extends ViewGroup {
 
     @Override
     protected void onLayout(boolean changed, int l, int t, int r, int b) {
-        BusStationViewNew busStationView = new BusStationViewNew(getContext());
+        BusStationView busStationView = new BusStationView(getContext());
         busStationView.setLineWidth(lineWidth);
         busStationView.setLineColor(lineColor);
         busStationView.setRingColor(ringColor);

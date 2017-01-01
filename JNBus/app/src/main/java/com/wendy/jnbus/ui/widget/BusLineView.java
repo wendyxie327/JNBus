@@ -18,10 +18,11 @@ public class BusLineView extends LinearLayout {
 
     private static final String TAG= "BusLineView";
     private List<BusStation> busStations;
-    private int oneLineNum = 4 ; // 线上总共有几个点
+    private int oneLineNum = 5 ; // 线上总共有几个点
     private int ringRadius = 10;
     private int lineWidth = 5;
     private int stationNameWidth = 70 ; // 站点名称控件宽度
+    private int padding = 56 ; //左右两遍距离最近站点的间距
 
 
     public BusLineView(Context context, AttributeSet attrs) {
@@ -39,6 +40,28 @@ public class BusLineView extends LinearLayout {
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+        if ( busStations==null){
+            return;
+        }
+
+        int width = widthMeasureSpec ;
+        int height = heightMeasureSpec; //初始化控件宽高
+
+        // 将屏幕分为一块块正方形,
+        // 左右两个站点，左右间距会小一些，以padding为准
+        int lineLength = (getMeasuredWidth() - 2*padding) / (oneLineNum-1) ; // 线路长度的两倍，包含站点直径
+        int lineVerLength = lineLength + 30 ; // 上下走向的线路长度
+
+        int widthNoPadding = (oneLineNum-1) *lineLength; //正式的控件宽度为此。因为上面相除时，可能有些余数被忽略掉了
+        padding = (getMeasuredWidth() - widthNoPadding)/2 ; //两边需要留出一定间隙
+
+        Logger.d(TAG,"lineLength="+lineLength+",width="+widthNoPadding+",padding="+padding+",height="+getMeasuredHeight());
+
+        // 设置高度
+        height = 2*padding ;
+        int heightLineNum = busStations.size()/ oneLineNum ; //总共有几行
+        height = height + heightLineNum * lineVerLength;
+        setMeasuredDimension(width, height);
 
     }
 
@@ -50,68 +73,60 @@ public class BusLineView extends LinearLayout {
             return;
         }
 
-        int lineUseWidth = getMeasuredWidth() - 2*stationNameWidth;// 横向实际可用长度，在前后去掉一个站点的显示
-        int lineLength = (lineUseWidth- ringRadius*2) / (oneLineNum); // 某个站点的长度,总长度上，先减去边上圈圈.为站点名称空出一个站点的长度
-        int widthNoPadding = ringRadius*2 + oneLineNum *lineLength; //正式的控件宽度为此。因为上面相除时，可能有些余数被忽略掉了
-        int padding = (lineUseWidth - widthNoPadding)/2 ; //两边需要留出一定间隙
+        // 将屏幕分为一块块正方形,
+        // 左右两个站点，左右间距会小一些，以padding为准
+        int lineLength = (getMeasuredWidth() - 2*padding) / (oneLineNum-1) ; // 线路长度的两倍，包含站点直径
+        int lineVerLength = lineLength + 30 ; // 上下走向的线路长度
+
+        int widthNoPadding = (oneLineNum-1) *lineLength; //正式的控件宽度为此。因为上面相除时，可能有些余数被忽略掉了
+        padding = (getMeasuredWidth() - widthNoPadding)/2 ; //两边需要留出一定间隙
 
         Logger.d(TAG,"lineLength="+lineLength+",width="+widthNoPadding+",padding="+padding+",height="+getMeasuredHeight());
 
+        int x = 0;
+        int y = 0 ;
         int len = busStations.size();
-        for (int i=0 ;i < len -1 ; i++){
-            BusContentView busStationView = new BusContentView(getContext());
+        for (int i=0 ;i < len ; i++){
+            BusContainView busStationView = new BusContainView(getContext());
             busStationView.setLineWidth(lineWidth);
             busStationView.setLineColor(R.color.cyan);
             busStationView.setRingColor(R.color.yellow);
             busStationView.setRadius(ringRadius);
             busStationView.setStationNameWidth(stationNameWidth);
             busStationView.setBusStation( busStations.get(i) );
+            Logger.d(TAG,"i="+i+"---x="+x +",y="+y);
 
-            int iLineNum = i/ (oneLineNum +1) ;  //判断在第几行,一行=横行n个站点+竖行一个站点
-            // 一组横向，加一个竖为一组
-            if (i ==0){ //第一个站点,只有一个点
-                busStationView.setPosition(BusViewConstant.Position.TOP_LEFT.name());
-                busStationView.setFirst(true);
-                busStationView.layout(
-                        padding ,
-                        0,
-                        ringRadius*2 + padding + 2*stationNameWidth,
-                        ringRadius*2 + 2*stationNameWidth);
-
-            } else if ( i%(oneLineNum +1) == 0 ){    // ↓ 方向
-                if ( iLineNum%2 == 0){  // 下划线在左边
+            if ( i/oneLineNum %2 ==0 ){ // 左↓ & →
+                if ( i % oneLineNum == 0  ){ //第一个数，表示为 左↓
                     busStationView.setPosition(BusViewConstant.Position.TOP_LEFT.name());
-                    busStationView.layout(
-                            padding ,
-                            ringRadius*3 + (iLineNum-1)*lineLength, // 正常情况下为（ringRadius*3 + (iLineNum-1)*lineLength），为防止线路突出，减少半个站点半径
-                            padding + ringRadius*2 +2* stationNameWidth,
-                            ringRadius*2 + iLineNum*lineLength + 2*stationNameWidth);
-                }else { //下划线在右边
-                    busStationView.setPosition(BusViewConstant.Position.TOP_RIGHT.name());
-                    busStationView.layout(
-                            widthNoPadding + padding - ringRadius*2  ,
-                            ringRadius*2 + (iLineNum-1)*lineLength,
-                            widthNoPadding + padding + 2*stationNameWidth,
-                            ringRadius*3 + iLineNum*lineLength+ 2*stationNameWidth);// 正常情况下为（ringRadius*3 + (iLineNum-1)*lineLength），为防止线路突出，增加半个站点半径
+                    if (i ==0 ) {
+                        y = y - (lineVerLength - padding);
+                        busStationView.setFirst(true);
+                    }
+                    busStationView.layout( padding-lineLength, y , padding+lineLength , y+ 2*lineVerLength );
+                    x = padding;
+                }else {
+                    busStationView.setPosition( BusViewConstant.Position.RIGHT.name());
+                    busStationView.layout(x, y , x+2*lineLength , y+2*lineVerLength );
+                    x = x + lineLength;    // 右移一个格
                 }
 
-            } else if (iLineNum % 2 == 0){ //单数表示向右 →
-                busStationView.setPosition(BusViewConstant.Position.RIGHT.name());
-                busStationView.layout(
-                        padding + lineLength*(i % (oneLineNum +1) -1) + ringRadius*2 ,
-                        lineLength * iLineNum ,
-                        padding + lineLength*(i % (oneLineNum +1) ) + ringRadius*2 + 2*stationNameWidth,
-                        lineLength * iLineNum + ringRadius*2 + 2*stationNameWidth);
-
-            }else if (iLineNum % 2 ==1 ){   //双数表示向左 ←
-                busStationView.setPosition(BusViewConstant.Position.LEFT.name());
-                busStationView.setFirst(false);
-                busStationView.layout(
-                        padding + widthNoPadding - (padding + lineLength*(i % (oneLineNum +1) ) + ringRadius*2) ,
-                        ringRadius*2 + iLineNum*lineLength - ringRadius,
-                        padding + widthNoPadding-(padding + lineLength*(i % (oneLineNum +1) -1) + ringRadius*2) + 2*stationNameWidth,
-                        ringRadius*2 + iLineNum*lineLength + ringRadius + 2*stationNameWidth);
+            }else { // ↓右 & ←
+                if ( i % oneLineNum == 0 ){ // 右↓
+                    busStationView.setPosition(BusViewConstant.Position.TOP_RIGHT.name());
+                    busStationView.layout( widthNoPadding + padding - lineLength  , y , widthNoPadding + 2*padding + (lineLength-padding), y+2*lineVerLength);
+                    x = widthNoPadding + padding ; // 初始化右侧第一个站点的位置
+                }else {
+                    busStationView.setPosition(BusViewConstant.Position.LEFT.name());
+                    busStationView.layout( x-2*lineLength , y , x , y+2*lineVerLength);
+                    x = x - lineLength;
+                }
             }
+
+            if ( i%oneLineNum == (oneLineNum-1) ){
+                y = y+ lineVerLength ;//换行
+            }
+            Logger.d(TAG,"---i="+i+"---x="+x +",y="+y);
 
             addView(busStationView);// 将站点添加到view中
         }

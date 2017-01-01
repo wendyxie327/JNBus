@@ -1,6 +1,5 @@
 package com.wendy.jnbus.ui;
 
-import android.support.v4.content.ContextCompat;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
@@ -11,7 +10,6 @@ import com.wendy.jnbus.R;
 import com.wendy.jnbus.net.BusHttpMethod;
 import com.wendy.jnbus.ui.base.BaseAppActivity;
 import com.wendy.jnbus.ui.widget.BusLineView;
-import com.wendy.jnbus.ui.widget.BusLineViewNew;
 import com.wendy.jnbus.vo.BusDetail;
 import com.wendy.jnbus.vo.BusLine;
 import com.wendy.jnbus.vo.BusStation;
@@ -24,7 +22,6 @@ import butterknife.BindView;
 public class MainActivity extends BaseAppActivity {
 
     BusLineView busLineView;
-    BusLineViewNew busLineViewNew;
     @BindView(R.id.content_ll)
     ScrollView contentLL;
 
@@ -106,10 +103,10 @@ public class MainActivity extends BaseAppActivity {
 //        busLineView.setLayoutParams(busParam);
 //        contentLL.addView(busLineView, busParam);
 
-        busLineViewNew = new BusLineViewNew(MainActivity.this,null);
-        busLineViewNew.setBusStations( busStations );
+        busLineView = new BusLineView(MainActivity.this,null);
+        busLineView.setBusStations( busStations );
         LinearLayout.LayoutParams busParam = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
-        busLineViewNew.setLayoutParams(busParam);
-        contentLL.addView(busLineViewNew, busParam);
+        busLineView.setLayoutParams(busParam);
+        contentLL.addView(busLineView, busParam);
     }
 }
