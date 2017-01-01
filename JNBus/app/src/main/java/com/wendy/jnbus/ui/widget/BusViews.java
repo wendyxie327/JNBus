@@ -21,7 +21,8 @@ public class BusViews extends ViewGroup {
     private List<BusDetail> busDetails;
     private String position ;
     private int stationWidth;
-    private int busWidth = 30;
+    private int busHeight = 30;
+    private int busWidth = 70;
 
     public BusViews(Context context){
         super(context);
@@ -32,20 +33,20 @@ public class BusViews extends ViewGroup {
 
         int widthHalf = getWidth()/2;
         int heightHalf = getHeight()/2;
-        int x = 0 ;
-        int y = 0 ;
+        int x1 =0, x2 = 0 ;
+        int y1 =0, y2 = 0 ;
         switch (BusViewConstant.Position.valueOf(position)){
             case LEFT:
-                y = heightHalf-stationWidth;
+                y1 = heightHalf-stationWidth;y2 = heightHalf-stationWidth;
                 break;
             case RIGHT:
-                y = heightHalf - stationWidth;
+                y1 = heightHalf - stationWidth;y2 = heightHalf - stationWidth;
                 break;
             case TOP_LEFT:
-                x = widthHalf - stationWidth ;
+                x1 = widthHalf  ;  x2 = widthHalf  ;
                 break;
             case TOP_RIGHT:
-                x = widthHalf + stationWidth;
+                x1 = widthHalf ; x2 = widthHalf  ;
                 break;
         }
 
@@ -60,35 +61,43 @@ public class BusViews extends ViewGroup {
                 switch (BusViewConstant.Position.valueOf(position)){
                     case LEFT:
                         if ("1".equals( busDetails.get(i).getIsArrvLft())){ //未到达
-                            busView.layout( 3*widthHalf/2- busWidth/2, y-busWidth, 3*widthHalf/2+ busWidth/2 , y);
+                            busView.layout( 3*widthHalf/2, y1- busHeight, 3*widthHalf/2+ busWidth , y1);
+                            y1 = y1-10;
                         }else {
-                            busView.layout( widthHalf, y-busWidth , 3*widthHalf/2 , y );
+                            busView.layout( widthHalf, y1- busHeight, widthHalf+busWidth , y1 );
+                            y2 = y2-10;
                         }
-                        y = y-10;
+
                         break;
                     case RIGHT:
                         if ("1".equals( busDetails.get(i).getIsArrvLft())){
-                            busView.layout(widthHalf/2 -busWidth/2 , y-busWidth , widthHalf/2 + busWidth/2, y);
+                            busView.layout(widthHalf/2 , y1- busHeight, widthHalf/2 + busWidth, y1);
+                            y1 = y1-10;
                         }else {
-                            busView.layout(widthHalf, y-busWidth ,3*widthHalf/2,y);
+                            busView.layout(widthHalf, y1- busHeight, widthHalf+busWidth , y1);
+                            y2 = y2-10;
                         }
-                        y = y-10;
+
                         break;
                     case TOP_LEFT:
                         if ("1".equals( busDetails.get(i).getIsArrvLft())){
-                            busView.layout( x , heightHalf/2-busWidth/2 , x+busWidth, heightHalf/2+busWidth/2);
+                            busView.layout( x1 , heightHalf/2- busHeight, x1+ busHeight, heightHalf/2);
+                            x1 = x1+10;
                         }else {
-                            busView.layout(x, heightHalf - stationWidth - busWidth, x+busWidth , heightHalf-stationWidth);
+                            busView.layout(x1, heightHalf - stationWidth - busHeight, x1+ busHeight, heightHalf-stationWidth);
+                            x2 = x2+10;
                         }
-                        x = x-10;
+
                         break;
                     case TOP_RIGHT:
                         if ("1".equals( busDetails.get(i).getIsArrvLft())){
-                            busView.layout( x, heightHalf/2- busWidth/2 , x+busWidth, heightHalf/2+busWidth/2);
+                            busView.layout( x1, heightHalf/2- busHeight , x1+ busHeight, heightHalf/2);
+                            x1 = x1-10;
                         }else {
-                            busView.layout(x, heightHalf-stationWidth-busWidth , x+busWidth, heightHalf-stationWidth);
+                            busView.layout(x1, heightHalf-stationWidth- busHeight, x1+ busHeight, heightHalf-stationWidth);
+                            x2 = x2-10;
                         }
-                        x = x+10;
+
                         break;
                 }
 
@@ -98,12 +107,12 @@ public class BusViews extends ViewGroup {
         }
     }
 
-    public int getBusWidth() {
-        return busWidth;
+    public int getBusHeight() {
+        return busHeight;
     }
 
-    public void setBusWidth(int busWidth) {
-        this.busWidth = busWidth;
+    public void setBusHeight(int busHeight) {
+        this.busHeight = busHeight;
     }
 
     public int getStationWidth() {

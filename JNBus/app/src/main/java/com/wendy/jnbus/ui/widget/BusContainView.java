@@ -64,7 +64,7 @@ public class BusContainView extends ViewGroup {
         busViews.setBusDetails(busStation.getBusDetails());
         busViews.setPosition(position);
         busViews.setStationWidth( radius);
-        busViews.setBusWidth(50);//TODO
+        busViews.setBusHeight(50);//TODO
         busViews.layout(0,0,getWidth(),getHeight());
 
         addView(stationNameTV);
