@@ -6,6 +6,7 @@ import android.widget.ScrollView;
 
 import com.eagle.androidlib.net.SubscriberOnNextListener;
 import com.eagle.androidlib.utils.Logger;
+import com.eagle.androidlib.utils.ToastManager;
 import com.wendy.jnbus.R;
 import com.wendy.jnbus.net.BusHttpMethod;
 import com.wendy.jnbus.ui.base.BaseAppActivity;
@@ -27,6 +28,7 @@ public class MainActivity extends BaseAppActivity {
 
     List<BusDetail> mBusDetails ;
     BusLine mBusLine;
+    private String lineId;
 
     @Override
     public int getLayoutID() {
@@ -35,11 +37,13 @@ public class MainActivity extends BaseAppActivity {
 
     @Override
     public void initBundle() {
-
+        lineId = getIntent().getStringExtra("lineId");
     }
 
     @Override
     public void initDataCreate() {
+
+        if (lineId == null) ToastManager.getInstance(getApplicationContext()).show("错误");
 
         // 根据线路，获取线路上走的车
         SubscriberOnNextListener<List<BusDetail>> buses = new SubscriberOnNextListener<List<BusDetail>>() {
@@ -52,7 +56,7 @@ public class MainActivity extends BaseAppActivity {
                     Logger.d(MainActivity.this, "busDetails is null");
             }
         };
-        BusHttpMethod.queryBusDetail(MainActivity.this , buses, "191");
+        BusHttpMethod.queryBusDetail(MainActivity.this , buses, lineId);
 
 
         // 根据线路，获取具体线路
@@ -68,7 +72,7 @@ public class MainActivity extends BaseAppActivity {
                     Logger.d(MainActivity.this, "busLine is null");
             }
         };
-        BusHttpMethod.queryBusLine(MainActivity.this , busLineSub, "191");
+        BusHttpMethod.queryBusLine(MainActivity.this , busLineSub, lineId);
     }
 
     @Override

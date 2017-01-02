@@ -60,7 +60,6 @@ public class HttpSubscriber<T> extends Subscriber<T> implements ProgressCancelLi
     @Override
     public void onCompleted() {
         dismissProgressDialog();
-        Toast.makeText(context, "Get Top Movie Completed", Toast.LENGTH_SHORT).show();
     }
 
     /**

@@ -8,6 +8,7 @@ import android.widget.ListView;
 import com.eagle.androidlib.baseUI.BaseFragment;
 import com.eagle.androidlib.baseUI.BaseListAdapter;
 import com.wendy.jnbus.R;
+import com.wendy.jnbus.vo.Response;
 
 import java.util.ArrayList;
 
@@ -41,6 +42,8 @@ public abstract class BaseListFragment<T> extends BaseFragment implements Adapte
         listLv.setAdapter(adapter);
         listLv.setOnItemClickListener(this);
 
+        getListResultFromService();
+
         refreshSrl.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -66,7 +69,7 @@ public abstract class BaseListFragment<T> extends BaseFragment implements Adapte
      *
      * @return
      */
-//    abstract public ApiResponseT<T, T> getListResultFromService();
+    abstract public Response<T> getListResultFromService();
 
     /**
      * 初始化adapter

@@ -42,4 +42,20 @@ public class PageInfoResult<T> {
         }
     }
 
+
+    public PageInfo getPageParam() {
+        return pageParam;
+    }
+
+    public void setPageParam(PageInfo pageParam) {
+        this.pageParam = pageParam;
+    }
+
+    public List<T> getResult() {
+        return result;
+    }
+
+    public void setResult(List<T> result) {
+        this.result = result;
+    }
 }
