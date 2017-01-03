@@ -12,6 +12,7 @@ import com.wendy.jnbus.ui.activity.LineBusActivity;
 import com.wendy.jnbus.ui.activity.SearchActivity;
 import com.wendy.jnbus.ui.adapter.SearchBusAdapter;
 import com.wendy.jnbus.ui.base.BaseListFragment;
+import com.wendy.jnbus.util.PubInfo;
 import com.wendy.jnbus.vo.BusLine;
 import com.wendy.jnbus.vo.PageInfoResult;
 import com.wendy.jnbus.vo.Response;
@@ -26,6 +27,7 @@ import java.util.List;
 public class SearchBusListFragment extends BaseListFragment<BusLine> implements SearchActivity.RefreshFrag {
 
     private static final String TAG = "SearchBusListFragment";
+    private static final int REQUEST_BUSLINE = 1000;
 
     private String searchLine ;
     private List<BusLine> busLines;
@@ -52,7 +54,7 @@ public class SearchBusListFragment extends BaseListFragment<BusLine> implements 
         }else {
             busLines = BusShare.getKeySearchHistory();
             if ( busLines == null ) busLines = new ArrayList<>();
-            Collections.reverse(busLines);
+            Collections.reverse(busLines);// 查询记录倒序显示，最新添加的在最上方
             adapter.setItems( busLines);
         }
 
@@ -74,7 +76,7 @@ public class SearchBusListFragment extends BaseListFragment<BusLine> implements 
         Intent intent = new Intent(getActivity(), LineBusActivity.class);
         intent.putExtra("lineId", busLines.get(position).getId() );
         BusShare.addKeySearchHistory(busLines.get(position));
-        startActivity(intent);
+        getActivity().startActivityForResult(intent, PubInfo.SEARCH2BUSLINE_REQUEST);
     }
 
     @Override

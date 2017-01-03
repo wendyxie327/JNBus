@@ -1,11 +1,14 @@
 package com.wendy.jnbus.ui.activity;
 
+import android.content.Intent;
 import android.widget.EditText;
 import android.widget.ImageButton;
 
+import com.eagle.androidlib.utils.Logger;
 import com.wendy.jnbus.R;
 import com.wendy.jnbus.ui.fragment.SearchBusListFragment;
 import com.wendy.jnbus.ui.base.BaseAppActivity;
+import com.wendy.jnbus.util.PubInfo;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -14,6 +17,8 @@ import butterknife.OnClick;
  * Created by Wendy on 2017/1/1.
  */
 public class SearchActivity extends BaseAppActivity {
+
+    private static final String TAG = "SearchActivity";
 
     @BindView(R.id.search_btn)
     ImageButton searchBtn;
@@ -49,6 +54,18 @@ public class SearchActivity extends BaseAppActivity {
     @Override
     public void initDataResume() {
 
+    }
+
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (requestCode){
+            case PubInfo.SEARCH2BUSLINE_REQUEST:
+                searchContentET.setText("");
+                clickSearchBtn();
+                break;
+        }
     }
 
     @OnClick({R.id.search_btn})
