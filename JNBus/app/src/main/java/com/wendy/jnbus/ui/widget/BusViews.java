@@ -64,7 +64,7 @@ public class BusViews extends ViewGroup {
                             busView.layout( 3*widthHalf/2, y1- busHeight, 3*widthHalf/2+ busWidth , y1);
                             y1 = y1-10;
                         }else {
-                            busView.layout( widthHalf, y1- busHeight, widthHalf+busWidth , y1 );
+                            busView.layout( widthHalf, y2- busHeight, widthHalf+busWidth , y2 );
                             y2 = y2-10;
                         }
 
@@ -74,7 +74,7 @@ public class BusViews extends ViewGroup {
                             busView.layout(widthHalf/2 , y1- busHeight, widthHalf/2 + busWidth, y1);
                             y1 = y1-10;
                         }else {
-                            busView.layout(widthHalf, y1- busHeight, widthHalf+busWidth , y1);
+                            busView.layout(widthHalf, y2- busHeight, widthHalf+busWidth , y2);
                             y2 = y2-10;
                         }
 
@@ -84,7 +84,7 @@ public class BusViews extends ViewGroup {
                             busView.layout( x1 , heightHalf/2- busHeight, x1+ busWidth, heightHalf/2);
                             x1 = x1+10;
                         }else {
-                            busView.layout(x1, heightHalf - stationWidth - busHeight, x1+ busWidth, heightHalf-stationWidth);
+                            busView.layout(x2, heightHalf - stationWidth - busHeight, x2+ busWidth, heightHalf-stationWidth);
                             x2 = x2+10;
                         }
 
@@ -94,7 +94,7 @@ public class BusViews extends ViewGroup {
                             busView.layout( x1, heightHalf/2- busHeight , x1+ busWidth, heightHalf/2);
                             x1 = x1-10;
                         }else {
-                            busView.layout(x1, heightHalf-stationWidth- busHeight, x1+ busWidth, heightHalf-stationWidth);
+                            busView.layout(x2, heightHalf-stationWidth- busHeight, x2+ busWidth, heightHalf-stationWidth);
                             x2 = x2-10;
                         }
 
