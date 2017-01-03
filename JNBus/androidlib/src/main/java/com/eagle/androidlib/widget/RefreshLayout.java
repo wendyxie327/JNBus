@@ -171,8 +171,6 @@ public class RefreshLayout extends SwipeRefreshLayout implements AbsListView.OnS
      * @return
      */
     private boolean isPullUp() {
-        System.out.println(mYDown+"------------------"+mLastY+"----------------------"+mTouchSlop);
-
         return (mYDown - mLastY) >= mTouchSlop;
     }
 
