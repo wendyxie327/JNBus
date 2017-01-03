@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">JNBus</string>
+    <string name="search_clear">清空查询记录</string>
 </resources>

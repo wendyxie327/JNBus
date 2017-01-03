@@ -7,6 +7,7 @@ import android.widget.ListView;
 
 import com.eagle.androidlib.baseUI.BaseFragment;
 import com.eagle.androidlib.baseUI.BaseListAdapter;
+import com.eagle.androidlib.widget.RefreshLayout;
 import com.wendy.jnbus.R;
 import com.wendy.jnbus.vo.Response;
 
@@ -23,7 +24,7 @@ public abstract class BaseListFragment<T> extends BaseFragment implements Adapte
     @BindView(R.id.list_lv)
     ListView listLv;
     @BindView(R.id.refresh_srl)
-    protected SwipeRefreshLayout refreshSrl;
+    protected RefreshLayout refreshSrl;
 
     protected ArrayList<T> list;
     protected BaseListAdapter<T> adapter;
