@@ -30,17 +30,28 @@ public class BusHttpMethod {
 
 
     /**
+     * 根据线路名称，查看线路具体情况，走了哪些站---反方向
+     * @param context
+     * @param subListener
+     * @param busLineId
+     */
+    public static void queryOtherBusLine(Context context, SubscriberOnNextListener<BusLine> subListener, String busLineId){
+        Observable observable = HttpMethods.getInstance().getBusService().queryOtherBusLine(BusShare.getKeyArea(), busLineId)
+                .map(new HttpResultFunc<BusLine>());
+        HttpMethods.getInstance().toSubscribe(observable,new HttpSubscriber<BusLine>(subListener, context));
+    }
+
+    /**
      * 根据线路名称，查看线路具体情况，走了哪些站
      * @param context
      * @param subListener
      * @param busLineId
      */
-    public static void queryBusLine(Context context,SubscriberOnNextListener<BusLine> subListener,String busLineId){
+    public static void queryBusLine(Context context, SubscriberOnNextListener<BusLine> subListener, String busLineId){
         Observable observable = HttpMethods.getInstance().getBusService().queryBusLine(BusShare.getKeyArea(), busLineId)
                 .map(new HttpResultFunc<BusLine>());
         HttpMethods.getInstance().toSubscribe(observable,new HttpSubscriber<BusLine>(subListener, context));
     }
-
 
     /**
      * 根据用户输入信息，查询线路
@@ -50,8 +61,8 @@ public class BusHttpMethod {
      * @param start
      * @param len
      */
-    public static void queryBusLine(Context context, SubscriberOnNextListener<PageInfoResult<BusLine>> subListener, String searchLine, int start , int len ){
-        Observable observable = HttpMethods.getInstance().getBusService().queryBusLine(BusShare.getKeyArea(),
+    public static void queryOtherBusLine(Context context, SubscriberOnNextListener<PageInfoResult<BusLine>> subListener, String searchLine, int start , int len ){
+        Observable observable = HttpMethods.getInstance().getBusService().queryOtherBusLine(BusShare.getKeyArea(),
                 searchLine, start, len)
                 .map(new HttpResultFunc());
         HttpMethods.getInstance().toSubscribe(observable, new HttpSubscriber<PageInfoResult<BusLine>>(subListener, context));

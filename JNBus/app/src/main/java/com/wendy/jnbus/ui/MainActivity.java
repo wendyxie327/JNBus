@@ -22,6 +22,7 @@ import butterknife.BindView;
 
 public class MainActivity extends BaseAppActivity {
 
+    private static final String TAG = "MainActivity";
     BusLineView busLineView;
     @BindView(R.id.content_ll)
     ScrollView contentLL;
@@ -51,6 +52,7 @@ public class MainActivity extends BaseAppActivity {
             public void onNext(List<BusDetail> busDetails) {
                 if (busDetails !=null){
                     mBusDetails = busDetails;
+                    Logger.d(TAG,busDetails.toString());
                     parseBusLine();
                 } else
                     Logger.d(MainActivity.this, "busDetails is null");
@@ -66,7 +68,6 @@ public class MainActivity extends BaseAppActivity {
                 if (busLine !=null){
                     Logger.d(MainActivity.this, busLine.toString());
                     mBusLine = busLine;
-//                    showBusView(busLine,null);
                     parseBusLine();
                 } else
                     Logger.d(MainActivity.this, "busLine is null");
@@ -101,12 +102,6 @@ public class MainActivity extends BaseAppActivity {
 
 
     private void showBusView(List<BusStation> busStations){
-//        busLineView = new BusLineView(MainActivity.this,null);
-//        busLineView.setBusStations( busStations );
-//        LinearLayout.LayoutParams busParam = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
-//        busLineView.setLayoutParams(busParam);
-//        contentLL.addView(busLineView, busParam);
-
         busLineView = new BusLineView(MainActivity.this,null);
         busLineView.setBusStations( busStations );
         LinearLayout.LayoutParams busParam = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);

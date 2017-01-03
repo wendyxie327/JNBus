@@ -40,7 +40,7 @@ public class SearchBusListFragment extends BaseListFragment<BusLine> implements 
                         Logger.d(TAG, "busLinePageInfoResult is null");
                 }
             };
-            BusHttpMethod.queryBusLine(getContext() , busLineSub, searchLine, 0,20 );
+            BusHttpMethod.queryOtherBusLine(getContext() , busLineSub, searchLine, 0,20 );
         }
 
         return null;

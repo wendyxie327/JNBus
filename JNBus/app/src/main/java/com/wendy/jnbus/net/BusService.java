@@ -34,8 +34,16 @@ public interface BusService {
      * @return
      */
     @GET("buslines/theOtherDirection/{area}/{busLineId}")
-    Observable<Response<BusLine>> queryBusLine(@Path("area") String area, @Path("busLineId") String busLineId );
+    Observable<Response<BusLine>> queryOtherBusLine(@Path("area") String area, @Path("busLineId") String busLineId );
 
+    /**
+     * 输入线路名称，查询到该线路具体站点信息
+     * @param area
+     * @param busLineId 线路名
+     * @return
+     */
+    @GET("buslines/{area}/{busLineId}")
+    Observable<Response<BusLine>> queryBusLine(@Path("area") String area, @Path("busLineId") String busLineId );
 
     /**
      * 根据输入内容查询存在线路
@@ -46,6 +54,6 @@ public interface BusService {
      * @return
      */
     @GET("buslines/simple/{area}/{queryContent}/{start}/{len}")
-    Observable<Response<PageInfoResult<BusLine>>> queryBusLine(@Path("area") String area, @Path("queryContent") String queryContent,
-                                                      @Path("start") int start, @Path("len") int len);
+    Observable<Response<PageInfoResult<BusLine>>> queryOtherBusLine(@Path("area") String area, @Path("queryContent") String queryContent,
+                                                                    @Path("start") int start, @Path("len") int len);
 }
