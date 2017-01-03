@@ -22,7 +22,7 @@ public class BusLineView extends LinearLayout {
     private int ringRadius = 10;
     private int lineWidth = 5;
     private int stationNameWidth = 70 ; // 站点名称控件宽度
-    private int padding = 56 ; //左右两遍距离最近站点的间距
+    private int padding = 70 ; //左右两遍距离最近站点的间距
 
 
     public BusLineView(Context context, AttributeSet attrs) {

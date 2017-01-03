@@ -39,7 +39,7 @@ public class BusView extends RelativeLayout {
     }
 
     private void init(Context context) {
-        this.setBackground(ContextCompat.getDrawable(context,R.drawable.car));
+        this.setBackground(ContextCompat.getDrawable(context,R.drawable.car1));
 
         carIdTV = new TextView(context);
         carIdTV.setText(carId);

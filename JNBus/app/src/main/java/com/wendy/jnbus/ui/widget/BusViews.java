@@ -81,20 +81,20 @@ public class BusViews extends ViewGroup {
                         break;
                     case TOP_LEFT:
                         if ("1".equals( busDetails.get(i).getIsArrvLft())){
-                            busView.layout( x1 , heightHalf/2- busHeight, x1+ busHeight, heightHalf/2);
+                            busView.layout( x1 , heightHalf/2- busHeight, x1+ busWidth, heightHalf/2);
                             x1 = x1+10;
                         }else {
-                            busView.layout(x1, heightHalf - stationWidth - busHeight, x1+ busHeight, heightHalf-stationWidth);
+                            busView.layout(x1, heightHalf - stationWidth - busHeight, x1+ busWidth, heightHalf-stationWidth);
                             x2 = x2+10;
                         }
 
                         break;
                     case TOP_RIGHT:
                         if ("1".equals( busDetails.get(i).getIsArrvLft())){
-                            busView.layout( x1, heightHalf/2- busHeight , x1+ busHeight, heightHalf/2);
+                            busView.layout( x1, heightHalf/2- busHeight , x1+ busWidth, heightHalf/2);
                             x1 = x1-10;
                         }else {
-                            busView.layout(x1, heightHalf-stationWidth- busHeight, x1+ busHeight, heightHalf-stationWidth);
+                            busView.layout(x1, heightHalf-stationWidth- busHeight, x1+ busWidth, heightHalf-stationWidth);
                             x2 = x2-10;
                         }
 
