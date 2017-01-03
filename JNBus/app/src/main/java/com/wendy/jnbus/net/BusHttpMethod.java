@@ -1,6 +1,7 @@
 package com.wendy.jnbus.net;
 
 import android.content.Context;
+import android.support.v4.widget.SwipeRefreshLayout;
 
 import com.eagle.androidlib.net.SubscriberOnNextListener;
 import com.wendy.jnbus.persistence.BusShare;
@@ -61,10 +62,20 @@ public class BusHttpMethod {
      * @param start
      * @param len
      */
-    public static void queryOtherBusLine(Context context, SubscriberOnNextListener<PageInfoResult<BusLine>> subListener, String searchLine, int start , int len ){
-        Observable observable = HttpMethods.getInstance().getBusService().queryOtherBusLine(BusShare.getKeyArea(),
+    public static void queryBusLine(Context context, SubscriberOnNextListener<PageInfoResult<BusLine>> subListener,
+                                    String searchLine, int start , int len ,
+                                    final SwipeRefreshLayout swipeRefreshLayout){
+        Observable observable = HttpMethods.getInstance().getBusService().queryBusLine(BusShare.getKeyArea(),
                 searchLine, start, len)
                 .map(new HttpResultFunc());
-        HttpMethods.getInstance().toSubscribe(observable, new HttpSubscriber<PageInfoResult<BusLine>>(subListener, context));
+        HttpMethods.getInstance().toSubscribe(observable, new HttpSubscriber<PageInfoResult<BusLine>>(subListener, context){
+            @Override
+            public void onCompleted() {
+                super.onCompleted();
+                if ( swipeRefreshLayout!=null && swipeRefreshLayout.isRefreshing()){
+                    swipeRefreshLayout.setRefreshing(false);
+                }
+            }
+        });
     }
 }

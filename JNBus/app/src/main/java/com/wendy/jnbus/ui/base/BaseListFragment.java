@@ -23,7 +23,7 @@ public abstract class BaseListFragment<T> extends BaseFragment implements Adapte
     @BindView(R.id.list_lv)
     ListView listLv;
     @BindView(R.id.refresh_srl)
-    SwipeRefreshLayout refreshSrl;
+    protected SwipeRefreshLayout refreshSrl;
 
     protected ArrayList<T> list;
     protected BaseListAdapter<T> adapter;
@@ -47,7 +47,7 @@ public abstract class BaseListFragment<T> extends BaseFragment implements Adapte
         refreshSrl.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                //TODO 获取数据
+                getListResultFromService();
             }
         });
     }
@@ -63,6 +63,14 @@ public abstract class BaseListFragment<T> extends BaseFragment implements Adapte
 
     }
 
+    /**
+     * 停止刷新转圈的显示
+     */
+    public void stopRefresh(){
+        if ( refreshSrl!=null && refreshSrl.isRefreshing()){
+            refreshSrl.setRefreshing(false);
+        }
+    }
 
     /**
      * 获取列表数据

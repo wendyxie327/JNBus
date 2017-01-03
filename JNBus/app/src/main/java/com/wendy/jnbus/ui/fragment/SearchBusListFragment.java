@@ -1,4 +1,4 @@
-package com.wendy.jnbus.ui;
+package com.wendy.jnbus.ui.fragment;
 
 import android.content.Intent;
 import android.view.View;
@@ -7,6 +7,8 @@ import android.widget.AdapterView;
 import com.eagle.androidlib.net.SubscriberOnNextListener;
 import com.eagle.androidlib.utils.Logger;
 import com.wendy.jnbus.net.BusHttpMethod;
+import com.wendy.jnbus.ui.activity.LineBusActivity;
+import com.wendy.jnbus.ui.activity.SearchActivity;
 import com.wendy.jnbus.ui.adapter.SearchBusAdapter;
 import com.wendy.jnbus.ui.base.BaseListFragment;
 import com.wendy.jnbus.vo.BusLine;
@@ -40,7 +42,7 @@ public class SearchBusListFragment extends BaseListFragment<BusLine> implements 
                         Logger.d(TAG, "busLinePageInfoResult is null");
                 }
             };
-            BusHttpMethod.queryOtherBusLine(getContext() , busLineSub, searchLine, 0,20 );
+            BusHttpMethod.queryBusLine(getContext() , busLineSub, searchLine, 0,20,refreshSrl  );
         }
 
         return null;
@@ -59,7 +61,7 @@ public class SearchBusListFragment extends BaseListFragment<BusLine> implements 
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        Intent intent = new Intent(getActivity(), MainActivity.class);
+        Intent intent = new Intent(getActivity(), LineBusActivity.class);
         intent.putExtra("lineId", busLines.get(position).getId() );
         startActivity(intent);
     }

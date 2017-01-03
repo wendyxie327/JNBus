@@ -1,4 +1,4 @@
-package com.wendy.jnbus.ui;
+package com.wendy.jnbus.ui.activity;
 
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
@@ -20,7 +20,7 @@ import java.util.List;
 
 import butterknife.BindView;
 
-public class MainActivity extends BaseAppActivity {
+public class LineBusActivity extends BaseAppActivity {
 
     private static final String TAG = "MainActivity";
     BusLineView busLineView;
@@ -55,10 +55,10 @@ public class MainActivity extends BaseAppActivity {
                     Logger.d(TAG,busDetails.toString());
                     parseBusLine();
                 } else
-                    Logger.d(MainActivity.this, "busDetails is null");
+                    Logger.d(LineBusActivity.this, "busDetails is null");
             }
         };
-        BusHttpMethod.queryBusDetail(MainActivity.this , buses, lineId);
+        BusHttpMethod.queryBusDetail(LineBusActivity.this , buses, lineId);
 
 
         // 根据线路，获取具体线路
@@ -66,14 +66,14 @@ public class MainActivity extends BaseAppActivity {
             @Override
             public void onNext(BusLine busLine) {
                 if (busLine !=null){
-                    Logger.d(MainActivity.this, busLine.toString());
+                    Logger.d(LineBusActivity.this, busLine.toString());
                     mBusLine = busLine;
                     parseBusLine();
                 } else
-                    Logger.d(MainActivity.this, "busLine is null");
+                    Logger.d(LineBusActivity.this, "busLine is null");
             }
         };
-        BusHttpMethod.queryBusLine(MainActivity.this , busLineSub, lineId);
+        BusHttpMethod.queryBusLine(LineBusActivity.this , busLineSub, lineId);
     }
 
     @Override
@@ -81,6 +81,9 @@ public class MainActivity extends BaseAppActivity {
 
     }
 
+    /**
+     * 将线路接口和车辆路线接口整合
+     */
     private void parseBusLine(){
         if ( mBusLine!=null && mBusDetails!=null
                 && mBusLine.getStations()!=null && mBusLine.getStations().size() >0 ){
@@ -101,8 +104,12 @@ public class MainActivity extends BaseAppActivity {
     }
 
 
+    /**
+     * 显示线路图
+     * @param busStations
+     */
     private void showBusView(List<BusStation> busStations){
-        busLineView = new BusLineView(MainActivity.this,null);
+        busLineView = new BusLineView(LineBusActivity.this,null);
         busLineView.setBusStations( busStations );
         LinearLayout.LayoutParams busParam = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
         busLineView.setLayoutParams(busParam);

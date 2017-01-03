@@ -54,6 +54,6 @@ public interface BusService {
      * @return
      */
     @GET("buslines/simple/{area}/{queryContent}/{start}/{len}")
-    Observable<Response<PageInfoResult<BusLine>>> queryOtherBusLine(@Path("area") String area, @Path("queryContent") String queryContent,
-                                                                    @Path("start") int start, @Path("len") int len);
+    Observable<Response<PageInfoResult<BusLine>>> queryBusLine(@Path("area") String area, @Path("queryContent") String queryContent,
+                                                               @Path("start") int start, @Path("len") int len);
 }

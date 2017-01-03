@@ -1,10 +1,10 @@
-package com.wendy.jnbus.ui;
+package com.wendy.jnbus.ui.activity;
 
-import android.os.Bundle;
 import android.widget.EditText;
 import android.widget.ImageButton;
 
 import com.wendy.jnbus.R;
+import com.wendy.jnbus.ui.fragment.SearchBusListFragment;
 import com.wendy.jnbus.ui.base.BaseAppActivity;
 
 import butterknife.BindView;
