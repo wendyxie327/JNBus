@@ -56,6 +56,9 @@ public class BusShare {
 
     public static void setKeySearchHistory(List<BusLine> busLines){
         SharedPreferences sharedPreferences = JNBusApplication.getContext().getSharedPreferences(SHARE_NAME, Context.MODE_PRIVATE);
+        if ( busLines == null){
+            busLines = new ArrayList<>();
+        }
         sharedPreferences.edit().putString(KEY_SEARCH_HISTORY, (new Gson()).toJson(busLines)).commit();
     }
 
