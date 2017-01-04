@@ -3,7 +3,9 @@ package com.wendy.jnbus.ui.widget;
 import android.content.Context;
 import android.view.ViewGroup;
 
+import com.eagle.androidlib.utils.DensityUtil;
 import com.eagle.androidlib.utils.Logger;
+import com.wendy.jnbus.ui.JNBusApplication;
 import com.wendy.jnbus.vo.BusDetail;
 
 import java.util.List;
@@ -21,8 +23,8 @@ public class BusViews extends ViewGroup {
     private List<BusDetail> busDetails;
     private String position ;
     private int stationWidth;
-    private int busHeight = 30;
-    private int busWidth = 70;
+    private int busHeight = DensityUtil.dp2px(JNBusApplication.getContext(),22);
+    private int busWidth = DensityUtil.dp2px(JNBusApplication.getContext(),30) ;
 
     public BusViews(Context context){
         super(context);
@@ -53,10 +55,8 @@ public class BusViews extends ViewGroup {
 
         if ( busDetails !=null && busDetails.size()>0 ){
             for(int i=0; i< busDetails.size() ; i++){
-                Logger.d(TAG,"cardId0="+busDetails.get(i).getCardId());
                 BusView busView = new BusView(getContext(), busDetails.get(i).getCardId());
                 busView.setCarId( busDetails.get(i).getCardId() );
-                Logger.d(TAG,"cardId="+busDetails.get(i).getCardId());
 
                 switch (BusViewConstant.Position.valueOf(position)){
                     case LEFT:

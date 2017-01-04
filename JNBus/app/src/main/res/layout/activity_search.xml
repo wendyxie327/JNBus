@@ -2,13 +2,15 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="@dimen/activity_horizontal_margin">
+    android:orientation="vertical">
+
+    <include layout="@layout/app_bar_back"></include>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:padding="@dimen/activity_horizontal_margin">
 
         <ImageButton
             android:id="@+id/search_btn"
@@ -22,14 +24,15 @@
             android:id="@+id/search_content_et"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="number"
-            android:layout_toLeftOf="@id/search_btn" />
+            android:layout_toLeftOf="@id/search_btn"
+            android:inputType="number" />
     </RelativeLayout>
 
     <FrameLayout
         android:id="@+id/searchListFg"
         android:name="com.wendy.jnbus.ui.SearchBusListFragment"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"></FrameLayout>
+        android:layout_height="match_parent"
+        android:padding="@dimen/activity_horizontal_margin"></FrameLayout>
 
 </LinearLayout>

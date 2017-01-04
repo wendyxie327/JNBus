@@ -44,6 +44,7 @@ public class SearchActivity extends BaseAppActivity {
 
     @Override
     public void initDataCreate() {
+        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
         if (searchBusListFragment==null){
             searchBusListFragment = new SearchBusListFragment();
             refreshFrag = searchBusListFragment;

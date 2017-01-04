@@ -23,6 +23,7 @@ public class BusView extends RelativeLayout {
     private static final String TAG = "BusView";
     private String carId;
     private TextView carIdTV;
+    private int cardTVSize= 10;
 
     public BusView(Context context,String carId) {
         this(context, null, 0);
@@ -39,14 +40,12 @@ public class BusView extends RelativeLayout {
     }
 
     private void init(Context context) {
-        this.setBackground(ContextCompat.getDrawable(context,R.drawable.car1));
-
         carIdTV = new TextView(context);
         carIdTV.setText(carId);
-        Logger.d(TAG,"---cardId="+carId);
-        carIdTV.setTextColor(ContextCompat.getColor(context, R.color.red_a200));
-        carIdTV.setTextSize(10);
+        carIdTV.setTextColor(ContextCompat.getColor(context, R.color.textColor));
+        carIdTV.setTextSize(cardTVSize);
         carIdTV.setGravity(Gravity.CENTER);
+
         LayoutParams carIdTVParams = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
         carIdTVParams.addRule(CENTER_IN_PARENT);
         carIdTV.layout(0,0,getWidth(),getHeight());
@@ -83,6 +82,15 @@ public class BusView extends RelativeLayout {
 
     public void setCarId(String carId) {
         this.carId = carId;
-        carIdTV.setText(carId);
+
+        if ( carId!=null && carId.startsWith("k")){
+            if (carId.length() >1)
+                carIdTV.setText(carId.substring(1, carId.length()));
+            this.setBackground(ContextCompat.getDrawable(getContext(),R.drawable.car_k));
+        }else {
+            carIdTV.setText(carId);
+            this.setBackground(ContextCompat.getDrawable(getContext(),R.drawable.car_com));
+        }
+
     }
 }
