@@ -16,6 +16,9 @@ public class BusLine {
     private String endStationName;// 结束站
     private List<BusStation> stations;// 各站点
     private Date updateTime;// 该线路最近更新时间
+    private String operationTime;// 例如： "公交驾校  : 6:00－20:30 解放桥东 : 6:00－21:05",
+    private String ticketPrice;// 例如：87:票价一元  K87:票价两元
+
 
     @Override
     public String toString() {
@@ -28,6 +31,22 @@ public class BusLine {
                 ", stations=" + stations +
                 ", updateTime=" + updateTime +
                 '}';
+    }
+
+    public String getOperationTime() {
+        return operationTime;
+    }
+
+    public void setOperationTime(String operationTime) {
+        this.operationTime = operationTime;
+    }
+
+    public String getTicketPrice() {
+        return ticketPrice;
+    }
+
+    public void setTicketPrice(String ticketPrice) {
+        this.ticketPrice = ticketPrice;
     }
 
     public String getId() {

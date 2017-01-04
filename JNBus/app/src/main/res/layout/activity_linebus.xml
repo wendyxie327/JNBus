@@ -1,21 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="com.wendy.jnbus.ui.activity.LineBusActivity">
 
     <include
         android:id="@+id/app_back"
         layout="@layout/app_bar_back"></include>
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="@dimen/activity_horizontal_margin">
+
+        <ImageButton
+            android:id="@+id/line_reverse_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:background="@null"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:scaleType="fitXY"
+            android:src="@drawable/line_reverse" />
+
+        <TextView
+            android:id="@+id/operation_time_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@id/line_reverse_btn"
+            android:textColor="@color/textColor"
+            android:textSize="@dimen/text_size" />
+
+    </RelativeLayout>
+
     <ScrollView
         android:id="@+id/content_ll"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/app_back"
         android:orientation="vertical"
         android:paddingBottom="@dimen/activity_vertical_margin"
         android:paddingLeft="@dimen/activity_horizontal_margin"
@@ -23,8 +50,5 @@
         android:paddingTop="@dimen/activity_vertical_margin"
         android:scrollbars="vertical"></ScrollView>
 
-    <!--<com.wendy.jnbus.ui.widget.BusView-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="match_parent"></com.wendy.jnbus.ui.widget.BusView>-->
 
-</RelativeLayout>
+</LinearLayout>
