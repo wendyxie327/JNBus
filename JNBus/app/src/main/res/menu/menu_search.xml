@@ -9,6 +9,6 @@
         android:icon="@drawable/search_clear"
         android:orderInCategory="100"
         android:title="@string/search_clear"
-        app:showAsAction="ifRoom" />
+        app:showAsAction="never" />
 
 </menu>

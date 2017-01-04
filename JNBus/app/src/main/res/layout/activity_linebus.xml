@@ -12,43 +12,65 @@
         android:id="@+id/app_back"
         layout="@layout/app_bar_back"></include>
 
-    <RelativeLayout
+    <com.eagle.androidlib.widget.RefreshLayout
+        android:id="@+id/refresh_srl"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="@dimen/activity_horizontal_margin">
+        android:layout_height="match_parent">
 
-        <ImageButton
-            android:id="@+id/line_reverse_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:background="@null"
-            android:paddingLeft="@dimen/activity_horizontal_margin"
-            android:scaleType="fitXY"
-            android:src="@drawable/line_reverse" />
-
-        <TextView
-            android:id="@+id/operation_time_tv"
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_toLeftOf="@id/line_reverse_btn"
-            android:textColor="@color/textColor"
-            android:textSize="@dimen/text_size" />
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:scrollbars="none">
 
-    </RelativeLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:paddingBottom="@dimen/activity_vertical_margin"
+                android:paddingLeft="@dimen/activity_horizontal_margin"
+                android:paddingRight="@dimen/activity_horizontal_margin"
+                android:paddingTop="@dimen/activity_vertical_margin">
 
-    <ScrollView
-        android:id="@+id/content_ll"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:paddingBottom="@dimen/activity_vertical_margin"
-        android:paddingLeft="@dimen/activity_horizontal_margin"
-        android:paddingRight="@dimen/activity_horizontal_margin"
-        android:paddingTop="@dimen/activity_vertical_margin"
-        android:scrollbars="vertical"></ScrollView>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/activity_horizontal_margin">
+
+                    <ImageButton
+                        android:id="@+id/line_reverse_btn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:background="@null"
+                        android:paddingLeft="@dimen/activity_horizontal_margin"
+                        android:scaleType="fitXY" />
+
+                    <TextView
+                        android:id="@+id/operation_time_tv"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_toLeftOf="@id/line_reverse_btn"
+                        android:textColor="@color/textColor"
+                        android:textSize="@dimen/text_size" />
+
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:id="@+id/content_ll"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                </LinearLayout>
+            </LinearLayout>
+
+        </ScrollView>
+
+
+    </com.eagle.androidlib.widget.RefreshLayout>
 
 
 </LinearLayout>

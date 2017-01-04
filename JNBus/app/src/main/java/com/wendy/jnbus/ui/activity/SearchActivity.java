@@ -46,7 +46,8 @@ public class SearchActivity extends BaseAppActivity {
 
     @Override
     public void initDataCreate() {
-        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(false);// 去除返回按钮显示
+
         if (searchBusListFragment==null){
             searchBusListFragment = new SearchBusListFragment();
             refreshFrag = searchBusListFragment;

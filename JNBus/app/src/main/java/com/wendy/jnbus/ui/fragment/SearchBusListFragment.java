@@ -82,6 +82,7 @@ public class SearchBusListFragment extends BaseListFragment<BusLine> implements 
     @Override
     public void refresh(String searchLine) {
         this.searchLine = searchLine;
+        stopRefresh();
         getListResultFromService();
     }
 }

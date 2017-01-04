@@ -41,6 +41,7 @@ public abstract class BaseAppActivity extends BaseActivity {
         getSupportActionBar().setHomeAsUpIndicator(R.mipmap.ic_bar_back);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         toolbar.setTitleTextColor(ContextCompat.getColor(getApplicationContext(), R.color.white));
+        toolbar.setOverflowIcon(ContextCompat.getDrawable(getApplicationContext(),R.mipmap.ic_bar_menu));
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

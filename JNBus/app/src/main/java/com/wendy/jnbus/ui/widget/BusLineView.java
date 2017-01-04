@@ -4,8 +4,10 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.widget.LinearLayout;
 
+import com.eagle.androidlib.utils.DensityUtil;
 import com.eagle.androidlib.utils.Logger;
 import com.wendy.jnbus.R;
+import com.wendy.jnbus.ui.JNBusApplication;
 import com.wendy.jnbus.vo.BusStation;
 
 import java.util.List;
@@ -21,8 +23,8 @@ public class BusLineView extends LinearLayout {
     private int oneLineNum = 5 ; // 线上总共有几个点
     private int ringRadius = 10;
     private int lineWidth = 5;
-    private int stationNameWidth = 70 ; // 站点名称控件宽度
-    private int padding = 70 ; //左右两遍距离最近站点的间距
+    private int stationNameWidth = DensityUtil.dp2px(JNBusApplication.getContext(), 35)  ; // 站点名称控件宽度
+    private int padding = DensityUtil.dp2px(JNBusApplication.getContext(), 35) ; //左右两遍距离最近站点的间距
 
 
     public BusLineView(Context context, AttributeSet attrs) {

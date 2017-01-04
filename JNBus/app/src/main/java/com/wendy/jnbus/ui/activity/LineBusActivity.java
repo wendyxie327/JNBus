@@ -1,5 +1,8 @@
 package com.wendy.jnbus.ui.activity;
 
+import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
@@ -7,8 +10,10 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.eagle.androidlib.net.SubscriberOnNextListener;
+import com.eagle.androidlib.utils.DensityUtil;
 import com.eagle.androidlib.utils.Logger;
 import com.eagle.androidlib.utils.ToastManager;
+import com.eagle.androidlib.widget.RefreshLayout;
 import com.wendy.jnbus.R;
 import com.wendy.jnbus.net.BusHttpMethod;
 import com.wendy.jnbus.ui.base.BaseAppActivity;
@@ -23,16 +28,18 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.OnClick;
 
-public class LineBusActivity extends BaseAppActivity {
+public class LineBusActivity extends BaseAppActivity implements SwipeRefreshLayout.OnRefreshListener{
 
     private static final String TAG = "MainActivity";
     BusLineView busLineView;
     @BindView(R.id.content_ll)
-    ScrollView contentLL;
+    LinearLayout contentLL;
     @BindView(R.id.line_reverse_btn)
     ImageButton lineReverseBtn;
     @BindView(R.id.operation_time_tv)
     TextView operationTimeTV;
+    @BindView(R.id.refresh_srl)
+    RefreshLayout refreshLayout;
 
     private List<BusDetail> mBusDetails ;
     private BusLine mBusLine;
@@ -53,9 +60,18 @@ public class LineBusActivity extends BaseAppActivity {
     }
 
     @Override
+    public void initView(Bundle savedInstanceState) {
+        super.initView(savedInstanceState);
+        refreshLayout.setOnRefreshListener(this);
+    }
+
+    @Override
     public void initDataCreate() {
 
-        if (lineId == null) ToastManager.getInstance(getApplicationContext()).show("错误");
+        if (lineId == null) {
+            ToastManager.getInstance(getApplicationContext()).show("错误");
+            return;
+        }
 
         // 根据线路，获取线路上走的车
         busesSub = new SubscriberOnNextListener<List<BusDetail>>() {
@@ -96,7 +112,6 @@ public class LineBusActivity extends BaseAppActivity {
 
     @Override
     public void initDataResume() {
-
     }
 
     /**
@@ -105,8 +120,24 @@ public class LineBusActivity extends BaseAppActivity {
      */
     @OnClick(R.id.line_reverse_btn)
     public void clickReverseBtn(){
-        if (isReverse){ //当前为反向
-            isReverse = !isReverse;
+        isReverse = !isReverse;
+        onRefresh();
+    }
+
+
+    @Override
+    public void onRefresh() {
+        stopRefresh();
+        if (isReverse){
+            if (mBusLineReverse==null ){
+                BusHttpMethod.queryOtherBusLine(LineBusActivity.this , busLineSub, lineId);
+            } else {
+                lineId = mBusLineReverse.getId();// 设置当前线路id
+                BusHttpMethod.queryBusDetail(LineBusActivity.this , busesSub, lineId);// 线路图获取完成后，请求线路上车辆
+                showLineMsg(mBusLineReverse);
+            }
+
+        }else {
             if (mBusLine==null ){
                 BusHttpMethod.queryBusLine(LineBusActivity.this , busLineSub, lineId);
             }else {
@@ -115,18 +146,14 @@ public class LineBusActivity extends BaseAppActivity {
                 showLineMsg(mBusLine);
             }
 
-        }else { // 当前正向
-            isReverse = !isReverse;
-            if (mBusLineReverse==null ){
-                BusHttpMethod.queryOtherBusLine(LineBusActivity.this , busLineSub, lineId);
-            } else {
-                lineId = mBusLineReverse.getId();// 设置当前线路id
-                BusHttpMethod.queryBusDetail(LineBusActivity.this , busesSub, lineId);// 线路图获取完成后，请求线路上车辆
-                showLineMsg(mBusLineReverse);
-            }
         }
     }
 
+    private void stopRefresh(){
+        if ( refreshLayout!=null && refreshLayout.isRefreshing()){
+            refreshLayout.setRefreshing(false);
+        }
+    }
 
     /**
      * 将线路接口和车辆路线接口整合
@@ -160,6 +187,11 @@ public class LineBusActivity extends BaseAppActivity {
 
     private void showLineMsg(BusLine busLine){
         operationTimeTV.setText( busLine.getTicketPrice() +"\n"+ busLine.getOperationTime());
+        if ( isReverse){
+            lineReverseBtn.setImageDrawable(ContextCompat.getDrawable(getApplicationContext(),R.drawable.line_reverse1));
+        }else {
+            lineReverseBtn.setImageDrawable(ContextCompat.getDrawable(getApplicationContext(),R.drawable.line_reverse0));
+        }
     }
 
 
@@ -177,4 +209,5 @@ public class LineBusActivity extends BaseAppActivity {
         busLineView.setLayoutParams(busParam);
         contentLL.addView(busLineView, busParam);
     }
+
 }
