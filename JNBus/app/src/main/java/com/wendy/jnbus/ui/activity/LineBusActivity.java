@@ -33,7 +33,7 @@ public class LineBusActivity extends BaseAppActivity {
 
     @Override
     public int getLayoutID() {
-        return R.layout.activity_main;
+        return R.layout.activity_linebus;
     }
 
     @Override

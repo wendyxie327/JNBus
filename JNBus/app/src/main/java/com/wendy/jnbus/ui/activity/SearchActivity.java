@@ -6,7 +6,6 @@ import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.ImageButton;
 
-import com.eagle.androidlib.utils.Logger;
 import com.wendy.jnbus.R;
 import com.wendy.jnbus.persistence.BusShare;
 import com.wendy.jnbus.ui.fragment.SearchBusListFragment;
@@ -62,7 +61,7 @@ public class SearchActivity extends BaseAppActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_main, menu);
+        getMenuInflater().inflate(R.menu.menu_search, menu);
         return true;
     }
 
