@@ -61,15 +61,11 @@ public class BusStationView extends View {
 
         lineLength = getWidth()/2;
         int lineHeight = getHeight() /2 ;// 竖向的长度
-        canvas.drawCircle(  // 圆心在正中央
-                lineLength, // 圆心x坐标点
-                lineHeight, // 圆心y坐标点
-                radius, ringPaint);
 
         switch (BusViewConstant.Position.valueOf(position)){
 
             case RIGHT: //线在左方，圈在右 →
-                canvas.drawLine( 0, lineHeight ,
+                canvas.drawLine( radius, lineHeight ,
                         lineLength, lineHeight ,
                         linePaint);
 
@@ -77,18 +73,22 @@ public class BusStationView extends View {
 
             case LEFT://  ←
                 canvas.drawLine( lineLength , lineHeight,
-                        getWidth() , lineHeight,
+                        getWidth()-radius , lineHeight,
                         linePaint);
                 break;
 
             case TOP_LEFT:// 线在上，圈在下 - 左
             case TOP_RIGHT:// 线在上，圈在下 - 右 ，都执行同一个方法
                 if (!isFirst)   // 当不是第一个时，是有横线的
-                    canvas.drawLine( lineLength , 0,
+                    canvas.drawLine( lineLength , radius,
                             lineLength , lineHeight ,
                             linePaint);
                 break;
         }
+        canvas.drawCircle(  // 圆心在正中央
+                lineLength, // 圆心x坐标点
+                lineHeight, // 圆心y坐标点
+                radius, ringPaint);
 
     }
 

@@ -21,8 +21,8 @@ public class BusLineView extends LinearLayout {
     private static final String TAG= "BusLineView";
     private List<BusStation> busStations;
     private int oneLineNum = 5 ; // 线上总共有几个点
-    private int ringRadius = 10;
-    private int lineWidth = 5;
+    private int ringRadius = DensityUtil.dp2px(JNBusApplication.getContext(), 5);
+    private int lineWidth = DensityUtil.dp2px(JNBusApplication.getContext(), 2);
     private int stationNameWidth = DensityUtil.dp2px(JNBusApplication.getContext(), 35)  ; // 站点名称控件宽度
     private int padding = DensityUtil.dp2px(JNBusApplication.getContext(), 35) ; //左右两遍距离最近站点的间距
 
