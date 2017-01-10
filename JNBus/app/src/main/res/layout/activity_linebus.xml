@@ -45,6 +45,7 @@
                         android:layout_alignParentRight="true"
                         android:layout_centerVertical="true"
                         android:background="@null"
+                        android:src="@drawable/line_reverse0"
                         android:paddingLeft="@dimen/activity_horizontal_margin"
                         android:scaleType="fitXY" />
 
@@ -54,7 +55,8 @@
                         android:layout_height="wrap_content"
                         android:layout_toLeftOf="@id/line_reverse_btn"
                         android:textColor="@color/textColor"
-                        android:textSize="@dimen/text_size" />
+                        tools:text="票价一元\n济南大学:3月-10月 5:00-00:00  11月-2月 5:00-22:00 葛家庄:3月-10月5:00-00:00  11月-2月 5:00-22:00"
+                        android:textSize="@dimen/text_note_size" />
 
                 </RelativeLayout>
 

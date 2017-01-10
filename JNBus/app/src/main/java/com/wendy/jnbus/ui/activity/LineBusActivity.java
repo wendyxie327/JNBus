@@ -18,6 +18,7 @@ import com.wendy.jnbus.R;
 import com.wendy.jnbus.net.BusHttpMethod;
 import com.wendy.jnbus.ui.base.BaseAppActivity;
 import com.wendy.jnbus.ui.widget.BusLineView;
+import com.wendy.jnbus.util.SystemUtil;
 import com.wendy.jnbus.vo.BusDetail;
 import com.wendy.jnbus.vo.BusLine;
 import com.wendy.jnbus.vo.BusStation;
@@ -186,7 +187,10 @@ public class LineBusActivity extends BaseAppActivity implements SwipeRefreshLayo
     }
 
     private void showLineMsg(BusLine busLine){
-        operationTimeTV.setText( busLine.getTicketPrice() +"\n"+ busLine.getOperationTime());
+
+        operationTimeTV.setText( SystemUtil.parseLineOperTimeStr(busLine.getOperationTime())
+                +"（"+busLine.getTicketPrice()+"）");
+
         if ( isReverse){
             lineReverseBtn.setImageDrawable(ContextCompat.getDrawable(getApplicationContext(),R.drawable.line_reverse1));
         }else {
