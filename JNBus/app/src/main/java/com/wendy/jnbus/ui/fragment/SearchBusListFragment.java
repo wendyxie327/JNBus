@@ -75,6 +75,7 @@ public class SearchBusListFragment extends BaseListFragment<BusLine> implements 
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Intent intent = new Intent(getActivity(), LineBusActivity.class);
         intent.putExtra("lineId", busLines.get(position).getId() );
+        intent.putExtra("stationName",busLines.get(position).getLineName());
         BusShare.addKeySearchHistory(busLines.get(position));
         getActivity().startActivityForResult(intent, PubInfo.SEARCH2BUSLINE_REQUEST);
     }

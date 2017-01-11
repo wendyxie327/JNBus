@@ -1,6 +1,7 @@
 package com.wendy.jnbus.ui.activity;
 
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.ViewGroup;
@@ -36,7 +37,7 @@ public class LineBusActivity extends BaseAppActivity implements SwipeRefreshLayo
     @BindView(R.id.content_ll)
     LinearLayout contentLL;
     @BindView(R.id.line_reverse_btn)
-    ImageButton lineReverseBtn;
+    FloatingActionButton lineReverseBtn;
     @BindView(R.id.operation_time_tv)
     TextView operationTimeTV;
     @BindView(R.id.refresh_srl)
@@ -46,7 +47,7 @@ public class LineBusActivity extends BaseAppActivity implements SwipeRefreshLayo
     private BusLine mBusLine;
     private BusLine mBusLineReverse; // 反方向线路
     private boolean isReverse; //正向false,反向true
-    private String lineId;
+    private String lineId , stationName;
     private SubscriberOnNextListener<BusLine> busLineSub;// 根据线路，获取具体线路
     private SubscriberOnNextListener<List<BusDetail>> busesSub;// 根据线路，获取线路上走的车
 
@@ -58,11 +59,13 @@ public class LineBusActivity extends BaseAppActivity implements SwipeRefreshLayo
     @Override
     public void initBundle() {
         lineId = getIntent().getStringExtra("lineId");
+        stationName = getIntent().getStringExtra("stationName");
     }
 
     @Override
     public void initView(Bundle savedInstanceState) {
         super.initView(savedInstanceState);
+        initToolbar(stationName+"路");
         refreshLayout.setOnRefreshListener(this);
     }
 

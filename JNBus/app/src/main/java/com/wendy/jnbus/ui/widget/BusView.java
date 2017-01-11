@@ -85,12 +85,12 @@ public class BusView extends RelativeLayout {
 
         if ( carId!=null && carId.startsWith("k")){
             if (carId.length() >1)
-                carIdTV.setText(carId.substring(1, carId.length()));
+//                carIdTV.setText(carId.substring(1, carId.length()));
             this.setBackground(ContextCompat.getDrawable(getContext(),R.drawable.car_k));
         }else {
-            carIdTV.setText(carId);
+
             this.setBackground(ContextCompat.getDrawable(getContext(),R.drawable.car_com));
         }
-
+        carIdTV.setText(carId);
     }
 }

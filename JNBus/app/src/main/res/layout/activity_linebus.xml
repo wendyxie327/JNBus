@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_main"
@@ -12,10 +12,12 @@
         android:id="@+id/app_back"
         layout="@layout/app_bar_back"></include>
 
+
     <com.eagle.androidlib.widget.RefreshLayout
         android:id="@+id/refresh_srl"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_below="@id/app_back">
 
         <ScrollView
             android:layout_width="match_parent"
@@ -32,33 +34,6 @@
                 android:paddingRight="@dimen/activity_horizontal_margin"
                 android:paddingTop="@dimen/activity_vertical_margin">
 
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:padding="@dimen/activity_horizontal_margin">
-
-                    <ImageButton
-                        android:id="@+id/line_reverse_btn"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentRight="true"
-                        android:layout_centerVertical="true"
-                        android:background="@null"
-                        android:src="@drawable/line_reverse0"
-                        android:paddingLeft="@dimen/activity_horizontal_margin"
-                        android:scaleType="fitXY" />
-
-                    <TextView
-                        android:id="@+id/operation_time_tv"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_toLeftOf="@id/line_reverse_btn"
-                        android:textColor="@color/textColor"
-                        tools:text="票价一元\n济南大学:3月-10月 5:00-00:00  11月-2月 5:00-22:00 葛家庄:3月-10月5:00-00:00  11月-2月 5:00-22:00"
-                        android:textSize="@dimen/text_note_size" />
-
-                </RelativeLayout>
 
                 <LinearLayout
                     android:id="@+id/content_ll"
@@ -67,6 +42,22 @@
                     android:orientation="vertical">
 
                 </LinearLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/activity_horizontal_margin">
+
+                    <TextView
+                        android:id="@+id/operation_time_tv"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/textColor"
+                        android:textSize="@dimen/text_note_size"
+                        tools:text="票价一元\n济南大学:3月-10月 5:00-00:00  11月-2月 5:00-22:00 葛家庄:3月-10月5:00-00:00  11月-2月 5:00-22:00" />
+
+                </RelativeLayout>
             </LinearLayout>
 
         </ScrollView>
@@ -74,5 +65,14 @@
 
     </com.eagle.androidlib.widget.RefreshLayout>
 
-
-</LinearLayout>
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/line_reverse_btn"
+        android:layout_width="@dimen/line_reverse_width"
+        android:layout_height="@dimen/line_reverse_width"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_margin="@dimen/activity_vertical_margin"
+        android:scaleType="fitXY"
+        android:src="@drawable/line_reverse0"
+        app:backgroundTint="@color/white" />
+</RelativeLayout>

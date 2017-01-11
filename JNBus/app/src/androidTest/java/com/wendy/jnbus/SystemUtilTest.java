@@ -23,5 +23,6 @@ public class SystemUtilTest {
         Context appContext = InstrumentationRegistry.getTargetContext();
 
         SystemUtil.parseLineOperTime("济南大学:3月-10月 5:00-00:00  11月-2月 5:00-22:00 葛家庄:3月-10月5:00-00:00  11月-2月 5:00-22:00");
+        SystemUtil.parseLineOperTime("公交驾校  : 6:00－20:30 解放桥东 : 6:00－21:05");
     }
 }

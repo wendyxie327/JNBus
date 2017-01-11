@@ -16,7 +16,9 @@ public class SystemUtil {
 
     public static List<String> parseLineOperTime(String str) {
         Logger.d(TAG,"len="+str.length());
-        String regEx = "[\\u4e00-\\u9fa5]{1,15}\\s{0,5}(:|：)(((\\s*\\d.*?)(([0-1]?[0-9])|([2][0-3])):([0-5]?[0-9])(-|－)(([0-1]?[0-9])|([2][0-3])):([0-5]?[0-9]))+)";
+        str = str.replace("：",":").replace("－","-");
+        // "[\\u4e00-\\u9fa5]{1,15}\\s{0,5}(:|：)(((\\s*\\d.*?)(([0-1]?[0-9])|([2][0-3])):([0-5]?[0-9])(-|－)(([0-1]?[0-9])|([2][0-3])):([0-5]?[0-9]))+)"
+        String regEx = "[\\u4e00-\\u9fa5]{1,15}\\s{0,5}:(((\\s*\\d.*?)(([0-1]?[0-9])|([2][0-3])):([0-5]?[0-9])-(([0-1]?[0-9])|([2][0-3])):([0-5]?[0-9]))+)";
         Pattern pattern = Pattern.compile(regEx);
         Matcher matcher = pattern.matcher(str);
         List<String> list = new ArrayList<>();

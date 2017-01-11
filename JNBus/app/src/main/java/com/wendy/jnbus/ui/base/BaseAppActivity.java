@@ -36,7 +36,7 @@ public abstract class BaseAppActivity extends BaseActivity {
      */
     public void initToolbar(String titleText) {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-//        toolbar.setTitle(titleText);
+        if (titleText !=null) toolbar.setTitle(titleText);
         setSupportActionBar(toolbar);
         getSupportActionBar().setHomeAsUpIndicator(R.mipmap.ic_bar_back);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
