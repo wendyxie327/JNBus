@@ -1,5 +1,7 @@
 package com.wendy.jnbus.vo;
 
+import java.util.Arrays;
+
 /**
  * Created by Wendy on 2016/12/16.
  */
@@ -49,5 +51,16 @@ public class Version {
 
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    @Override
+    public String toString() {
+        return "Version{" +
+                "versionName='" + versionName + '\'' +
+                ", versionCode=" + versionCode +
+                ", descriptions=" + Arrays.toString(descriptions) +
+                ", must=" + must +
+                ", url='" + url + '\'' +
+                '}';
     }
 }

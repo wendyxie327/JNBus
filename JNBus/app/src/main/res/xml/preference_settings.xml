@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <PreferenceCategory android:title="@string/pref_set">
+        <Preference android:title="@string/pref_set_update"
+            android:key="set_update">
+        </Preference>
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="@string/pref_app">
+
+        <Preference
+            android:key="app_version"
+            android:title="@string/app_name"/>
+
+        <Preference android:title="@string/pref_app_update">
+            <intent
+                android:action="android.intent.action.VIEW"
+                android:data="@string/app_update_url"/>
+        </Preference>
+    </PreferenceCategory>
+
+</PreferenceScreen>

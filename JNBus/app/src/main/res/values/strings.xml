@@ -1,4 +1,17 @@
 <resources>
     <string name="app_name">济南公交查询</string>
-    <string name="search_clear">清空查询记录</string>
+    
+    <string name="menu_search_clear">清空查询记录</string>
+    <string name="menu_setting">设置</string>
+    
+    <string name="pref_app">关于</string>
+    <string name="pref_set">设置</string>
+    <string name="pref_set_update">更新请求地址</string>
+    <string name="pref_app_update">查看最新APP</string>
+    <string name="app_update_url">http://www.baidu.com</string>
+
+    <string name="dialog_sure">确定</string>
+    <string name="dialog_no">取消</string>
+    <string name="pref_set_update_dialog_lastest">当前版本号即为最新版本，版本号：</string>
+    <string name="pref_set_update_dialog_change_left">版本号已更新：</string>
 </resources>

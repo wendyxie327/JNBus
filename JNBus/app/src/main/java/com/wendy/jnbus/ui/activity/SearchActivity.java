@@ -74,6 +74,9 @@ public class SearchActivity extends BaseAppActivity {
                 BusShare.setKeySearchHistory(null);
                 clickSearchBtn();
                 break;
+            case R.id.action_setting:
+                startActivity(new Intent(SearchActivity.this, SettingsActivity.class));
+                break;
         }
 
         return super.onOptionsItemSelected(item);
