@@ -14,6 +14,13 @@
             android:key="app_version"
             android:title="@string/app_name"/>
 
+        <Preference android:title="@string/pref_app_code"
+            android:summary="@string/pref_app_code_url">
+            <intent
+                android:action="android.intent.action.VIEW"
+                android:data="@string/pref_app_code_url"/>
+        </Preference>
+
         <Preference android:title="@string/pref_app_update">
             <intent
                 android:action="android.intent.action.VIEW"

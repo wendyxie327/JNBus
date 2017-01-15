@@ -14,4 +14,8 @@
     <string name="dialog_no">取消</string>
     <string name="pref_set_update_dialog_lastest">当前版本号即为最新版本，版本号：</string>
     <string name="pref_set_update_dialog_change_left">版本号已更新：</string>
+    <string name="pref_set_update_ip_dialog_lastest">当前连接IP地址正确，地址为：</string>
+    <string name="pref_set_update_ip_dialog_change_left">IP地址已更新：</string>
+    <string name="pref_app_code_url">https://github.com/wendyxie327/JNBus</string>
+    <string name="pref_app_code">GitHub源代码</string>
 </resources>
