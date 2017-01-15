@@ -3,9 +3,11 @@ package com.wendy.jnbus.ui.fragment;
 import android.content.Intent;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.EditText;
 
 import com.eagle.androidlib.net.SubscriberOnNextListener;
 import com.eagle.androidlib.utils.Logger;
+import com.wendy.jnbus.R;
 import com.wendy.jnbus.net.BusHttpMethod;
 import com.wendy.jnbus.persistence.BusShare;
 import com.wendy.jnbus.ui.activity.LineBusActivity;
@@ -31,9 +33,12 @@ public class SearchBusListFragment extends BaseListFragment<BusLine> implements 
 
     private String searchLine ;
     private List<BusLine> busLines;
+    private EditText searchContentET;
 
     @Override
     public Response<BusLine> getListResultFromService() {
+        stopRefresh();
+        this.searchLine = searchContentET.getText().toString();
         if ( searchLine!=null && !"".equals(searchLine)){
             // 根据线路，获取具体线路
             SubscriberOnNextListener<PageInfoResult<BusLine>> busLineSub = new SubscriberOnNextListener<PageInfoResult<BusLine>>() {
@@ -63,6 +68,7 @@ public class SearchBusListFragment extends BaseListFragment<BusLine> implements 
 
     @Override
     public void initAdapter() {
+        searchContentET = (EditText) getActivity().findViewById(R.id.search_content_et);
         adapter = new SearchBusAdapter( getActivity());
     }
 
@@ -82,8 +88,6 @@ public class SearchBusListFragment extends BaseListFragment<BusLine> implements 
 
     @Override
     public void refresh(String searchLine) {
-        this.searchLine = searchLine;
-        stopRefresh();
         getListResultFromService();
     }
 }
