@@ -20,7 +20,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:background="@null"
-            android:src="@drawable/search" />
+            android:src="@drawable/search_btn" />
 
         <EditText
             android:id="@+id/search_content_et"

@@ -8,8 +8,8 @@ android {
         applicationId "com.wendy.jnbus"
         minSdkVersion 16
         targetSdkVersion 23
-        versionCode 6
-        versionName "1.01"
+        versionCode 7
+        versionName "1.02"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {

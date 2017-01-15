@@ -12,4 +12,6 @@
     <dimen name="text_large_size">24sp</dimen>
 
     <dimen name="line_reverse_width">48dp</dimen>
+
+    <dimen name="search_btn_padding">3dp</dimen>
 </resources>
