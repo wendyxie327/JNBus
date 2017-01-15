@@ -21,7 +21,8 @@
                 android:data="@string/pref_app_code_url"/>
         </Preference>
 
-        <Preference android:title="@string/pref_app_update">
+        <Preference android:title="@string/pref_app_update"
+            android:summary="@string/app_update_url">
             <intent
                 android:action="android.intent.action.VIEW"
                 android:data="@string/app_update_url"/>

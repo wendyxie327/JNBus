@@ -8,7 +8,7 @@
     <string name="pref_set">设置</string>
     <string name="pref_set_update">更新请求地址</string>
     <string name="pref_app_update">查看最新APP</string>
-    <string name="app_update_url">http://www.baidu.com</string>
+    <string name="app_update_url">https://fir.im/x8sg</string>
 
     <string name="dialog_sure">确定</string>
     <string name="dialog_no">取消</string>
