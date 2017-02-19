@@ -26,8 +26,9 @@
             android:id="@+id/search_content_et"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_toLeftOf="@id/search_btn"
-            android:inputType="number" />
+            android:imeOptions="actionSearch"
+            android:digits="0123456789brtBRT"
+            android:layout_toLeftOf="@id/search_btn" />
     </RelativeLayout>
 
     <FrameLayout

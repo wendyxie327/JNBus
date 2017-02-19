@@ -1,11 +1,17 @@
 package com.wendy.jnbus.ui.activity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.text.InputType;
+import android.text.method.DigitsKeyListener;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
 
+import com.eagle.androidlib.utils.Logger;
 import com.wendy.jnbus.R;
 import com.wendy.jnbus.persistence.BusShare;
 import com.wendy.jnbus.ui.fragment.SearchBusListFragment;
@@ -47,6 +53,10 @@ public class SearchActivity extends BaseAppActivity {
     @Override
     public void initDataCreate() {
         getSupportActionBar().setDisplayHomeAsUpEnabled(false);// 去除返回按钮显示
+
+//        String digists = "0123456789brtBRT";
+//        searchContentET.setKeyListener(DigitsKeyListener.getInstance(digists));
+        searchContentET.setInputType(InputType.TYPE_CLASS_TEXT);
 
         if (searchBusListFragment==null){
             searchBusListFragment = new SearchBusListFragment();
@@ -98,6 +108,20 @@ public class SearchActivity extends BaseAppActivity {
      */
     @OnClick({R.id.search_btn})
     public void clickSearchBtn(){
+        /*隐藏软键盘*/
+        InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        if(inputMethodManager.isActive()){
+            inputMethodManager.hideSoftInputFromWindow(SearchActivity.this.getCurrentFocus().getWindowToken(), 0);
+        }
         refreshFrag.refresh(searchContentET.getText().toString());
+    }
+
+    @Override
+    public boolean dispatchKeyEvent(KeyEvent event) {
+        Logger.d(TAG,"---------dispatchKeyEvent");
+        if ( event.getKeyCode() == KeyEvent.KEYCODE_ENTER){
+            clickSearchBtn();
+        }
+        return super.dispatchKeyEvent(event);
     }
 }
