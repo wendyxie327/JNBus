@@ -13,7 +13,8 @@
         android:theme="@style/AppTheme.NoBar">
 
 
-        <activity android:name=".ui.activity.SearchActivity">
+        <activity android:name=".ui.activity.SearchActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

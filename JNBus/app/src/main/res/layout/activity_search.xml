@@ -26,16 +26,33 @@
             android:id="@+id/search_content_et"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:imeOptions="actionSearch"
-            android:digits="0123456789brtBRT"
             android:layout_toLeftOf="@id/search_btn" />
     </RelativeLayout>
 
-    <FrameLayout
-        android:id="@+id/searchListFg"
-        android:name="com.wendy.jnbus.ui.SearchBusListFragment"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:padding="@dimen/activity_horizontal_margin"></FrameLayout>
+        android:layout_height="match_parent">
+
+        <android.inputmethodservice.KeyboardView
+            android:id="@+id/keyboard_view"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_alignParentBottom="true"
+            android:background="@color/cyan_200"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:keyTextColor="@color/white"
+            android:visibility="gone" />
+
+        <FrameLayout
+            android:id="@+id/searchListFg"
+            android:name="com.wendy.jnbus.ui.SearchBusListFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@id/keyboard_view"
+            android:padding="@dimen/activity_horizontal_margin"></FrameLayout>
+
+
+    </RelativeLayout>
 
 </LinearLayout>

@@ -1,12 +1,16 @@
 package com.wendy.jnbus.ui.activity;
 
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
+import android.inputmethodservice.Keyboard;
+import android.os.Build;
 import android.text.InputType;
-import android.text.method.DigitsKeyListener;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
+import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -16,6 +20,7 @@ import com.wendy.jnbus.R;
 import com.wendy.jnbus.persistence.BusShare;
 import com.wendy.jnbus.ui.fragment.SearchBusListFragment;
 import com.wendy.jnbus.ui.base.BaseAppActivity;
+import com.wendy.jnbus.util.KeyboardUtil;
 import com.wendy.jnbus.util.PubInfo;
 
 import butterknife.BindView;
@@ -24,7 +29,7 @@ import butterknife.OnClick;
 /**
  * Created by Wendy on 2017/1/1.
  */
-public class SearchActivity extends BaseAppActivity {
+public class SearchActivity extends BaseAppActivity implements View.OnTouchListener, KeyboardUtil.KeyboardViewListener {
 
     private static final String TAG = "SearchActivity";
 
@@ -35,6 +40,9 @@ public class SearchActivity extends BaseAppActivity {
     SearchBusListFragment searchBusListFragment;
 
     private RefreshFrag refreshFrag;
+    private KeyboardUtil keyboardUtil;
+    private int inputType;
+
 
     public interface RefreshFrag {
         public void refresh(String searchLine);
@@ -54,9 +62,9 @@ public class SearchActivity extends BaseAppActivity {
     public void initDataCreate() {
         getSupportActionBar().setDisplayHomeAsUpEnabled(false);// 去除返回按钮显示
 
-//        String digists = "0123456789brtBRT";
-//        searchContentET.setKeyListener(DigitsKeyListener.getInstance(digists));
-        searchContentET.setInputType(InputType.TYPE_CLASS_TEXT);
+        searchContentET.setOnTouchListener(this);
+        keyboardUtil = new KeyboardUtil(this, this, searchContentET);
+        inputType = searchContentET.getInputType();
 
         if (searchBusListFragment==null){
             searchBusListFragment = new SearchBusListFragment();
@@ -116,12 +124,28 @@ public class SearchActivity extends BaseAppActivity {
         refreshFrag.refresh(searchContentET.getText().toString());
     }
 
+    /**
+     * 点击搜索输入框，弹出输入键盘
+     * @param v
+     * @param event
+     * @return
+     */
     @Override
-    public boolean dispatchKeyEvent(KeyEvent event) {
-        Logger.d(TAG,"---------dispatchKeyEvent");
-        if ( event.getKeyCode() == KeyEvent.KEYCODE_ENTER){
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+    public boolean onTouch(View v, MotionEvent event) {
+        // 禁止软键盘弹出
+        searchContentET.setShowSoftInputOnFocus(false);
+        // 显示键盘
+        keyboardUtil.showKeyboard();
+        return false;
+    }
+
+
+
+    @Override
+    public void onClickKey(int keyCode) {
+        if ( keyCode == Keyboard.KEYCODE_CANCEL){
             clickSearchBtn();
         }
-        return super.dispatchKeyEvent(event);
     }
 }
