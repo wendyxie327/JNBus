@@ -41,7 +41,7 @@ public class KeyboardUtil {
         keyboardView = (KeyboardView) act.findViewById(R.id.keyboard_view);
         keyboardView.setKeyboard(keyboard);
         keyboardView.setEnabled(true);
-        keyboardView.setPreviewEnabled(true);
+        keyboardView.setPreviewEnabled(false); // 设为true时，点击按钮，将提出对话框，提示选中内容
         keyboardView.setOnKeyboardActionListener(listener);
         keyboardViewListener = (KeyboardViewListener) act;
     }
