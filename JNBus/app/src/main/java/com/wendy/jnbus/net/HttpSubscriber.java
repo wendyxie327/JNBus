@@ -32,6 +32,11 @@ public class HttpSubscriber<T> extends Subscriber<T> implements ProgressCancelLi
         mProgressDialogHandler = new ProgressDialogHandler(context, this, true);
     }
 
+    public HttpSubscriber(SubscriberOnNextListener mSubscriberOnNextListener) {
+        this.mSubscriberOnNextListener = mSubscriberOnNextListener;
+    }
+
+
     private void showProgressDialog(){
         if (mProgressDialogHandler != null) {
             mProgressDialogHandler.obtainMessage(ProgressDialogHandler.SHOW_PROGRESS_DIALOG).sendToTarget();

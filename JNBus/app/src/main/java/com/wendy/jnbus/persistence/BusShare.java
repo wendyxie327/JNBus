@@ -22,6 +22,7 @@ public class BusShare {
     private static final int VERSION_DEFAULT = 2319;
     private static final String AREA_DEFAULT = "370100";
 
+
     private static final String SHARE_NAME = "bus";
 
     private static final String KEY_AREA = "area";

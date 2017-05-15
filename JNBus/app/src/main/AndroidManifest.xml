@@ -22,8 +22,8 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".ui.activity.LineBusActivity"></activity>
-        <activity android:name=".ui.activity.SettingsActivity"></activity>
+        <activity android:name=".ui.activity.LineBusActivity"/>
+        <activity android:name=".ui.activity.SettingsActivity"/>
     </application>
 
 </manifest>

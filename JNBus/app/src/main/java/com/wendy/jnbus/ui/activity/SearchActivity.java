@@ -15,13 +15,19 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
 
+import com.eagle.androidlib.net.SubscriberOnNextListener;
+import com.eagle.androidlib.utils.AppUtil;
 import com.eagle.androidlib.utils.Logger;
+import com.eagle.androidlib.widget.MaterialDialog;
 import com.wendy.jnbus.R;
+import com.wendy.jnbus.net.NoAddressHttpMethod;
 import com.wendy.jnbus.persistence.BusShare;
 import com.wendy.jnbus.ui.fragment.SearchBusListFragment;
 import com.wendy.jnbus.ui.base.BaseAppActivity;
 import com.wendy.jnbus.util.KeyboardUtil;
 import com.wendy.jnbus.util.PubInfo;
+import com.wendy.jnbus.vo.Address;
+import com.wendy.jnbus.vo.fir.AppVersion;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -66,7 +72,8 @@ public class SearchActivity extends BaseAppActivity implements View.OnTouchListe
         keyboardUtil = new KeyboardUtil(this, this, searchContentET);
         inputType = searchContentET.getInputType();
 
-        if (searchBusListFragment==null){
+        checkAppUpdate();// 检查版本更新
+        if (searchBusListFragment == null) {
             searchBusListFragment = new SearchBusListFragment();
             refreshFrag = searchBusListFragment;
             getSupportFragmentManager().beginTransaction().add(R.id.searchListFg, searchBusListFragment).commit();
@@ -87,7 +94,7 @@ public class SearchActivity extends BaseAppActivity implements View.OnTouchListe
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-        switch (id){
+        switch (id) {
             case R.id.action_clear:// 清除查询历史记录
                 BusShare.setKeySearchHistory(null);
                 clickSearchBtn();
@@ -103,8 +110,9 @@ public class SearchActivity extends BaseAppActivity implements View.OnTouchListe
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        switch (requestCode){
+        switch (requestCode) {
             case PubInfo.SEARCH2BUSLINE_REQUEST:
+                if (searchContentET == null) return;// 防止页面关闭
                 searchContentET.setText("");
                 clickSearchBtn();
                 break;
@@ -115,10 +123,10 @@ public class SearchActivity extends BaseAppActivity implements View.OnTouchListe
      * 点击查询按钮，进行查询，并刷新当前界面
      */
     @OnClick({R.id.search_btn})
-    public void clickSearchBtn(){
+    public void clickSearchBtn() {
         /*隐藏软键盘*/
         InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-        if(inputMethodManager.isActive()){
+        if (inputMethodManager.isActive()) {
             inputMethodManager.hideSoftInputFromWindow(SearchActivity.this.getCurrentFocus().getWindowToken(), 0);
         }
         refreshFrag.refresh(searchContentET.getText().toString());
@@ -126,6 +134,7 @@ public class SearchActivity extends BaseAppActivity implements View.OnTouchListe
 
     /**
      * 点击搜索输入框，弹出输入键盘
+     *
      * @param v
      * @param event
      * @return
@@ -141,11 +150,57 @@ public class SearchActivity extends BaseAppActivity implements View.OnTouchListe
     }
 
 
-
     @Override
     public void onClickKey(int keyCode) {
-        if ( keyCode == Keyboard.KEYCODE_CANCEL){
+        if (keyCode == Keyboard.KEYCODE_CANCEL) {
             clickSearchBtn();
         }
     }
+
+    // 检查应用是否需要升级，如果需要升级，则弹出对话框提示
+    private void checkAppUpdate() {
+        NoAddressHttpMethod.getInstance().checkAppUpdate( getAppUpdateListener());
+    }
+
+    /**
+     * 更新IP地址
+     *
+     * @return
+     */
+    private SubscriberOnNextListener<AppVersion> getAppUpdateListener() {
+        SubscriberOnNextListener<AppVersion> onNextListener = new SubscriberOnNextListener<AppVersion>() {
+            @Override
+            public void onNext(AppVersion appVersion) {
+                // 显示内容
+                if (appVersion != null && appVersion.getVersion() != null) {
+                    try {
+                        int nowVersionCode = Integer.valueOf(appVersion.getVersion());
+                        if (nowVersionCode > AppUtil.getVersionCode(getApplicationContext())) {
+                            final MaterialDialog dialog = new MaterialDialog(SearchActivity.this);
+                            dialog.setMessage(appVersion.getChangelog());// 更新信息
+                            dialog.setPositiveButton(R.string.dialog_sure, new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    dialog.dismiss();
+                                    // 更新-“确认”
+                                }
+                            });
+                            dialog.setNegativeButton(R.string.dialog_no, new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    dialog.dismiss(); //取消
+                                }
+                            });
+                            dialog.show();
+                        }
+                    } catch (Exception e) {
+                    }
+
+                }
+
+            }
+        };
+        return onNextListener;
+    }
+
 }

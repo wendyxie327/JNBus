@@ -32,7 +32,7 @@ import butterknife.OnClick;
 
 public class LineBusActivity extends BaseAppActivity implements SwipeRefreshLayout.OnRefreshListener{
 
-    private static final String TAG = "MainActivity";
+    private static final String TAG = "LineBusActivity";
     BusLineView busLineView;
     @BindView(R.id.content_ll)
     LinearLayout contentLL;

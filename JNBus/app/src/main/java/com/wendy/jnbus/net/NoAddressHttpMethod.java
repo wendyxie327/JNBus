@@ -1,11 +1,15 @@
 package com.wendy.jnbus.net;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.eagle.androidlib.net.SubscriberOnNextListener;
+import com.eagle.androidlib.utils.Logger;
 import com.wendy.jnbus.persistence.BusShare;
+import com.wendy.jnbus.util.PubInfo;
 import com.wendy.jnbus.vo.Address;
 import com.wendy.jnbus.vo.Version;
+import com.wendy.jnbus.vo.fir.AppVersion;
 
 import java.util.concurrent.TimeUnit;
 
@@ -21,6 +25,7 @@ import rx.Observable;
 
 public class NoAddressHttpMethod {
 
+    private static String TAG = "NoAddressHttpMethod";
     private static final int DEFAULT_TIMEOUT = 5;
     private static OkHttpClient.Builder builder;
 
@@ -67,5 +72,22 @@ public class NoAddressHttpMethod {
         Observable observable = service.checkIp(BusShare.getKeyArea())
                 .map(new HttpResultFunc<Address>());
         HttpMethods.getInstance().toSubscribe(observable, new HttpSubscriber<Address>(subListener, context));
+    }
+
+    /**
+     * 检查应用升级
+     * @param subListener
+     */
+    public void checkAppUpdate( SubscriberOnNextListener<AppVersion> subListener){
+        Logger.d(TAG, "---checkAppUpdate");
+        Retrofit retrofit = new Retrofit.Builder()
+                .client(builder.build())
+                .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                .baseUrl("http://api.fir.im/apps/latest/")
+                .build();
+        NoAddressService service = retrofit.create(NoAddressService.class);
+        Observable observable = service.checkAppUpdate(PubInfo.FIR_APP_ID, PubInfo.FIR_API_TOKEN,"android");
+        HttpMethods.getInstance().toSubscribe(observable, new HttpSubscriber<AppVersion>(subListener));// 对结果的处理
     }
 }
