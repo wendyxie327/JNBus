@@ -47,6 +47,11 @@ public class NoAddressHttpMethod {
         return SingletonHolder.INSTANCE;
     }
 
+    /**
+     * 检查公交最新版本号
+     * @param context
+     * @param subListener
+     */
     public void checkLastestVersion(Context context, SubscriberOnNextListener<Version> subListener) {
         Retrofit retrofit = new Retrofit.Builder()
                             .client(builder.build())
@@ -61,6 +66,11 @@ public class NoAddressHttpMethod {
     }
 
 
+    /**
+     * 检查IP地址是否发生改变
+     * @param context
+     * @param subListener
+     */
     public void checkIP(Context context, SubscriberOnNextListener<Address> subListener) {
         Retrofit retrofit = new Retrofit.Builder()
                 .client(builder.build())

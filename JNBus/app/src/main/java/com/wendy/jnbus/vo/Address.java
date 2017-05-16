@@ -13,6 +13,18 @@ public class Address {
     private String state;
     private boolean useToken;
 
+    @Override
+    public String toString() {
+        return "Address{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", httpAddr='" + httpAddr + '\'' +
+                ", functions='" + functions + '\'' +
+                ", state='" + state + '\'' +
+                ", useToken=" + useToken +
+                '}';
+    }
+
     public int getId() {
         return id;
     }

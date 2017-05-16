@@ -14,6 +14,18 @@ public class AppVersion {
     private String build;//编译号
     private String install_url;//安装地址(新增字段)
 
+    @Override
+    public String toString() {
+        return "AppVersion{" +
+                "name='" + name + '\'' +
+                ", version='" + version + '\'' +
+                ", changelog='" + changelog + '\'' +
+                ", versionShort='" + versionShort + '\'' +
+                ", build='" + build + '\'' +
+                ", install_url='" + install_url + '\'' +
+                '}';
+    }
+
     public String getName() {
         return name;
     }

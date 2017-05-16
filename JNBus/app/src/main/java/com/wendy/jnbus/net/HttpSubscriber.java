@@ -6,6 +6,7 @@ import android.widget.Toast;
 import com.eagle.androidlib.net.ProgressCancelListener;
 import com.eagle.androidlib.net.ProgressDialogHandler;
 import com.eagle.androidlib.net.SubscriberOnNextListener;
+import com.wendy.jnbus.ui.JNBusApplication;
 
 import java.net.ConnectException;
 import java.net.SocketTimeoutException;
@@ -74,12 +75,13 @@ public class HttpSubscriber<T> extends Subscriber<T> implements ProgressCancelLi
      */
     @Override
     public void onError(Throwable e) {
+        if ( context==null) return; // 对于不显示进程对话框的内容，不进行展示异常
         if (e instanceof SocketTimeoutException) {
-            Toast.makeText(context, "网络中断，请检查您的网络状态", Toast.LENGTH_SHORT).show();
+            Toast.makeText(JNBusApplication.getContext(), "网络中断，请检查您的网络状态", Toast.LENGTH_SHORT).show();
         } else if (e instanceof ConnectException) {
-            Toast.makeText(context, "网络中断，请检查您的网络状态", Toast.LENGTH_SHORT).show();
+            Toast.makeText(JNBusApplication.getContext(), "网络中断，请检查您的网络状态", Toast.LENGTH_SHORT).show();
         } else {
-            Toast.makeText(context, "error:" + e.getMessage(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(JNBusApplication.getContext(), "error:" + e.getMessage(), Toast.LENGTH_SHORT).show();
         }
         e.printStackTrace();
         dismissProgressDialog();
