@@ -8,7 +8,6 @@ import android.text.Editable;
 import android.view.View;
 import android.widget.EditText;
 
-import com.eagle.androidlib.utils.Logger;
 import com.wendy.jnbus.R;
 
 /**

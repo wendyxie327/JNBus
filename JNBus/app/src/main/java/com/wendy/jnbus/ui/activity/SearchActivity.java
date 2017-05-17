@@ -4,6 +4,7 @@ import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
 import android.inputmethodservice.Keyboard;
+import android.net.Uri;
 import android.os.Build;
 import android.text.InputType;
 import android.view.KeyEvent;
@@ -178,11 +179,15 @@ public class SearchActivity extends BaseAppActivity implements View.OnTouchListe
                         if (nowVersionCode > AppUtil.getVersionCode(getApplicationContext())) {
                             final MaterialDialog dialog = new MaterialDialog(SearchActivity.this);
                             dialog.setMessage(appVersion.getChangelog());// 更新信息
+                            dialog.setTitle(getString(R.string.app_update_dialog_title));
                             dialog.setPositiveButton(R.string.dialog_sure, new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
                                     dialog.dismiss();
                                     // 更新-“确认”
+                                    Uri uri = Uri.parse(getString(R.string.app_update_url));
+                                    Intent it = new Intent(Intent.ACTION_VIEW, uri);
+                                    startActivity(it);
                                 }
                             });
                             dialog.setNegativeButton(R.string.dialog_no, new View.OnClickListener() {

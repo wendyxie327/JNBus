@@ -50,7 +50,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_above="@id/keyboard_view"
-            android:padding="@dimen/activity_horizontal_margin"></FrameLayout>
+            android:padding="@dimen/activity_horizontal_margin"/>
 
 
     </RelativeLayout>

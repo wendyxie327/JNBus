@@ -100,4 +100,8 @@ public class NoAddressHttpMethod {
         Observable observable = service.checkAppUpdate(PubInfo.FIR_APP_ID, PubInfo.FIR_API_TOKEN,"android");
         HttpMethods.getInstance().toSubscribe(observable, new HttpSubscriber<AppVersion>(subListener));// 对结果的处理
     }
+
+    public void downloadApp(SubscriberOnNextListener subscriberOnNextListener){
+
+    }
 }
