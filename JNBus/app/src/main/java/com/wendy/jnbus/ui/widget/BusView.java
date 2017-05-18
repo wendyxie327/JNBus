@@ -82,9 +82,11 @@ public class BusView extends RelativeLayout {
 
     public void setCarId(String carId) {
         this.carId = carId;
-
-        if ( carId!=null && carId.startsWith("k")){
-            if (carId.length() >1)
+        Logger.d(TAG, "cardId="+carId);
+        if ( carId!=null &&
+                (carId.startsWith("k") || carId.startsWith("K")) ){
+            Logger.d(TAG, "startWith k cardId="+carId);
+//            if (carId.length() >1)
 //                carIdTV.setText(carId.substring(1, carId.length()));
             this.setBackground(ContextCompat.getDrawable(getContext(),R.drawable.car_k));
         }else {

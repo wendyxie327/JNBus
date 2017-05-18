@@ -42,6 +42,13 @@ public class PageInfoResult<T> {
         }
     }
 
+    @Override
+    public String toString() {
+        return "PageInfoResult{" +
+                "pageParam=" + pageParam +
+                ", result=" + result +
+                '}';
+    }
 
     public PageInfo getPageParam() {
         return pageParam;
