@@ -9,10 +9,9 @@
 
         <CheckBoxPreference android:title="@string/pref_app_update_wifi_only_title"
             android:key="@string/preference_key_app_update_wifi"
+            android:defaultValue="false"
             android:summary="@string/pref_app_update_wifi_only_body"
-            android:lineSpacingMultiplier="1.5">
-
-        </CheckBoxPreference>
+            android:lineSpacingMultiplier="1.5"/>
 
     </PreferenceCategory>
 

@@ -1,8 +1,11 @@
 package com.wendy.jnbus.ui.fragment;
 
+import android.content.Context;
 import android.os.Bundle;
+import android.preference.CheckBoxPreference;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
+import android.preference.PreferenceManager;
 import android.view.View;
 
 import com.eagle.androidlib.net.SubscriberOnNextListener;
@@ -23,10 +26,22 @@ import com.wendy.jnbus.vo.Version;
 public class SettingsFragment extends PreferenceFragment {
 
     private static final String TAG = "SettingsFragment";
+    private Context context;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.preference_settings);
+        this.context = getActivity().getBaseContext();
+
+        // 检查APP更新只在Wifi方式下执行
+        CheckBoxPreference wifiPref = (CheckBoxPreference) findPreference(getString(R.string.preference_key_app_update_wifi));
+        wifiPref.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+            @Override
+            public boolean onPreferenceChange(Preference preference, Object newValue) {
+                return true;// true保存更新后的值；false不保存更新后的值
+            }
+        });
 
 
         //显示当前版本号

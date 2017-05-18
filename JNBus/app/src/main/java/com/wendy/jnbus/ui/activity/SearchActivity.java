@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.inputmethodservice.Keyboard;
 import android.net.Uri;
 import android.os.Build;
+import android.preference.PreferenceManager;
 import android.text.InputType;
 import android.view.KeyEvent;
 import android.view.Menu;
@@ -161,8 +162,13 @@ public class SearchActivity extends BaseAppActivity implements View.OnTouchListe
     // 检查应用是否需要升级，如果需要升级，则弹出对话框提示
     // 当连接方式为Wifi时，检查更新
     private void checkAppUpdate() {
-        if (AppUtil.isWifiConnection(getApplicationContext()))
-            NoAddressHttpMethod.getInstance().checkAppUpdate( getAppUpdateListener());
+        // 当连接方式不是Wifi，并且设置页面“只在Wifi下更新”功能设置为-只在Wifi下更新，则不进行升级检查
+        if (!AppUtil.isWifiConnection(getApplicationContext())
+                && PreferenceManager.getDefaultSharedPreferences(this).getBoolean(getString(R.string.preference_key_app_update_wifi),false)){
+            return;
+        }
+        // 其他情况均视为需要更新
+        NoAddressHttpMethod.getInstance().checkAppUpdate( getAppUpdateListener());
     }
 
     /**

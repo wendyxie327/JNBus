@@ -20,7 +20,7 @@
     <string name="pref_app_code_url">https://github.com/wendyxie327/JNBus</string>
     <string name="pref_app_code">GitHub源代码</string>
     <string name="pref_app_update_wifi_only_title">WIFI模式下更新</string>
-    <string name="pref_app_update_wifi_only_body">只在WIFI模式下更新APP</string>
+    <string name="pref_app_update_wifi_only_body">只允许在WIFI模式下更新APP</string>
 
 
     <string name="preference_key_set_update">set_update</string>
