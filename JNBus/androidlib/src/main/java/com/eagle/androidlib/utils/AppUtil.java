@@ -6,6 +6,8 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationManager;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.telephony.TelephonyManager;
 
 
@@ -115,5 +117,22 @@ public class AppUtil {
             e.printStackTrace();
         }
         return 0;
+    }
+
+
+    /**
+     * 当前网络是否为Wifi
+     * 需要权限 ACCESS_NETWORK_STATE
+     * @param context
+     * @return
+     */
+    public static boolean isWifiConnection(Context context){
+        ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetInfo = connectivityManager.getActiveNetworkInfo();
+        if (activeNetInfo != null
+                && activeNetInfo.getType() == ConnectivityManager.TYPE_WIFI) {
+            return true;
+        }
+        return false;
     }
 }

@@ -159,8 +159,10 @@ public class SearchActivity extends BaseAppActivity implements View.OnTouchListe
     }
 
     // 检查应用是否需要升级，如果需要升级，则弹出对话框提示
+    // 当连接方式为Wifi时，检查更新
     private void checkAppUpdate() {
-        NoAddressHttpMethod.getInstance().checkAppUpdate( getAppUpdateListener());
+        if (AppUtil.isWifiConnection(getApplicationContext()))
+            NoAddressHttpMethod.getInstance().checkAppUpdate( getAppUpdateListener());
     }
 
     /**
