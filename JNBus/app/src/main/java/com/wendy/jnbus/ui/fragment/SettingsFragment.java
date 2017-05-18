@@ -30,11 +30,11 @@ public class SettingsFragment extends PreferenceFragment {
 
 
         //显示当前版本号
-        Preference versionPref = findPreference("app_version");
+        Preference versionPref = findPreference(getString(R.string.preference_key_app_version));
         versionPref.setSummary(AppUtil.getVersionName(JNBusApplication.getContext()));
 
         //更新IP地址
-        Preference setUpdatePref = findPreference("set_update");
+        Preference setUpdatePref = findPreference(getString(R.string.preference_key_set_update));
         setUpdatePref.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
             @Override
             public boolean onPreferenceClick(Preference preference) {
