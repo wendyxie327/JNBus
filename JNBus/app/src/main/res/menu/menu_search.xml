@@ -4,6 +4,13 @@
     tools:context=".MainActivity">
 
     <!--orderInCategory表示优先级，越大的优先级越高-->
+
+
+    <item android:id="@+id/action_haoyun"
+        android:icon="@drawable/ic_directions_bus"
+        android:title="@string/menu_haoyun_bus"
+        app:showAsAction="ifRoom"/>
+
     <item
         android:id="@+id/action_clear"
         android:icon="@drawable/search_clear"
@@ -13,6 +20,6 @@
     <item
         android:id="@+id/action_setting"
         android:title="@string/menu_setting"
-        app:showAsAction="never"></item>
+        app:showAsAction="never"/>
 
 </menu>

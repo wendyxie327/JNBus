@@ -2,6 +2,7 @@
     <string name="app_name">济南公交查询</string>
     
     <string name="menu_search_clear">清空查询记录</string>
+    <string name="menu_haoyun_bus">好运巴士</string>
     <string name="menu_setting">设置</string>
     
     <string name="pref_app">关于</string>
@@ -9,6 +10,7 @@
     <string name="pref_set_update">更新请求地址</string>
     <string name="pref_app_update">查看最新APP</string>
     <string name="app_update_url">https://fir.im/x8sg</string>
+    <string name="haoyun_bus_url">http://www.esdjy.com.cn/quickly.html</string>
 
     <string name="app_update_dialog_title">更新应用</string>
     <string name="dialog_sure">确定</string>
@@ -21,6 +23,7 @@
     <string name="pref_app_code">GitHub源代码</string>
     <string name="pref_app_update_wifi_only_title">WIFI模式下更新</string>
     <string name="pref_app_update_wifi_only_body">只允许在WIFI模式下更新APP</string>
+    <string name="nothing_exception">没有什么可以显示</string>
 
 
     <string name="preference_key_set_update">set_update</string>

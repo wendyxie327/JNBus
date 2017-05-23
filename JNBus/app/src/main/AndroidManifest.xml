@@ -25,6 +25,7 @@
 
         <activity android:name=".ui.activity.LineBusActivity"/>
         <activity android:name=".ui.activity.SettingsActivity"/>
+        <activity android:name=".ui.activity.WebActivity"/>
     </application>
 
 </manifest>

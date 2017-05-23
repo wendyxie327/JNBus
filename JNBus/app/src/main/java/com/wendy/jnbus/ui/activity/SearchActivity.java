@@ -104,6 +104,14 @@ public class SearchActivity extends BaseAppActivity implements View.OnTouchListe
             case R.id.action_setting:
                 startActivity(new Intent(SearchActivity.this, SettingsActivity.class));
                 break;
+            case R.id.action_haoyun:// 好运巴士
+                String url = getString(R.string.haoyun_bus_url);
+                String title = getString(R.string.menu_haoyun_bus);
+                Intent intent = new Intent(this, WebActivity.class);
+                intent.putExtra("url", url);
+                intent.putExtra("title", title);
+                startActivity(intent);
+                break;
         }
 
         return super.onOptionsItemSelected(item);

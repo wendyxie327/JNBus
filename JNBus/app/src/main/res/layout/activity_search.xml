@@ -6,7 +6,7 @@
     android:focusableInTouchMode="true"
     android:orientation="vertical">
 
-    <include layout="@layout/app_bar_back"></include>
+    <include layout="@layout/app_bar_back"/>
 
     <RelativeLayout
         android:layout_width="match_parent"
