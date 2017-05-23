@@ -128,6 +128,11 @@ public class LineBusActivity extends BaseAppActivity implements SwipeRefreshLayo
         onRefresh();
     }
 
+    @OnClick(R.id.road_reverse_btn)
+    public void clickRoad(){
+        Logger.d(TAG, "clickRoad");
+    }
+
 
     @Override
     public void onRefresh() {

@@ -10,7 +10,7 @@
 
     <include
         android:id="@+id/app_back"
-        layout="@layout/app_bar_back"></include>
+        layout="@layout/app_bar_back" />
 
 
     <com.eagle.androidlib.widget.RefreshLayout
@@ -73,7 +73,22 @@
         android:layout_alignParentRight="true"
         android:layout_margin="@dimen/activity_vertical_margin"
         android:scaleType="center"
-        app:fabSize="normal"
         android:src="@drawable/line_reverse0"
-        app:backgroundTint="@color/white" />
+        app:backgroundTint="@color/white"
+        app:fabSize="normal"
+        app:rippleColor="@color/grey" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/road_reverse_btn"
+        android:layout_width="@dimen/line_reverse_width"
+        android:layout_height="@dimen/line_reverse_width"
+        android:layout_above="@id/line_reverse_btn"
+        android:layout_alignParentRight="true"
+        android:layout_marginLeft="@dimen/activity_vertical_margin"
+        android:layout_marginRight="@dimen/activity_vertical_margin"
+        android:scaleType="center"
+        android:src="@drawable/road"
+        app:backgroundTint="@color/white"
+        app:fabSize="normal"
+        app:rippleColor="@color/grey" />
 </RelativeLayout>
