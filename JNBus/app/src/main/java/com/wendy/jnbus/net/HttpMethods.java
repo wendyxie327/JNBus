@@ -1,5 +1,6 @@
 package com.wendy.jnbus.net;
 
+import com.eagle.androidlib.net.NullOnEmptyConverterFactory;
 import com.wendy.jnbus.persistence.BusShare;
 
 import java.io.IOException;
@@ -47,8 +48,9 @@ public class HttpMethods {
         retrofit = new Retrofit.Builder()
                 .client(builder.build())
                 .addConverterFactory(GsonConverterFactory.create())
+                .addConverterFactory(new NullOnEmptyConverterFactory())
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
-                .client(new OkHttpClient.Builder().addInterceptor(versionTokenInterceptor).build()) //设置统一头信息
+                .client(  new OkHttpClient.Builder().addInterceptor(versionTokenInterceptor).build()) //设置统一头信息
                 .baseUrl(busUrl)
                 .build();
 
@@ -80,7 +82,8 @@ public class HttpMethods {
         @Override public Response intercept(Chain chain) throws IOException {
             Request authorised = chain.request().newBuilder()
                     .header("version", "android-insigma.waybook.jinan-"+BusShare.getKeyVersionCode())
-                    .addHeader("Connection","close") // 解决错误， java.io.EOFException
+//                    .addHeader("Connection","close") // 解决错误， java.io.EOFException
+//                    .addHeader("http.keepAlive", "false")
                     .build();
             return chain.proceed(authorised);
         }
