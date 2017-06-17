@@ -1,5 +1,6 @@
 package com.wendy.jnbus.ui.fragment;
 
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 
@@ -7,14 +8,17 @@ import com.amap.api.maps2d.AMap;
 import com.amap.api.maps2d.CameraUpdate;
 import com.amap.api.maps2d.CameraUpdateFactory;
 import com.amap.api.maps2d.MapView;
+import com.amap.api.maps2d.model.BitmapDescriptorFactory;
 import com.amap.api.maps2d.model.CameraPosition;
 import com.amap.api.maps2d.model.LatLng;
+import com.amap.api.maps2d.model.MarkerOptions;
 import com.amap.api.maps2d.model.Polyline;
 import com.amap.api.maps2d.model.PolylineOptions;
 import com.eagle.androidlib.utils.Logger;
 import com.wendy.jnbus.R;
 import com.wendy.jnbus.ui.JNBusApplication;
 import com.wendy.jnbus.ui.base.BaseAppFragment;
+import com.wendy.jnbus.vo.BusDetail;
 import com.wendy.jnbus.vo.BusStation;
 
 import java.util.ArrayList;
@@ -100,6 +104,17 @@ public class LineRoadFragment extends BaseAppFragment {
         List<LatLng> latLngs = new ArrayList<>();
         for (BusStation busStation : busStations) {
             latLngs.add(new LatLng(busStation.getLat(), busStation.getLng()));
+
+            //TODO 显示线路各点上的车辆
+            List<BusDetail> busDetails = busStation.getBusDetails();
+            if (busDetails!=null && !busDetails.isEmpty()){
+                for (BusDetail busDetail: busDetails) {
+                    MarkerOptions markerOptions = new MarkerOptions();
+                    markerOptions.position(new LatLng(busDetail.getLat(), busDetail.getLng()));
+                    markerOptions.icon(BitmapDescriptorFactory.fromBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.car_com)));
+                    aMap.addMarker(markerOptions);
+                }
+            }
         }
         // 将地图显示中心拉至线路中间
         CameraUpdate cameraUpdate = CameraUpdateFactory.newCameraPosition(new CameraPosition(latLngs.get( latLngs.size()/2), 14,0,0));
@@ -108,7 +123,8 @@ public class LineRoadFragment extends BaseAppFragment {
         aMap.addPolyline(
                 new PolylineOptions().addAll(latLngs).width(8).color(ContextCompat.getColor(JNBusApplication.getContext(), R.color.colorPrimary)).geodesic(true));
 
-        //TODO 显示线路各点上的车辆
+
+
 
 
     }
