@@ -37,6 +37,8 @@ public class LineBusFragment extends BaseAppFragment implements SwipeRefreshLayo
     @BindView(R.id.refresh_srl)
     RefreshLayout refreshLayout;
 
+    private List<BusStation> busStations;
+
     @Override
     public int getLayoutID() {
         return R.layout.fragment_linebus;
@@ -86,6 +88,10 @@ public class LineBusFragment extends BaseAppFragment implements SwipeRefreshLayo
      * @param busStations
      */
     public void showBusView(List<BusStation> busStations){
+
+        this.busStations = busStations;
+
+        if ( !this.isResumed()) return;
         if ( busLineView!=null){
             contentLL.removeView(busLineView);
         }

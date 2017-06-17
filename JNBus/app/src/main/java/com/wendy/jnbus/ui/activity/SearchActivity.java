@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.inputmethodservice.Keyboard;
 import android.net.Uri;
 import android.os.Build;
+import android.os.Bundle;
+import android.os.PersistableBundle;
 import android.preference.PreferenceManager;
 import android.text.InputType;
 import android.view.KeyEvent;
@@ -91,6 +93,17 @@ public class SearchActivity extends BaseAppActivity implements View.OnTouchListe
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_search, menu);
         return true;
+    }
+
+
+    @Override
+    public void onSaveInstanceState(Bundle outState, PersistableBundle outPersistentState) {
+        super.onSaveInstanceState(outState, outPersistentState);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
     }
 
     @Override

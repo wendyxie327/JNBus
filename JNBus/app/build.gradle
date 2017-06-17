@@ -11,13 +11,34 @@ android {
         versionCode 11
         versionName "1.06-beta"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+
     }
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+
+            manifestPlaceholders = [
+                    amap_key: "" // 高德地图key
+            ]
+
+        }
+
+        debug {
+            manifestPlaceholders = [
+                    amap_key: "" // 高德地图key
+            ]
+
         }
     }
+
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']
+        }
+    }
+
 }
 
 dependencies {
@@ -31,4 +52,5 @@ dependencies {
     compile 'com.jakewharton:butterknife:8.4.0'
     apt 'com.jakewharton:butterknife-compiler:8.4.0'
     compile 'com.android.support:design:23.4.0'
+    compile 'com.amap.api:map2d:latest.integration'
 }

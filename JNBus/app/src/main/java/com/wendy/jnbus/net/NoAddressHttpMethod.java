@@ -3,6 +3,7 @@ package com.wendy.jnbus.net;
 import android.content.Context;
 import android.util.Log;
 
+import com.eagle.androidlib.net.NullOnEmptyConverterFactory;
 import com.eagle.androidlib.net.SubscriberOnNextListener;
 import com.eagle.androidlib.utils.Logger;
 import com.wendy.jnbus.persistence.BusShare;
@@ -56,6 +57,7 @@ public class NoAddressHttpMethod {
         Retrofit retrofit = new Retrofit.Builder()
                             .client(builder.build())
                             .addConverterFactory(GsonConverterFactory.create())
+                            .addConverterFactory(new NullOnEmptyConverterFactory())
                             .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                             .baseUrl("http://jinan.iwaybook.com/download/")
                             .build();
@@ -75,6 +77,7 @@ public class NoAddressHttpMethod {
         Retrofit retrofit = new Retrofit.Builder()
                 .client(builder.build())
                 .addConverterFactory(GsonConverterFactory.create())
+                .addConverterFactory(new NullOnEmptyConverterFactory())
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .baseUrl("http://www.iwaybook.com/server-ue2/rest/servers-v2/")
                 .build();
@@ -93,6 +96,7 @@ public class NoAddressHttpMethod {
         Retrofit retrofit = new Retrofit.Builder()
                 .client(builder.build())
                 .addConverterFactory(GsonConverterFactory.create())
+                .addConverterFactory(new NullOnEmptyConverterFactory())
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .baseUrl("http://api.fir.im/apps/latest/")
                 .build();

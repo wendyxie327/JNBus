@@ -33,13 +33,13 @@ public class BusShare {
 
     public static void setKeyBusIpAndArea(String ip, String area){
         SharedPreferences sharedPreferences = JNBusApplication.getContext().getSharedPreferences(SHARE_NAME, Context.MODE_PRIVATE);
-        sharedPreferences.edit().putString(KEY_BUS_IP, ip).commit();
-        sharedPreferences.edit().putString(KEY_AREA, area ).commit();
+        sharedPreferences.edit().putString(KEY_BUS_IP, ip).apply();
+        sharedPreferences.edit().putString(KEY_AREA, area ).apply();
     }
 
     public static void setKeyVersionCode(int versionCode){
         SharedPreferences sharedPreferences = JNBusApplication.getContext().getSharedPreferences(SHARE_NAME, Context.MODE_PRIVATE);
-        sharedPreferences.edit().putInt(KEY_VERSION_CODE, versionCode).commit();
+        sharedPreferences.edit().putInt(KEY_VERSION_CODE, versionCode).apply();
     }
 
     public static int getKeyVersionCode(){
@@ -60,7 +60,7 @@ public class BusShare {
         if ( busLines == null){
             busLines = new ArrayList<>();
         }
-        sharedPreferences.edit().putString(KEY_SEARCH_HISTORY, (new Gson()).toJson(busLines)).commit();
+        sharedPreferences.edit().putString(KEY_SEARCH_HISTORY, (new Gson()).toJson(busLines)).apply();
     }
 
     /**

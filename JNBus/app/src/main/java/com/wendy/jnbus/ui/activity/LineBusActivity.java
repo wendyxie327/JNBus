@@ -227,11 +227,11 @@ public class LineBusActivity extends BaseAppActivity {
      * @param busStations
      */
     private void showBusView(List<BusStation> busStations){
-        if ( roadFragment!= null){
+        if ( roadFragment!= null ){
             roadFragment.showBusView(busStations);
         }
 
-        if ( busFragment != null){
+        if ( busFragment != null ){
             busFragment.showBusView(busStations);
         }
     }
