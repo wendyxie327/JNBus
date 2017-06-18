@@ -1,6 +1,7 @@
 package com.wendy.jnbus.ui.fragment;
 
 import android.graphics.BitmapFactory;
+import android.graphics.Point;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
@@ -17,6 +18,7 @@ import com.baidu.mapapi.map.PolylineOptions;
 import com.baidu.mapapi.map.Stroke;
 import com.baidu.mapapi.map.TextureMapView;
 import com.baidu.mapapi.model.LatLng;
+import com.baidu.mapapi.utils.CoordinateConverter;
 import com.eagle.androidlib.utils.Logger;
 import com.wendy.jnbus.R;
 import com.wendy.jnbus.ui.JNBusApplication;
@@ -58,6 +60,8 @@ public class LineRoadFragment extends BaseAppFragment {
             aMap = mapView.getMap();
             //普通地图
             aMap.setMapType(BaiduMap.MAP_TYPE_NORMAL);
+            mapView.showScaleControl(false);// 不显示比例尺
+            mapView.setZoomControlsPosition(new Point(0, 0)); // 设置缩放比例位置
         }
     }
 
@@ -103,18 +107,23 @@ public class LineRoadFragment extends BaseAppFragment {
 
 
         aMap.clear();
-        //TODO 显示线路图
+        // 显示线路图
         if (busStations == null || busStations.isEmpty()) return;
         List<LatLng> latLngs = new ArrayList<>();
         for (BusStation busStation : busStations) {
             latLngs.add(new LatLng(busStation.getLat(), busStation.getLng()));
 
-            //TODO 显示线路各点上的车辆
+            // 显示线路各点上的车辆
             List<BusDetail> busDetails = busStation.getBusDetails();
+            CoordinateConverter converter  = new CoordinateConverter();
+            converter.from(CoordinateConverter.CoordType.COMMON);
             if (busDetails!=null && !busDetails.isEmpty()){
                 for (BusDetail busDetail: busDetails) {
                     MarkerOptions markerOptions = new MarkerOptions();
-                    markerOptions.position(new LatLng(busDetail.getLat(), busDetail.getLng()));
+                    LatLng sourceLatLng = new LatLng(busDetail.getLat(), busDetail.getLng());
+                    // sourceLatLng待转换坐标
+                    converter.coord(sourceLatLng);
+                    markerOptions.position(converter.convert());// 将坐标改为高德地图坐标
                     markerOptions.icon(BitmapDescriptorFactory.fromBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.car_com)));
                     aMap.addOverlay(markerOptions);
                 }
