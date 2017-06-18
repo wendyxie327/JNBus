@@ -2,18 +2,21 @@ package com.wendy.jnbus.ui.fragment;
 
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 
-import com.amap.api.maps2d.AMap;
-import com.amap.api.maps2d.CameraUpdate;
-import com.amap.api.maps2d.CameraUpdateFactory;
-import com.amap.api.maps2d.MapView;
-import com.amap.api.maps2d.model.BitmapDescriptorFactory;
-import com.amap.api.maps2d.model.CameraPosition;
-import com.amap.api.maps2d.model.LatLng;
-import com.amap.api.maps2d.model.MarkerOptions;
-import com.amap.api.maps2d.model.Polyline;
-import com.amap.api.maps2d.model.PolylineOptions;
+import com.baidu.mapapi.SDKInitializer;
+import com.baidu.mapapi.map.BaiduMap;
+import com.baidu.mapapi.map.BitmapDescriptorFactory;
+import com.baidu.mapapi.map.MapStatusUpdate;
+import com.baidu.mapapi.map.MapStatusUpdateFactory;
+import com.baidu.mapapi.map.MapView;
+import com.baidu.mapapi.map.MarkerOptions;
+import com.baidu.mapapi.map.PolygonOptions;
+import com.baidu.mapapi.map.PolylineOptions;
+import com.baidu.mapapi.map.Stroke;
+import com.baidu.mapapi.map.TextureMapView;
+import com.baidu.mapapi.model.LatLng;
 import com.eagle.androidlib.utils.Logger;
 import com.wendy.jnbus.R;
 import com.wendy.jnbus.ui.JNBusApplication;
@@ -37,9 +40,9 @@ public class LineRoadFragment extends BaseAppFragment {
     private static final String TAG = "LineRoadFragment";
 
     @BindView(R.id.map_view)
-    MapView mapView;
+    TextureMapView mapView;
 
-    private AMap aMap;
+    private BaiduMap aMap;
     private List<BusStation> busStations;
 
     @Override
@@ -50,10 +53,11 @@ public class LineRoadFragment extends BaseAppFragment {
     @Override
     public void initView(Bundle savedInstanceState) {
         super.initView(savedInstanceState);
-        mapView.onCreate(savedInstanceState);
 
         if (aMap == null) {
             aMap = mapView.getMap();
+            //普通地图
+            aMap.setMapType(BaiduMap.MAP_TYPE_NORMAL);
         }
     }
 
@@ -112,16 +116,23 @@ public class LineRoadFragment extends BaseAppFragment {
                     MarkerOptions markerOptions = new MarkerOptions();
                     markerOptions.position(new LatLng(busDetail.getLat(), busDetail.getLng()));
                     markerOptions.icon(BitmapDescriptorFactory.fromBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.car_com)));
-                    aMap.addMarker(markerOptions);
+                    aMap.addOverlay(markerOptions);
                 }
             }
         }
         // 将地图显示中心拉至线路中间
-        CameraUpdate cameraUpdate = CameraUpdateFactory.newCameraPosition(new CameraPosition(latLngs.get( latLngs.size()/2), 14,0,0));
-        aMap.moveCamera(cameraUpdate);
+//        CameraUpdate cameraUpdate = CameraUpdateFactory.newCameraPosition(new CameraPosition(latLngs.get( latLngs.size()/2), 14,0,0));
+//        aMap.(cameraUpdate);
+        MapStatusUpdate update = MapStatusUpdateFactory.newLatLngZoom(latLngs.get(latLngs.size()/2), 14);
+        // 移动到某经纬度
+        aMap.animateMapStatus(update);
 
-        aMap.addPolyline(
-                new PolylineOptions().addAll(latLngs).width(8).color(ContextCompat.getColor(JNBusApplication.getContext(), R.color.colorPrimary)).geodesic(true));
+        aMap.addOverlay(
+                new PolylineOptions()
+                        .points(latLngs)
+                        .color(ContextCompat.getColor(JNBusApplication.getContext(), R.color.colorPrimary))
+                        .width(8)
+        );
 
 
 
