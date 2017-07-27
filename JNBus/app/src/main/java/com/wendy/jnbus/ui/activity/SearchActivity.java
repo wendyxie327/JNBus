@@ -125,6 +125,9 @@ public class SearchActivity extends BaseAppActivity implements View.OnTouchListe
                 intent.putExtra("title", title);
                 startActivity(intent);
                 break;
+            case R.id.action_change:
+
+                break;
         }
 
         return super.onOptionsItemSelected(item);

@@ -2,6 +2,7 @@
     <string name="app_name">济南公交查询</string>
     
     <string name="menu_search_clear">清空查询记录</string>
+    <string name="menu_change">换乘</string>
     <string name="menu_haoyun_bus">好运巴士</string>
     <string name="menu_setting">设置</string>
     
@@ -29,4 +30,7 @@
     <string name="preference_key_set_update">set_update</string>
     <string name="preference_key_app_version">app_version</string>
     <string name="preference_key_app_update_wifi">app_update_wifi</string>
+    
+    <string name="change_bus_from_hint">出发地址</string>
+    <string name="change_bus_to_hint">目的地</string>
 </resources>

@@ -6,10 +6,17 @@
     <!--orderInCategory表示优先级，越大的优先级越高-->
 
 
-    <item android:id="@+id/action_haoyun"
+    <item
+        android:id="@+id/action_haoyun"
         android:icon="@drawable/ic_directions_bus"
         android:title="@string/menu_haoyun_bus"
-        app:showAsAction="ifRoom"/>
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/action_change"
+        android:icon="@drawable/ic_menu_change"
+        android:title="@string/menu_change"
+        app:showAsAction="ifRoom" />
 
     <item
         android:id="@+id/action_clear"
@@ -20,6 +27,6 @@
     <item
         android:id="@+id/action_setting"
         android:title="@string/menu_setting"
-        app:showAsAction="never"/>
+        app:showAsAction="never" />
 
 </menu>
