@@ -1,11 +1,15 @@
 package com.wendy.jnbus.ui.activity;
 
+import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ListView;
 
 import com.wendy.jnbus.R;
 import com.wendy.jnbus.ui.base.BaseAppActivity;
+
+import butterknife.OnClick;
 
 /**
  * 车辆换乘
@@ -35,9 +39,10 @@ public class ChangeBusActivity extends BaseAppActivity {
 
     }
 
-    private void showPopView(View mainView){
-        View contentView = LayoutInflater.from(this).inflate(R.layout.base_fragment_list, null);
-        ListView listView = (ListView) contentView.findViewById(R.id.list_lv);
-
+    @OnClick(R.id.from_et)
+    public void clickFromAddress(){
+        startActivity(new Intent(this, SearchLocationActivity.class));
     }
+
+
 }

@@ -12,10 +12,10 @@ android {
         versionName "1.06-beta"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
-
-        ndk{
-            abiFilters "armeabi", "armeabi-v7a", "arm64-v8a", "x86","x86_64"
-        }
+//
+//        ndk{
+//            abiFilters "armeabi", "armeabi-v7a", "arm64-v8a", "x86","x86_64"
+//        }
     }
 
     buildTypes {
@@ -56,7 +56,6 @@ dependencies {
     apt 'com.jakewharton:butterknife-compiler:8.4.0'
     compile 'com.android.support:design:25.3.1'
     compile 'com.android.support:appcompat-v7:25.3.1'
-    compile 'com.baidu.mapapi:location:6.13'
     compile 'com.baidu.mapapi:util:3.7.1'
     compile 'com.baidu.mapapi:base:3.7.1'
     compile 'com.baidu.mapapi:map:3.7.1'

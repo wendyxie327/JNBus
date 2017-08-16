@@ -126,7 +126,7 @@ public class SearchActivity extends BaseAppActivity implements View.OnTouchListe
                 startActivity(intent);
                 break;
             case R.id.action_change:
-
+                startActivity(new Intent(context, ChangeBusActivity.class));
                 break;
         }
 

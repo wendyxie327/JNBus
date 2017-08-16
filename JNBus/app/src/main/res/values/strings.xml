@@ -33,4 +33,6 @@
     
     <string name="change_bus_from_hint">出发地址</string>
     <string name="change_bus_to_hint">目的地</string>
+
+    <string name="search_location_hint">搜索地址</string>
 </resources>

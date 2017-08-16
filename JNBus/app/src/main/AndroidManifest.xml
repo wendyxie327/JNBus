@@ -31,7 +31,6 @@
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -39,6 +38,10 @@
         <activity android:name=".ui.activity.LineBusActivity"/>
         <activity android:name=".ui.activity.SettingsActivity"/>
         <activity android:name=".ui.activity.WebActivity"/>
+
+        <activity android:name=".ui.activity.ChangeBusActivity"/>
+        <activity android:name=".ui.activity.SearchLocationActivity"/>
+
     </application>
 
 </manifest>
