@@ -42,7 +42,7 @@ public class ChangeBusActivity extends BaseAppActivity implements BDLocationList
     public void initDataCreate() {
         mLocationClient = new LocationClient(getApplicationContext());
         mapUtil = new MapUtil();
-        mapUtil.startLocationOnce(this, mLocationClient);
+        mapUtil.startLocationOnce(getApplicationContext(), this, mLocationClient);
         //TODO 适配6.0系统以上
     }
 

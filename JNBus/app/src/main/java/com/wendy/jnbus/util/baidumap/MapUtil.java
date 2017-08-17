@@ -6,6 +6,9 @@ import android.util.Log;
 import com.baidu.location.BDLocationListener;
 import com.baidu.location.LocationClient;
 import com.baidu.location.LocationClientOption;
+import com.baidu.mapapi.search.poi.OnGetPoiSearchResultListener;
+import com.baidu.mapapi.search.poi.PoiCitySearchOption;
+import com.baidu.mapapi.search.poi.PoiSearch;
 import com.baidu.mapapi.utils.poi.BaiduMapPoiSearch;
 import com.wendy.jnbus.util.PubInfo;
 
@@ -22,18 +25,19 @@ public class MapUtil {
 
     /**
      * 初始化并开启定位
-     * @param context   实现AMapLocationListener的Activity.context
+     * @param context           getApplicationContext()
+     * @param locationListener   实现AMapLocationListener的Activity.context
      * @param aMapLocationClient    aMapLocationClient
      * @param interval          定位间隔,单位ms, 0为指定为一次，间隔必须大于1s才是有效的
      */
-    private void startLocation(Context context, LocationClient aMapLocationClient, int interval ){
+    private void startLocation(Context context, BDLocationListener locationListener, LocationClient aMapLocationClient, int interval ){
         //初始化定位
         if (aMapLocationClient == null) {
             aMapLocationClient = new LocationClient(context.getApplicationContext());
             Log.d(TAG , "-----------startLocation- null-------");
         }
         //设置定位回调监听
-        aMapLocationClient.registerLocationListener((BDLocationListener) context);
+        aMapLocationClient.registerLocationListener(locationListener);
         LocationClientOption option = new LocationClientOption();
         //可选，默认gcj02，设置返回的定位结果坐标系
         option.setCoorType("bd09ll");
@@ -79,12 +83,30 @@ public class MapUtil {
 
     /**
      * 初始化并开启定位 - 只支持单次定位
-     * @param context    实现AMapLocationListener的Activity.context
+     * @param context    getApplicationContext()
+     * @param locationListener  实现AMapLocationListener的Activity.context
      * @param aMapLocationClient aMapLocationClient
      */
-    public void startLocationOnce(Context context, LocationClient aMapLocationClient){
-        startLocation(context, aMapLocationClient, 0);
+    public void startLocationOnce(Context context,  BDLocationListener locationListener,LocationClient aMapLocationClient){
+        startLocation(context, locationListener, aMapLocationClient, 0);
     }
 
+
+    /**
+     * POI检索
+     * @param searchResultListener  检索监听
+     * @param poiSearch             poi实例， 需要对改内容进行释放
+     * @param searchOption          检索内容
+     */
+    public void searchPoi(OnGetPoiSearchResultListener searchResultListener, PoiSearch poiSearch,
+                          PoiCitySearchOption searchOption){
+        if (poiSearch == null) {
+            poiSearch = PoiSearch.newInstance();
+        }
+        // 设置监听
+        poiSearch.setOnGetPoiSearchResultListener(searchResultListener);
+        // 发起检索请求
+        poiSearch.searchInCity(searchOption);
+    }
 
 }
