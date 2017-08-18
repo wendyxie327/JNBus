@@ -67,6 +67,13 @@ public class HttpMethods {
         return SingletonHolder.INSTANCE;
     }
 
+    /**
+     * subscribe(mSubscriber)这种订阅方式在第二次请求数据时就不会执行了，原因就是第一次onNext后自动取消了订阅；
+     * subscribe(mObserver)则不出现此问题。
+     * @param o
+     * @param s
+     * @param <T>
+     */
     public <T> void toSubscribe(Observable<T> o, Subscriber<T> s){
          o.subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())

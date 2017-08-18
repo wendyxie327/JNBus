@@ -3,7 +3,7 @@ apply plugin: 'android-apt'
 
 android {
     compileSdkVersion 25
-    buildToolsVersion '25.0.2'
+    buildToolsVersion '25.0.0'
     defaultConfig {
         applicationId "com.wendy.jnbus"
         minSdkVersion 16
@@ -12,10 +12,9 @@ android {
         versionName "1.06-beta"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
-//
-//        ndk{
-//            abiFilters "armeabi", "armeabi-v7a", "arm64-v8a", "x86","x86_64"
-//        }
+        ndk{
+            abiFilters "armeabi", "armeabi-v7a", "arm64-v8a",'arm64', "x86","x86_64"
+        }
     }
 
     buildTypes {
@@ -24,14 +23,14 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
 
             manifestPlaceholders = [
-                    baidu_map_key: "BNcVi9nBkiKXfEhnB4BbQNihaOiQGKSw" // 地图key
+                    amap_key: "65343cd9c49346f8c07054ddbf85bb4d" // 地图key
             ]
 
         }
 
         debug {
             manifestPlaceholders = [
-                    baidu_map_key: "BNcVi9nBkiKXfEhnB4BbQNihaOiQGKSw" // 地图key
+                    amap_key: "65343cd9c49346f8c07054ddbf85bb4d" // 地图key
             ]
 
         }
@@ -41,6 +40,10 @@ android {
         main {
             jniLibs.srcDirs = ['libs']
         }
+    }
+
+    lintOptions {
+        abortOnError false
     }
 
 }
@@ -54,9 +57,9 @@ dependencies {
     compile project(':androidlib')
     compile 'com.jakewharton:butterknife:8.4.0'
     apt 'com.jakewharton:butterknife-compiler:8.4.0'
-    compile 'com.android.support:design:25.3.1'
-    compile 'com.android.support:appcompat-v7:25.3.1'
-    compile 'com.baidu.mapapi:util:3.7.1'
-    compile 'com.baidu.mapapi:base:3.7.1'
-    compile 'com.baidu.mapapi:map:3.7.1'
+    compile 'com.android.support:design:25.1.1'
+    compile 'com.android.support:appcompat-v7:25.1.1'
+    compile 'com.amap.api:map2d:latest.integration'
+    compile 'com.amap.api:search:latest.integration'
+    compile 'com.amap.api:location:latest.integration'
 }

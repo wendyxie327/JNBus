@@ -1,40 +1,37 @@
 package com.wendy.jnbus.ui.activity;
 
-import android.os.Bundle;
 import android.widget.ListView;
 import android.widget.SearchView;
 
-import com.baidu.mapapi.search.poi.OnGetPoiSearchResultListener;
-import com.baidu.mapapi.search.poi.PoiAddrInfo;
-import com.baidu.mapapi.search.poi.PoiCitySearchOption;
-import com.baidu.mapapi.search.poi.PoiDetailResult;
-import com.baidu.mapapi.search.poi.PoiResult;
-import com.baidu.mapapi.search.poi.PoiSearch;
+import com.amap.api.services.help.Inputtips;
+import com.amap.api.services.help.InputtipsQuery;
+import com.amap.api.services.help.Tip;
 import com.eagle.androidlib.utils.Logger;
 import com.wendy.jnbus.R;
+import com.wendy.jnbus.ui.adapter.SearchLocationAdapter;
 import com.wendy.jnbus.ui.base.BaseAppActivity;
 import com.wendy.jnbus.util.PubInfo;
-import com.wendy.jnbus.util.baidumap.MapUtil;
+import com.wendy.jnbus.util.amap.MapUtil;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnTextChanged;
 
 /**
  * Created by Wendy on 2017/8/12.
  * 查询地点
  */
 
-public class SearchLocationActivity extends BaseAppActivity implements OnGetPoiSearchResultListener {
+public class SearchLocationActivity extends BaseAppActivity implements Inputtips.InputtipsListener {
     @BindView(R.id.search_view)
     SearchView searchView;
     @BindView(R.id.list_lv)
     ListView listLv;
 
     private MapUtil mapUtil;
-    private PoiSearch mPoiSearch;
+    private InputtipsQuery inputtipsQuery;
+    private SearchLocationAdapter searchLocationAdapter;
 
     @Override
     public int getLayoutID() {
@@ -49,31 +46,35 @@ public class SearchLocationActivity extends BaseAppActivity implements OnGetPoiS
     @Override
     public void initDataCreate() {
         mapUtil = new MapUtil();
+        searchLocationAdapter = new SearchLocationAdapter(context);
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String s) {
+                Logger.d(context, "onQueryTextChange, "+s);
+                inputtipsQuery = new InputtipsQuery(s, PubInfo.KEY_LOCATION);
+                inputtipsQuery.setCityLimit(true);
+                mapUtil.searchPoiInputAsyn(context, SearchLocationActivity.this, inputtipsQuery);
+                return false;
+            }
+        });
     }
 
     @Override
     public void initDataResume() {
 
     }
-
-
-
     @Override
-    public void onGetPoiResult(PoiResult poiResult) {
-        List<PoiAddrInfo> poiAddrInfos = poiResult.getAllAddr();
-
+    public void onGetInputtips(List<Tip> list, int i) {
+        Logger.d(context, "onGetInputtips, i = "+i +", " );
+        if ( list == null) list = new ArrayList<>();
+        searchLocationAdapter.setItems(list);
+        listLv.setAdapter(searchLocationAdapter);
     }
 
-    @Override
-    public void onGetPoiDetailResult(PoiDetailResult poiDetailResult) {
-
-    }
-
-
-    @OnTextChanged
-    public void setSearchView(CharSequence charSequence){
-        mPoiSearch = PoiSearch.newInstance();
-        mapUtil.searchPoi(this, mPoiSearch,
-                new PoiCitySearchOption().city(PubInfo.KEY_LOCATION).keyword(charSequence.toString()).pageNum(15));
-    }
 }
