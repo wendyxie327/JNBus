@@ -11,6 +11,9 @@ import com.amap.api.services.route.BusStep;
 import com.eagle.androidlib.baseUI.BaseListAdapter;
 import com.eagle.androidlib.utils.Logger;
 import com.wendy.jnbus.R;
+import com.wendy.jnbus.util.StringUtil;
+
+import java.util.Calendar;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -38,12 +41,8 @@ public class ChangeBusAdapter extends BaseListAdapter<BusPath> {
         }
 
         BusPath busPath = itemList.get(i);
-        StringBuilder contentStr = new StringBuilder();
-        contentStr.append(busPath.getDuration()).append("分钟 ")
-                .append(busPath.getCost()).append("元 ")
-                .append("步行").append(busPath.getWalkDistance()).append("米");
-        viewHolder.costTv.setText(contentStr.toString());
 
+        // 显示路线
         StringBuilder pathStr = new StringBuilder("");
         for (BusStep busStep: busPath.getSteps()) {
             if (busStep.getBusLines() != null && busStep.getBusLines().size() >0){
@@ -51,12 +50,27 @@ public class ChangeBusAdapter extends BaseListAdapter<BusPath> {
                 for (BusLineItem busLineItem: busStep.getBusLines()){
                     if ( busLineItem != null && busLineItem.getBusLineName() != null){
                         Logger.d(context, "busLineItem is not null");
-                        pathStr.append( busLineItem.getBusLineName()).append("-");
+                        String busLineName = busLineItem.getBusLineName();
+                        if ( busLineName.contains("(")){
+                            busLineName = busLineName.substring(0, busLineName.indexOf("("));
+                        }
+                        if (busLineName.contains("/")){
+                            busLineName = busLineName.substring(0, busLineName.indexOf("/"));
+                        }
+                        pathStr.append( busLineName ).append(" → ");
                     }
                 }
             }
         }
-        viewHolder.pathTv.setText( pathStr.toString() );
+        viewHolder.pathTv.setText( pathStr.toString().substring(0, pathStr.toString().lastIndexOf("→")) );
+
+        // 显示：时长、金额、步行距离
+        StringBuilder contentStr = new StringBuilder();
+        contentStr.append(StringUtil.parseTimeSecond2Ch(busPath.getDuration(), Calendar.MINUTE)).append("   ")
+                .append(busPath.getCost()).append("元").append("   ")
+                .append("步行").append( StringUtil.parseDistance2Ch( (long)busPath.getWalkDistance() ));
+        viewHolder.costTv.setText(contentStr.toString());
+
         return view;
     }
 
