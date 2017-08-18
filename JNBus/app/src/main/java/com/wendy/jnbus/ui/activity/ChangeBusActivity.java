@@ -162,6 +162,7 @@ public class ChangeBusActivity extends BaseAppActivity implements AMapLocationLi
         startActivityForResult(new Intent(this, SearchLocationActivity.class), RequestActivityCode.CHANGEBUS_SEARCHLOCATION_REQUEST_TO);
     }
 
+
     @OnClick(R.id.search_btn)
     public void clickSearchBtn(){
         if (fromPoint == null){
@@ -173,6 +174,23 @@ public class ChangeBusActivity extends BaseAppActivity implements AMapLocationLi
             return;
         }
         searchLine(fromPoint, toPoint);
+    }
+
+    /**
+     * 交换地址
+     */
+    @OnClick(R.id.change_address_btn)
+    public void clickChangeAddressBtn(){
+        // 交换地址 - 坐标
+        LatLonPoint middle = new LatLonPoint(fromPoint.getLatitude(), fromPoint.getLongitude());
+        fromPoint = new LatLonPoint(toPoint.getLatitude(), toPoint.getLongitude());
+        toPoint = new LatLonPoint(middle.getLatitude(), middle.getLongitude());
+
+        // 交换地址 - 显示内容
+        String fromStr = fromEt.getText().toString();
+        String toStr = toEt.getText().toString();
+        fromEt.setText(toStr);
+        toEt.setText(fromStr);
     }
 
 
