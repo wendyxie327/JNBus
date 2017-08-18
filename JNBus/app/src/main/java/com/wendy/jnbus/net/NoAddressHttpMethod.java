@@ -1,13 +1,12 @@
 package com.wendy.jnbus.net;
 
 import android.content.Context;
-import android.util.Log;
 
 import com.eagle.androidlib.net.NullOnEmptyConverterFactory;
 import com.eagle.androidlib.net.SubscriberOnNextListener;
 import com.eagle.androidlib.utils.Logger;
 import com.wendy.jnbus.persistence.BusShare;
-import com.wendy.jnbus.util.PubInfo;
+import com.wendy.jnbus.config.PubInfo;
 import com.wendy.jnbus.vo.Address;
 import com.wendy.jnbus.vo.Version;
 import com.wendy.jnbus.vo.fir.AppVersion;

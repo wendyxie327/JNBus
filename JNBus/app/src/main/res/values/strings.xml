@@ -5,6 +5,7 @@
     <string name="menu_change">换乘</string>
     <string name="menu_haoyun_bus">好运巴士</string>
     <string name="menu_setting">设置</string>
+
     
     <string name="pref_app">关于</string>
     <string name="pref_set">设置</string>
@@ -33,6 +34,8 @@
     
     <string name="change_bus_from_hint">出发地址</string>
     <string name="change_bus_to_hint">目的地</string>
+    <string name="change_bus_search">搜索</string>
 
     <string name="search_location_hint">搜索地址</string>
+
 </resources>

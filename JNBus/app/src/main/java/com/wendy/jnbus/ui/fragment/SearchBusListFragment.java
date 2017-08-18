@@ -8,13 +8,13 @@ import android.widget.EditText;
 import com.eagle.androidlib.net.SubscriberOnNextListener;
 import com.eagle.androidlib.utils.Logger;
 import com.wendy.jnbus.R;
+import com.wendy.jnbus.config.RequestActivityCode;
 import com.wendy.jnbus.net.BusHttpMethod;
 import com.wendy.jnbus.persistence.BusShare;
 import com.wendy.jnbus.ui.activity.LineBusActivity;
 import com.wendy.jnbus.ui.activity.SearchActivity;
 import com.wendy.jnbus.ui.adapter.SearchBusAdapter;
 import com.wendy.jnbus.ui.base.BaseListFragment;
-import com.wendy.jnbus.util.PubInfo;
 import com.wendy.jnbus.vo.BusLine;
 import com.wendy.jnbus.vo.PageInfoResult;
 import com.wendy.jnbus.vo.Response;
@@ -83,7 +83,7 @@ public class SearchBusListFragment extends BaseListFragment<BusLine> implements 
         intent.putExtra("lineId", busLines.get(position).getId() );
         intent.putExtra("stationName",busLines.get(position).getLineName());
         BusShare.addKeySearchHistory(busLines.get(position));
-        getActivity().startActivityForResult(intent, PubInfo.SEARCH2BUSLINE_REQUEST);
+        getActivity().startActivityForResult(intent, RequestActivityCode.SEARCH_BUSLINE_REQUEST);
     }
 
     @Override

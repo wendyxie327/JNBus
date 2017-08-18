@@ -9,8 +9,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.preference.PreferenceManager;
-import android.text.InputType;
-import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
@@ -21,16 +19,14 @@ import android.widget.ImageButton;
 
 import com.eagle.androidlib.net.SubscriberOnNextListener;
 import com.eagle.androidlib.utils.AppUtil;
-import com.eagle.androidlib.utils.Logger;
 import com.eagle.androidlib.widget.MaterialDialog;
 import com.wendy.jnbus.R;
+import com.wendy.jnbus.config.RequestActivityCode;
 import com.wendy.jnbus.net.NoAddressHttpMethod;
 import com.wendy.jnbus.persistence.BusShare;
 import com.wendy.jnbus.ui.fragment.SearchBusListFragment;
 import com.wendy.jnbus.ui.base.BaseAppActivity;
 import com.wendy.jnbus.util.KeyboardUtil;
-import com.wendy.jnbus.util.PubInfo;
-import com.wendy.jnbus.vo.Address;
 import com.wendy.jnbus.vo.fir.AppVersion;
 
 import butterknife.BindView;
@@ -137,7 +133,7 @@ public class SearchActivity extends BaseAppActivity implements View.OnTouchListe
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         switch (requestCode) {
-            case PubInfo.SEARCH2BUSLINE_REQUEST:
+            case RequestActivityCode.SEARCH_BUSLINE_REQUEST:
                 if (searchContentET == null) return;// 防止页面关闭
                 searchContentET.setText("");
                 clickSearchBtn();
