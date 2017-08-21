@@ -51,10 +51,10 @@ public class ChangeBusAdapter extends BaseListAdapter<BusPath> {
                     if ( busLineItem != null && busLineItem.getBusLineName() != null){
                         Logger.d(context, "busLineItem is not null");
                         String busLineName = busLineItem.getBusLineName();
-                        if ( busLineName.contains("(")){
+                        if ( busLineName.contains("(")){// 去掉公交描述
                             busLineName = busLineName.substring(0, busLineName.indexOf("("));
                         }
-                        if (busLineName.contains("/")){
+                        if (busLineName.contains("/")){// 去掉相同路线展示
                             busLineName = busLineName.substring(0, busLineName.indexOf("/"));
                         }
                         pathStr.append( busLineName ).append(" → ");
