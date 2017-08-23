@@ -29,6 +29,7 @@ import com.wendy.jnbus.util.amap.MapUtil;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import butterknife.OnItemClick;
 
 /**
  * 车辆换乘
@@ -58,6 +59,7 @@ public class ChangeBusActivity extends BaseAppActivity implements AMapLocationLi
     private LatLonPoint fromPoint, toPoint;
     private AMapLocation aMapLocation;
     private BaseListAdapter changeBusAdapter;
+    private BusRouteResult mBusRouteResult;// 查询路线结果
 
     @Override
     public int getLayoutID() {
@@ -133,7 +135,7 @@ public class ChangeBusActivity extends BaseAppActivity implements AMapLocationLi
         // 展示结果
         changeBusAdapter.setItems(busRouteResult.getPaths());
         listLv.setAdapter(changeBusAdapter);
-
+        mBusRouteResult = busRouteResult;
     }
 
     @Override
@@ -152,17 +154,26 @@ public class ChangeBusActivity extends BaseAppActivity implements AMapLocationLi
     }
 
 
+    /**
+     * 选择出发地点
+     */
     @OnClick(R.id.from_et)
     public void clickFromAddress() {
         startActivityForResult(new Intent(this, SearchLocationActivity.class), RequestActivityCode.CHANGEBUS_SEARCHLOCATION_REQUEST_FROM);
     }
 
+    /**
+     * 选择目的地
+     */
     @OnClick(R.id.to_et)
     public void clickToAddress() {
         startActivityForResult(new Intent(this, SearchLocationActivity.class), RequestActivityCode.CHANGEBUS_SEARCHLOCATION_REQUEST_TO);
     }
 
 
+    /**
+     * 搜索
+     */
     @OnClick(R.id.search_btn)
     public void clickSearchBtn(){
         if (fromPoint == null){
@@ -191,6 +202,17 @@ public class ChangeBusActivity extends BaseAppActivity implements AMapLocationLi
         String toStr = toEt.getText().toString();
         fromEt.setText(toStr);
         toEt.setText(fromStr);
+    }
+
+    /**
+     * 点击任意一行，都可以打开路线页面
+     */
+    @OnItemClick(R.id.list_lv)
+    public void onListItemClick(){
+        // 打开路线详情页面
+        Intent intent = new Intent(context, ChangeBusDetailActivity.class);
+        intent.putExtra("busRouteResult",mBusRouteResult );
+        startActivity(intent);
     }
 
 

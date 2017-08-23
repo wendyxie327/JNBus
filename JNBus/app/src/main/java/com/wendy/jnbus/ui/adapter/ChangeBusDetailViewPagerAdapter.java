@@ -4,6 +4,8 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
+import java.util.List;
+
 /**
  * 类描述：
  * 创建人：XieWQ
@@ -11,19 +13,28 @@ import android.support.v4.app.FragmentPagerAdapter;
  */
 public class ChangeBusDetailViewPagerAdapter extends FragmentPagerAdapter {
 
-    private String[] titles = {"test1", "test2"};
+    private String[] titles;
+    private List<Fragment> fragments;
 
-    public ChangeBusDetailViewPagerAdapter(FragmentManager fm) {
+    public ChangeBusDetailViewPagerAdapter(FragmentManager fm, List<Fragment> fragments, String[] titles) {
         super(fm);
+        this.fragments = fragments;
+        this.titles = titles;
     }
+
 
     @Override
     public Fragment getItem(int position) {
-        return null;
+        return fragments.get(position);
     }
 
     @Override
     public int getCount() {
         return titles.length;
+    }
+
+    @Override
+    public CharSequence getPageTitle(int position) {
+        return titles[position];
     }
 }
