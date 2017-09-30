@@ -12,6 +12,7 @@ import com.amap.api.location.AMapLocationClient;
 import com.amap.api.location.AMapLocationListener;
 import com.amap.api.services.core.LatLonPoint;
 import com.amap.api.services.help.Tip;
+import com.amap.api.services.route.BusPath;
 import com.amap.api.services.route.BusRouteResult;
 import com.amap.api.services.route.DriveRouteResult;
 import com.amap.api.services.route.RideRouteResult;
@@ -27,14 +28,21 @@ import com.wendy.jnbus.ui.adapter.ChangeBusAdapter;
 import com.wendy.jnbus.ui.base.BaseAppActivity;
 import com.wendy.jnbus.util.amap.MapUtil;
 
+import java.util.List;
+
 import butterknife.BindView;
 import butterknife.OnClick;
 import butterknife.OnItemClick;
 
 /**
- * 车辆换乘
+ * 车辆换乘查询列表
  * <p>
- * 需要完成的功能：定位/查询地址/展示换乘方案/查询地址反转/查询历史地点记录
+ * 需要完成的功能：
+ * 1.定位/
+ * 2.查询地址/
+ * 3.展示换乘方案/
+ * 4.查询地址反转/
+ * 5.查询历史地点记录
  * Created by Wendy on 2017/7/27.
  *
  * TODO 屏幕变化，参数保存
@@ -58,7 +66,7 @@ public class ChangeBusActivity extends BaseAppActivity implements AMapLocationLi
     private RouteSearch routeSearch;
     private LatLonPoint fromPoint, toPoint;
     private AMapLocation aMapLocation;
-    private BaseListAdapter changeBusAdapter;
+    private ChangeBusAdapter changeBusAdapter;
     private BusRouteResult mBusRouteResult;// 查询路线结果
 
     @Override
@@ -193,9 +201,17 @@ public class ChangeBusActivity extends BaseAppActivity implements AMapLocationLi
     @OnClick(R.id.change_address_btn)
     public void clickChangeAddressBtn(){
         // 交换地址 - 坐标
-        LatLonPoint middle = new LatLonPoint(fromPoint.getLatitude(), fromPoint.getLongitude());
-        fromPoint = new LatLonPoint(toPoint.getLatitude(), toPoint.getLongitude());
-        toPoint = new LatLonPoint(middle.getLatitude(), middle.getLongitude());
+        LatLonPoint middle = null;
+        if (fromPoint != null){
+            middle = new LatLonPoint(fromPoint.getLatitude(), fromPoint.getLongitude());
+        }
+        if (toPoint != null){
+            fromPoint = new LatLonPoint(toPoint.getLatitude(), toPoint.getLongitude());
+        }
+
+        if (middle != null){
+            toPoint = new LatLonPoint(middle.getLatitude(), middle.getLongitude());
+        }
 
         // 交换地址 - 显示内容
         String fromStr = fromEt.getText().toString();

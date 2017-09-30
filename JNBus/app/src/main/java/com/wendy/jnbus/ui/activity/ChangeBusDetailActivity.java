@@ -21,7 +21,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
- * 类描述：
+ * 类描述：换乘详情
  * 创建人：XieWQ
  * 创建时间：2017/8/21 0021 下午 16:42
  */

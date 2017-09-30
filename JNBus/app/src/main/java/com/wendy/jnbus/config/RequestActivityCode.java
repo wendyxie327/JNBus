@@ -7,7 +7,7 @@ package com.wendy.jnbus.config;
  */
 public class RequestActivityCode {
 
-    public static final int SEARCH_BUSLINE_REQUEST = 100001;
+    public static final int SEARCH_BUSLINE_REQUEST = 10001;
 
     /** 换乘 → 地点查询 */
     public static final int CHANGEBUS_SEARCHLOCATION_REQUEST_FROM = 10002;

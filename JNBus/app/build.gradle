@@ -23,14 +23,14 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
 
             manifestPlaceholders = [
-                    amap_key: "e8b9731c22ab94895a2dbdf3c7a84880" // 地图key
+                    amap_key: "65343cd9c49346f8c07054ddbf85bb4d" // 地图key
             ]
 
         }
 
         debug {
             manifestPlaceholders = [
-                    amap_key: "e8b9731c22ab94895a2dbdf3c7a84880" // 地图key
+                    amap_key: "65343cd9c49346f8c07054ddbf85bb4d" // 地图key
             ]
 
         }

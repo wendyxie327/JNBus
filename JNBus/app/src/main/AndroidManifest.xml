@@ -43,6 +43,7 @@
 
         <activity android:name=".ui.activity.ChangeBusActivity"/>
         <activity android:name=".ui.activity.SearchLocationActivity"/>
+        <activity android:name=".ui.activity.ChangeBusDetailActivity"/>
 
     </application>
 
