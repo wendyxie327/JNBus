@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="@dimen/toolbar_height">
 
-    <android.support.v7.widget.Toolbar
+    <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="@dimen/toolbar_height"
@@ -17,6 +17,6 @@
         android:titleTextColor="@color/white">
 
 
-    </android.support.v7.widget.Toolbar>
+    </androidx.appcompat.widget.Toolbar>
 
 </RelativeLayout>

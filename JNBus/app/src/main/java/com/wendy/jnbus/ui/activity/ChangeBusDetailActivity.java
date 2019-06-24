@@ -1,24 +1,22 @@
 package com.wendy.jnbus.ui.activity;
 
 import android.os.Bundle;
-import android.support.design.widget.TabLayout;
-import android.support.v4.app.Fragment;
-import android.support.v4.view.ViewPager;
+
+import androidx.fragment.app.Fragment;
+import androidx.viewpager.widget.ViewPager;
 
 import com.amap.api.services.route.BusPath;
 import com.amap.api.services.route.BusRouteResult;
+import com.google.android.material.tabs.TabLayout;
 import com.wendy.jnbus.R;
 import com.wendy.jnbus.ui.adapter.ChangeBusDetailViewPagerAdapter;
 import com.wendy.jnbus.ui.base.BaseAppActivity;
 import com.wendy.jnbus.ui.fragment.ChangeBusDetailFragment;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
 /**
  * 类描述：换乘详情

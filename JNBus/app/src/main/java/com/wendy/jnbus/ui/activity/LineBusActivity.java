@@ -1,13 +1,13 @@
 package com.wendy.jnbus.ui.activity;
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v4.content.ContextCompat;
+import androidx.core.content.ContextCompat;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.eagle.androidlib.net.SubscriberOnNextListener;
 import com.eagle.androidlib.utils.Logger;
 import com.eagle.androidlib.utils.ToastManager;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.wendy.jnbus.R;
 import com.wendy.jnbus.net.BusHttpMethod;
 import com.wendy.jnbus.ui.base.BaseAppActivity;

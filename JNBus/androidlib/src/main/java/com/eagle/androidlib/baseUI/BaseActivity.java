@@ -1,7 +1,7 @@
 package com.eagle.androidlib.baseUI;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 
 /**
  * Created by Administrator on 2016/3/29 0029.

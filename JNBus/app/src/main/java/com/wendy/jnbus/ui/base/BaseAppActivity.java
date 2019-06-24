@@ -1,13 +1,10 @@
 package com.wendy.jnbus.ui.base;
 
 import android.content.Context;
-import android.graphics.Color;
-import android.os.Build;
 import android.os.Bundle;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.widget.Toolbar;
+import androidx.core.content.ContextCompat;
+import androidx.appcompat.widget.Toolbar;
 import android.view.View;
-import android.widget.TextView;
 
 import com.eagle.androidlib.baseUI.BaseActivity;
 import com.wendy.jnbus.R;

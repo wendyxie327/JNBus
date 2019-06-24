@@ -1,7 +1,8 @@
 package com.wendy.jnbus.net;
 
 import android.content.Context;
-import android.support.v4.widget.SwipeRefreshLayout;
+
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.eagle.androidlib.net.SubscriberOnNextListener;
 import com.wendy.jnbus.persistence.BusShare;

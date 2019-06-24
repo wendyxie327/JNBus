@@ -1,12 +1,12 @@
 package com.wendy.jnbus.ui.fragment;
 
 import android.os.Bundle;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.eagle.androidlib.baseUI.BaseFragment;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+
 import com.eagle.androidlib.widget.RefreshLayout;
 import com.wendy.jnbus.R;
 import com.wendy.jnbus.ui.activity.LineBusActivity;

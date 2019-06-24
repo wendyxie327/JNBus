@@ -1,10 +1,7 @@
 package com.wendy.jnbus.ui.fragment;
 
 import android.graphics.BitmapFactory;
-import android.graphics.Point;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.content.ContextCompat;
 
 import com.amap.api.maps2d.AMap;
 import com.amap.api.maps2d.CameraUpdate;
@@ -15,16 +12,13 @@ import com.amap.api.maps2d.model.BitmapDescriptorFactory;
 import com.amap.api.maps2d.model.CameraPosition;
 import com.amap.api.maps2d.model.LatLng;
 import com.amap.api.maps2d.model.MarkerOptions;
-import com.amap.api.maps2d.model.PolylineOptions;
 import com.eagle.androidlib.utils.Logger;
 import com.wendy.jnbus.R;
-import com.wendy.jnbus.ui.JNBusApplication;
 import com.wendy.jnbus.ui.base.BaseAppFragment;
 import com.wendy.jnbus.vo.BusDetail;
 import com.wendy.jnbus.vo.BusStation;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import butterknife.BindView;

@@ -1,9 +1,10 @@
 package com.wendy.jnbus.ui.base;
 
 import android.os.Bundle;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.widget.AdapterView;
 import android.widget.ListView;
+
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.eagle.androidlib.baseUI.BaseFragment;
 import com.eagle.androidlib.baseUI.BaseListAdapter;

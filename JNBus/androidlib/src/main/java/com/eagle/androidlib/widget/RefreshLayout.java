@@ -1,7 +1,6 @@
 package com.eagle.androidlib.widget;
 
 import android.content.Context;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -10,6 +9,8 @@ import android.view.ViewConfiguration;
 import android.widget.AbsListView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.eagle.androidlib.R;
 
