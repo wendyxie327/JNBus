@@ -66,7 +66,9 @@ http://60.216.101.229/server-ue2/rest/buslines/theOtherDirection/370100/163
 ### 济莱城际快车
 http://58.56.100.251:9997/mobile/map/findcarLoc.do?drivewayId=402881ed573abdee01573b3c0e9d0004
 
+http://58.56.100.251:9997/mobile/point/getPoints.do?drivewayId=402881ed573abdee01573b3c0e9d0004
 
+/mobile/point/getPointByDrivewayId.do
 
       <td bgcolor="#FBF7F7"><h2><font size="7">长清公交</font></h2></td>
     </tr>

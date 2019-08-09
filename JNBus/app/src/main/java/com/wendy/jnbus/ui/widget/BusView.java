@@ -40,7 +40,7 @@ public class BusView extends RelativeLayout {
     private void init(Context context) {
         carIdTV = new TextView(context);
         carIdTV.setText(carId);
-        carIdTV.setTextColor(ContextCompat.getColor(context, R.color.textColor));
+        carIdTV.setTextColor(ContextCompat.getColor(context, R.color.text_color));
         carIdTV.setTextSize(cardTVSize);
         carIdTV.setGravity(Gravity.CENTER);
 

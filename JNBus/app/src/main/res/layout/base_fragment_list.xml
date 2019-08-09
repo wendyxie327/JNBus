@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
+
     <com.eagle.androidlib.widget.RefreshLayout
         android:id="@+id/refresh_srl"
         android:layout_width="match_parent"
@@ -16,12 +17,12 @@
             <ListView
                 android:id="@+id/list_lv"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
+                android:layout_height="match_parent"
+                android:divider="@color/transparent" />
         </LinearLayout>
 
 
     </com.eagle.androidlib.widget.RefreshLayout>
-
 
 
 </LinearLayout>

@@ -6,7 +6,7 @@
     android:focusableInTouchMode="true"
     android:orientation="vertical">
 
-    <include layout="@layout/app_bar_back"/>
+    <include layout="@layout/app_bar_back" />
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -20,7 +20,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:background="@null"
-            android:src="@drawable/search_btn" />
+            android:src="@drawable/ic_search_black_24dp" />
 
         <EditText
             android:id="@+id/search_content_et"
@@ -41,7 +41,9 @@
             android:background="@color/cyan_200"
             android:focusable="true"
             android:focusableInTouchMode="true"
-            android:keyTextColor="@color/white"
+            android:keyBackground="@color/keyboard_bg"
+            android:keyTextColor="@color/text_color"
+            android:keyTextSize="@dimen/text_title"
             android:visibility="gone" />
 
         <FrameLayout
@@ -50,7 +52,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_above="@id/keyboard_view"
-            android:padding="@dimen/activity_horizontal_margin"/>
+            android:padding="@dimen/activity_horizontal_margin" />
 
 
     </RelativeLayout>

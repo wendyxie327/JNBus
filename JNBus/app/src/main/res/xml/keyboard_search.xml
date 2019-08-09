@@ -9,7 +9,7 @@
         <Key android:codes="50" android:keyLabel="2" />
         <Key android:codes="51" android:keyLabel="3" />
         <Key android:codes="-5" android:keyEdgeFlags="right"
-            android:keyIcon="@drawable/ic_keyboard_backspace"/>
+            android:keyIcon="@drawable/ic_backspace_black_24dp"/>
     </Row>
     <Row>
         <Key android:codes="52" android:keyLabel="4" />
@@ -22,14 +22,15 @@
         <Key android:codes="55" android:keyLabel="7" />
         <Key android:codes="56" android:keyLabel="8" />
         <Key android:codes="57" android:keyLabel="9" />
-        <Key android:codes="-3" android:keyHeight="@dimen/keyboard_search_key_height_2"
-            android:keyEdgeFlags="right" android:isRepeatable="true"
-            android:keyLabel="完成" />
+        <Key android:codes="57" android:keyLabel="B" />
     </Row>
 
     <Row>
         <Key android:codes="60000" android:keyLabel="BRT" />
         <Key android:codes="60001" android:keyLabel="K" />
         <Key android:codes="60002" android:keyLabel="T" />
+        <Key android:codes="-3"
+            android:keyEdgeFlags="right" android:isRepeatable="true"
+            android:keyLabel="完成" />
     </Row>
 </Keyboard>

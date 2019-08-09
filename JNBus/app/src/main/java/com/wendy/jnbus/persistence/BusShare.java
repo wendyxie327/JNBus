@@ -18,8 +18,8 @@ import java.util.TreeSet;
  */
 public class BusShare {
 
-    private static final String BUS_IP_DEFAULT = "60.216.101.229";
-    private static final int VERSION_DEFAULT = 2319;
+    private static final String BUS_IP_DEFAULT = "iwaybook.369cx.cn";
+    private static final int VERSION_DEFAULT = 2366;
     private static final String AREA_DEFAULT = "370100";
 
 

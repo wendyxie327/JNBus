@@ -54,7 +54,7 @@ public class BusContainView extends ViewGroup {
 
         TextView stationNameTV = new TextView(getContext());
         stationNameTV.setText(busStation.getStationName());
-        stationNameTV.setTextColor(ContextCompat.getColor(getContext(),R.color.textColor));
+        stationNameTV.setTextColor(ContextCompat.getColor(getContext(),R.color.text_color));
         stationNameTV.setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimensionPixelSize(R.dimen.text_note_small_size));
         stationNameTV.layout( lineLength , lineHeight , 3* lineLength/2, 3*lineHeight/2 );
 

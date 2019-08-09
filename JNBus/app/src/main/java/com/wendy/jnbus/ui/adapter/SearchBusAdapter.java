@@ -12,7 +12,7 @@ import com.wendy.jnbus.vo.BusLine;
 /**
  * Created by Wendy on 2017/1/1.
  */
-public class SearchBusAdapter extends BaseListAdapter<BusLine> {
+public class SearchBusAdapter extends BaseListAdaptecr<BusLine> {
 
     public SearchBusAdapter(Context context){
         super(context);

@@ -72,7 +72,7 @@ public class SearchActivity extends BaseAppActivity implements View.OnTouchListe
         keyboardUtil = new KeyboardUtil(this, this, searchContentET);
         inputType = searchContentET.getInputType();
 
-        checkAppUpdate();// 检查版本更新
+//        checkAppUpdate();// 检查版本更新
         if (searchBusListFragment == null) {
             searchBusListFragment = new SearchBusListFragment();
             refreshFrag = searchBusListFragment;

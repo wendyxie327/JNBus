@@ -37,7 +37,7 @@
                         android:id="@+id/operation_time_tv"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/textColor"
+                        android:textColor="@color/text_color"
                         android:textSize="@dimen/text_note_size"
                         tools:text="票价一元\n济南大学:3月-10月 5:00-00:00  11月-2月 5:00-22:00 葛家庄:3月-10月5:00-00:00  11月-2月 5:00-22:00" />
 
