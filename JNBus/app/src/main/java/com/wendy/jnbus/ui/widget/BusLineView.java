@@ -91,8 +91,8 @@ public class BusLineView extends LinearLayout {
         for (int i=0 ;i < len ; i++){
             BusContainView busStationView = new BusContainView(getContext());
             busStationView.setLineWidth(lineWidth);
-            busStationView.setLineColor(R.color.cyan);
-            busStationView.setRingColor(R.color.yellow);
+            busStationView.setLineColor(R.color.colorPrimary);
+            busStationView.setRingColor(R.color.colorAccent);
             busStationView.setRadius(ringRadius);
             busStationView.setStationNameWidth(stationNameWidth);
             busStationView.setBusStation( busStations.get(i) );

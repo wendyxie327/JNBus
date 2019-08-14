@@ -8,12 +8,11 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="@dimen/toolbar_height"
-        android:background="@color/transparent"
+        android:background="@color/colorPrimary"
         android:gravity="center_vertical"
         android:minHeight="@dimen/toolbar_height"
         android:navigationIcon="@mipmap/ic_bar_back"
-        android:orientation="vertical"
-        android:titleTextColor="@color/text_color">
+        android:orientation="vertical">
 
         <!--<TextView-->
             <!--android:id="@+id/titleTV"-->

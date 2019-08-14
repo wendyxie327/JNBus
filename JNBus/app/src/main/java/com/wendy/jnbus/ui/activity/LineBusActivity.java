@@ -125,12 +125,12 @@ public class LineBusActivity extends BaseAppActivity {
         onRefreshLine();
     }
 
-    @OnClick(R.id.road_reverse_btn)
-    public void clickRoad(){
-        isRoadShow = !isRoadShow;
-        onRefreshRoad();
-        Logger.d(TAG, "clickRoad");
-    }
+//    @OnClick(R.id.road_reverse_btn)
+//    public void clickRoad(){
+//        isRoadShow = !isRoadShow;
+//        onRefreshRoad();
+//        Logger.d(TAG, "clickRoad");
+//    }
 
     /**
      * 刷新路线-刷新地图显示的路线

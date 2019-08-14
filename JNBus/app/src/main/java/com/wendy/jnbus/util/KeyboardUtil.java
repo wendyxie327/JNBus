@@ -94,6 +94,8 @@ public class KeyboardUtil {
                 editable.insert(start, "K");
             }   else if ( primaryCode == 60002 ){
                 editable.insert(start, "T");
+            }   else if ( primaryCode == 60003 ){
+                editable.insert(start, "B");
             } else {
                 editable.insert(start, Character.toString((char) primaryCode));
             }

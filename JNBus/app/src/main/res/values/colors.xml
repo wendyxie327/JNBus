@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">@color/cyan</color>
-    <color name="colorPrimaryDark">@color/transparent</color>
-    <color name="colorAccent">@color/yellow</color>
-    <color name="colorPrimaryLight">@color/cyan_200</color>
+    <color name="colorPrimary">#00ccbc</color>
+    <color name="colorPrimaryDark">#00ccbc</color>
+    <color name="colorAccent">#FFC30F</color>
+    <color name="colorPrimaryLight">#00ccbc</color>
 
 
 
-    <color name="text_color">@color/black_light</color>
+    <color name="text_color">@color/black</color>
     <color name="textColorNote">@color/grey</color>
-    <color name="ui_bg">@color/grey_200</color>
-    <color name="keyboard_bg">#DEE5E7</color>
+    <color name="ui_bg">@color/white</color>
+    <color name="keyboard_bg">#F1FBFC</color>
 </resources>

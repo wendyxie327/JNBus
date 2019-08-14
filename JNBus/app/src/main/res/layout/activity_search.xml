@@ -4,6 +4,7 @@
     android:layout_height="match_parent"
     android:focusable="true"
     android:focusableInTouchMode="true"
+    android:background="@color/white"
     android:orientation="vertical">
 
     <include layout="@layout/app_bar_back" />
@@ -20,7 +21,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:background="@null"
-            android:src="@drawable/ic_search_black_24dp" />
+            android:src="@drawable/search_btn" />
 
         <EditText
             android:id="@+id/search_content_et"

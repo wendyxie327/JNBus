@@ -22,15 +22,15 @@
         <Key android:codes="55" android:keyLabel="7" />
         <Key android:codes="56" android:keyLabel="8" />
         <Key android:codes="57" android:keyLabel="9" />
-        <Key android:codes="57" android:keyLabel="B" />
+        <Key android:codes="60000" android:keyLabel="BRT" />
     </Row>
 
     <Row>
-        <Key android:codes="60000" android:keyLabel="BRT" />
+        <Key android:codes="60003" android:keyLabel="B" />
         <Key android:codes="60001" android:keyLabel="K" />
         <Key android:codes="60002" android:keyLabel="T" />
         <Key android:codes="-3"
             android:keyEdgeFlags="right" android:isRepeatable="true"
-            android:keyLabel="完成" />
+            android:keyIcon="@drawable/keyborad_ok" />
     </Row>
 </Keyboard>
