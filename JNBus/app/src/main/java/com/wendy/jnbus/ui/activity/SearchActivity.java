@@ -26,7 +26,7 @@ import com.wendy.jnbus.net.NoAddressHttpMethod;
 import com.wendy.jnbus.persistence.BusShare;
 import com.wendy.jnbus.ui.fragment.SearchBusListFragment;
 import com.wendy.jnbus.ui.base.BaseAppActivity;
-import com.wendy.jnbus.util.KeyboardUtil;
+import com.wendy.jnbus.util.SearchKeyboard;
 import com.wendy.jnbus.vo.fir.AppVersion;
 
 import butterknife.BindView;
@@ -35,7 +35,7 @@ import butterknife.OnClick;
 /**
  * Created by Wendy on 2017/1/1.
  */
-public class SearchActivity extends BaseAppActivity implements View.OnTouchListener, KeyboardUtil.KeyboardViewListener {
+public class SearchActivity extends BaseAppActivity implements View.OnTouchListener, SearchKeyboard.KeyboardViewListener {
 
     private static final String TAG = "SearchActivity";
 
@@ -46,7 +46,7 @@ public class SearchActivity extends BaseAppActivity implements View.OnTouchListe
     SearchBusListFragment searchBusListFragment;
 
     private RefreshFrag refreshFrag;
-    private KeyboardUtil keyboardUtil;
+    private SearchKeyboard searchKeyboard;
     private int inputType;
 
 
@@ -69,7 +69,7 @@ public class SearchActivity extends BaseAppActivity implements View.OnTouchListe
         getSupportActionBar().setDisplayHomeAsUpEnabled(false);// 去除返回按钮显示
 
         searchContentET.setOnTouchListener(this);
-        keyboardUtil = new KeyboardUtil(this, this, searchContentET);
+        searchKeyboard = new SearchKeyboard(this, this, searchContentET);
         inputType = searchContentET.getInputType();
 
 //        checkAppUpdate();// 检查版本更新
@@ -167,7 +167,7 @@ public class SearchActivity extends BaseAppActivity implements View.OnTouchListe
         // 禁止软键盘弹出
         searchContentET.setShowSoftInputOnFocus(false);
         // 显示键盘
-        keyboardUtil.showKeyboard();
+        searchKeyboard.showKeyboard();
         return false;
     }
 
