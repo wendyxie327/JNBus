@@ -77,9 +77,9 @@ public class HttpSubscriber<T> extends Subscriber<T> implements ProgressCancelLi
     public void onError(Throwable e) {
         if ( context==null) return; // 对于不显示进程对话框的内容，不进行展示异常
         if (e instanceof SocketTimeoutException) {
-            Toast.makeText(JNBusApplication.getContext(), "网络中断，请检查您的网络状态", Toast.LENGTH_SHORT).show();
+            Toast.makeText(JNBusApplication.getContext(), "网络中断，请检查您的网络状态，或稍后再试", Toast.LENGTH_SHORT).show();
         } else if (e instanceof ConnectException) {
-            Toast.makeText(JNBusApplication.getContext(), "网络中断，请检查您的网络状态", Toast.LENGTH_SHORT).show();
+            Toast.makeText(JNBusApplication.getContext(), "网络中断，请检查您的网络状态，或稍后再试", Toast.LENGTH_SHORT).show();
         } else {
             Toast.makeText(JNBusApplication.getContext(), "error:" + e.getMessage(), Toast.LENGTH_SHORT).show();
         }

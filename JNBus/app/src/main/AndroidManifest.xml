@@ -14,7 +14,7 @@
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <!--允许程序访问CellID或WiFi热点来获取粗略的位置-->
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
 
 
     <application
@@ -23,13 +23,17 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme.NoBar">
+        android:theme="@style/AppTheme.NoBar"
+        android:usesCleartextTraffic="true">
 
         <!-- 高德地图 -->
-        <meta-data android:name="com.amap.api.v2.apikey" android:value="${amap_key}"/>
-        <service android:name="com.amap.api.location.APSService"/>
+        <meta-data
+            android:name="com.amap.api.v2.apikey"
+            android:value="${amap_key}" />
+        <service android:name="com.amap.api.location.APSService" />
 
-        <activity android:name=".ui.activity.SearchActivity"
+        <activity
+            android:name=".ui.activity.SearchActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -37,13 +41,13 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".ui.activity.LineBusActivity"/>
-        <activity android:name=".ui.activity.SettingsActivity"/>
-        <activity android:name=".ui.activity.WebActivity"/>
+        <activity android:name=".ui.activity.LineBusActivity" />
+        <activity android:name=".ui.activity.SettingsActivity" />
+        <activity android:name=".ui.activity.WebActivity" />
 
-        <activity android:name=".ui.activity.ChangeBusActivity"/>
-        <activity android:name=".ui.activity.SearchLocationActivity"/>
-        <activity android:name=".ui.activity.ChangeBusDetailActivity"/>
+        <activity android:name=".ui.activity.ChangeBusActivity" />
+        <activity android:name=".ui.activity.SearchLocationActivity" />
+        <activity android:name=".ui.activity.ChangeBusDetailActivity" />
 
     </application>
 

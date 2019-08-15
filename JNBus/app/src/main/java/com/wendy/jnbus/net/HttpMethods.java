@@ -89,7 +89,7 @@ public class HttpMethods {
         @Override public Response intercept(Chain chain) throws IOException {
             Request authorised = chain.request().newBuilder()
                     .header("version", "android-insigma.waybook.jinan-"+BusShare.getKeyVersionCode())
-//                    .addHeader("Connection","close") // 解决错误， java.io.EOFException
+                    .addHeader("Connection","close") // 解决错误， java.io.EOFException
 //                    .addHeader("http.keepAlive", "false")
                     .build();
             return chain.proceed(authorised);
