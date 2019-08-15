@@ -149,7 +149,7 @@ public class SearchActivity extends BaseAppActivity implements View.OnTouchListe
         /*隐藏软键盘*/
         InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         if (inputMethodManager.isActive()) {
-            inputMethodManager.hideSoftInputFromWindow(SearchActivity.this.getCurrentFocus().getWindowToken(), 0);
+            inputMethodManager.hideSoftInputFromWindow(searchContentET.getWindowToken(), 0);
         }
         refreshFrag.refresh(searchContentET.getText().toString());
     }

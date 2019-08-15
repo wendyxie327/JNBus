@@ -7,11 +7,11 @@
             android:key="@string/preference_key_set_update">
         </Preference>
 
-        <CheckBoxPreference android:title="@string/pref_app_update_wifi_only_title"
-            android:key="@string/preference_key_app_update_wifi"
-            android:defaultValue="false"
-            android:summary="@string/pref_app_update_wifi_only_body"
-            android:lineSpacingMultiplier="1.5"/>
+        <!--<CheckBoxPreference android:title="@string/pref_app_update_wifi_only_title"-->
+            <!--android:key="@string/preference_key_app_update_wifi"-->
+            <!--android:defaultValue="false"-->
+            <!--android:summary="@string/pref_app_update_wifi_only_body"-->
+            <!--android:lineSpacingMultiplier="1.5"/>-->
 
     </PreferenceCategory>
 
@@ -19,20 +19,11 @@
 
         <Preference
             android:key="@string/preference_key_app_version"
-            android:title="@string/app_name"/>
+            android:title="当前版本"/>
 
-        <Preference android:title="@string/pref_app_code"
-            android:summary="@string/pref_app_code_url">
-            <intent
-                android:action="android.intent.action.VIEW"
-                android:data="@string/pref_app_code_url"/>
-        </Preference>
-
-        <Preference android:title="@string/pref_app_update"
-            android:summary="@string/app_update_url">
-            <intent
-                android:action="android.intent.action.VIEW"
-                android:data="@string/app_update_url"/>
+        <Preference
+            android:key="@string/preference_key_app_update"
+            android:title="@string/pref_app_update">
         </Preference>
     </PreferenceCategory>
 

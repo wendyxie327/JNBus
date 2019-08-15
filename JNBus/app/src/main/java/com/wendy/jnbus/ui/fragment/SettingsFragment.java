@@ -2,10 +2,8 @@ package com.wendy.jnbus.ui.fragment;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.preference.CheckBoxPreference;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
-import android.preference.PreferenceManager;
 import android.view.View;
 
 import com.eagle.androidlib.net.SubscriberOnNextListener;
@@ -13,9 +11,11 @@ import com.eagle.androidlib.utils.AppUtil;
 import com.eagle.androidlib.utils.Logger;
 import com.eagle.androidlib.widget.MaterialDialog;
 import com.wendy.jnbus.R;
+import com.wendy.jnbus.config.PubInfo;
 import com.wendy.jnbus.net.NoAddressHttpMethod;
 import com.wendy.jnbus.persistence.BusShare;
 import com.wendy.jnbus.ui.JNBusApplication;
+import com.wendy.jnbus.util.PackageUtil;
 import com.wendy.jnbus.vo.Address;
 import com.wendy.jnbus.vo.Version;
 
@@ -35,25 +35,41 @@ public class SettingsFragment extends PreferenceFragment {
         this.context = getActivity().getBaseContext();
 
         // 检查APP更新只在Wifi方式下执行
-        CheckBoxPreference wifiPref = (CheckBoxPreference) findPreference(getString(R.string.preference_key_app_update_wifi));
-        wifiPref.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
-            @Override
-            public boolean onPreferenceChange(Preference preference, Object newValue) {
-                return true;// true保存更新后的值；false不保存更新后的值
-            }
-        });
+//        CheckBoxPreference wifiPref = (CheckBoxPreference) findPreference(getString(R.string.preference_key_app_update_wifi));
+//        wifiPref.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+//            @Override
+//            public boolean onPreferenceChange(Preference preference, Object newValue) {
+//                return true;// true保存更新后的值；false不保存更新后的值
+//            }
+//        });
 
 
-        //显示当前版本号
+        //显示当前应用版本号
         Preference versionPref = findPreference(getString(R.string.preference_key_app_version));
         versionPref.setSummary(AppUtil.getVersionName(JNBusApplication.getContext()));
 
-        //更新IP地址
+        //更新公交IP地址
         Preference setUpdatePref = findPreference(getString(R.string.preference_key_set_update));
         setUpdatePref.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
             @Override
             public boolean onPreferenceClick(Preference preference) {
                 NoAddressHttpMethod.getInstance().checkLastestVersion(getActivity(), getVersionListener());
+                return false;
+            }
+        });
+
+        // 跳转到应用市场:如果有酷安，则跳转到酷安应用市场，如果没有，则打开网页
+        Preference appUpdatePre = findPreference(getString(R.string.preference_key_app_update));
+        appUpdatePre.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+            @Override
+            public boolean onPreferenceClick(Preference preference) {
+                Logger.d("TAG", "preference ------------------");
+                if (PackageUtil.checkAppInstalled(getActivity().getApplicationContext(), PubInfo.COOL_MARKET_PACKAGE_NAME)){
+                    Logger.d("TAG", "install ------------------");
+                    PackageUtil.goToMarket(getActivity(), PubInfo.APP_PACKAGE, PubInfo.COOL_MARKET_PACKAGE_NAME, PubInfo.COOL_MARKET_ACT);
+                }else {
+                    PackageUtil.openUrl(getActivity(), PubInfo.APP_DOWNLOAD_URL);
+                }
                 return false;
             }
         });
